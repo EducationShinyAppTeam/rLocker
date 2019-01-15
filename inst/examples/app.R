@@ -18,8 +18,8 @@ shinyApp(
   ),
   server = function(input, output, session) {
     rlocker::create(session, list(
-      endpoint = "https://learning-locker.stat.vmhost.psu.edu/data/xAPI/",
-      auth = "Basic NWE3NzBkOTNmNTlhMzM5NTI5YTI1ODgyYjgwMjExYTViNDVhYWNhMTo1NmY1MDQyYTczODU0ZTRkMThkNDQ0MDMwZTY2MWNhN2Q5OWM0ZmQ0"
+      endpoint = "http://localhost:8000/data/xAPI/",
+      auth = "Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA"
     ))
     output$session <- renderPrint({
       sessionInfo()
