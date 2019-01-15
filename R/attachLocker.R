@@ -17,7 +17,7 @@ locker <- structure(c(), class = "locker")
 
 #'@export
 test <- function(
-  testpoint = "http://localhost:8000/data/xAPI/about",
+  endpoint = "http://localhost:8000/data/xAPI/about",
   auth = NULL,
   user = NULL,
   password = NULL) {
@@ -38,7 +38,6 @@ test <- function(
       status <- status_code(GET(paste(c(endpoint, "/about"), collapse="")))
 
       if(!status == 200){
-        print(endpoint)
         stop(paste(c("Unable to connect to endpoint.\n\tReason: ", http_status(status)$message)))
       }
     },
