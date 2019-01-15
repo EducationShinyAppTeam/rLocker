@@ -1,0 +1,189 @@
+/**
+ * rlocker - An xAPI Statement Generator & Storage Mechanism
+ * @author Bob Carey (https://github.com/rpc5102).
+ * @license GPL-2.0+
+ **/
+
+import { UUID } from './uuid.js';
+
+/**
+ * This class requires the following modules:
+ * {@link https://github.com/adlnet/xAPIWrapper}
+ * @requires xapiwrapper/adl
+ * @requires uuid/generator
+ **/
+
+/* Check that requirements are met. */
+if (typeof ADL == "undefined") {
+  throw "Error: ADL Wrapper not defined";
+} else if (typeof UUID == "undefined") {
+  throw "Error: UUID Generator not defined";
+}
+
+/**
+ * Creates a new Learning Locker instance.
+ * @class rlocker/Locker
+ * @see module:rlocker/Locker
+ */
+export class Locker {
+
+  constructor(config) {
+    this.debug = true,
+    this.config = config ? config : {
+      endpoint: 'http://localhost:8000/xapi/',
+      auth: 'Basic ' + toBase64('abcd:1234'),
+    },
+    this.session = {
+      id: null,
+      launched: null
+    },
+    this.agent = null,
+    this.activity = null
+
+    this.init();
+  }
+
+  init() {
+    ADL.XAPIWrapper.changeConfig(this.config);
+
+    this.setSession();
+    this.setCurrentAgent("mailto:default@example.org");
+    this.setCurrentActivity(window.location.href, document.title);
+
+    this.experienced_xAPI();
+  }
+
+  setSession() {
+    if (typeof Storage !== "undefined") {
+      let sid = sessionStorage.getItem("sid");
+
+      if (!sid) {
+        /* generate universally unique identifier */
+        sid = UUID.generate();
+        sessionStorage.setItem("sid", sid);
+        this.session.launched = true;
+      } else {
+        this.session.launched = false;
+      }
+      this.session.id = sid;
+    } else {
+      this.session.id = "0000-0000-0000-0000";
+    }
+  }
+
+  getSession() {
+    return this.session;
+  }
+
+  store(statement) {
+    if (this.debug) {
+      console.info(statement);
+      ADL.XAPIWrapper.sendStatement(statement, function (request, response) {
+        if (request.status != 200) {
+          console.error(request);
+        }
+        console.info(response);
+      });
+    } else {
+      ADL.XAPIWrapper.sendStatement(statement);
+    }
+  }
+
+  setCurrentAgent(mbox, name = this.session.id) {
+    this.agent = new ADL.XAPIStatement.Agent(
+      ADL.XAPIWrapper.hash(mbox),
+      name
+    );
+  }
+
+  getCurrentAgent() {
+    return this.agent;
+  }
+
+  setCurrentActivity(href, title) {
+    this.activity = new ADL.XAPIStatement.Activity(href, title);
+  }
+
+  getCurrentActivity() {
+    return this.activity;
+  }
+
+  getVerb(ref, verb) {
+    return new ADL.XAPIStatement.Verb(ref, verb);
+  }
+
+  createBasicStatement(verb) {
+    let statement = new ADL.XAPIStatement(
+      this.getCurrentAgent(),
+      this.getVerb("http://adlnet.gov/expapi/verbs/" + verb, verb),
+      this.getCurrentActivity()
+    );
+    return statement;
+  }
+
+  experienced_xAPI () {
+    let verb = this.session.launched ? "launched" : "experienced";
+    this.store(this.createBasicStatement(verb));
+
+    this.session.launched = false;
+  }
+
+  terminated_xAPI() {
+    this.store(this.createBasicStatement("terminated"));
+  }
+
+  completed_xAPI() {
+    this.store(this.createBasicStatement("completed"));
+  }
+
+  answered_xAPI(question, data, answered, success) {
+    let attempt = data["attempt"] ? data["attempt"] : 1;
+    let location = this.activity.id + "#" + question;
+    let title = this.activity.definition.name['en-US'] + " :: " + question;
+    let agent = this.getCurrentAgent();
+    let verb = this.getVerb(
+      "http://adlnet.gov/expapi/verbs/answered",
+      "answered"
+    );
+    let activity = new ADL.XAPIStatement.Activity(location, title);
+    let statement = new ADL.XAPIStatement(agent, verb, activity);
+
+    statement.object.definition.type =
+      "http://adlnet.gov/expapi/activities/interaction";
+    statement.object.definition.interactionType = data["interactionType"];
+    statement.object.definition.correctResponsesPattern = [
+      JSON.stringify(data["validateOn"]),
+      data["answers"].toString()
+    ];
+
+    statement.result = {
+      success: success,
+      response: String(answered),
+      extensions: {
+        "http://adlnet.gov/expapi/verbs/attempted": attempt.toString()
+      }
+    };
+
+    this.store(statement);
+
+    return statement;
+  }
+
+  interacted_xAPI(element) {
+    let location = this.activity.id + "#" + element;
+    let title = this.activity.definition.name['en-US'] + " :: " + element;
+    let agent = this.getCurrentAgent();
+    let verb = this.getVerb(
+      "http://adlnet.gov/expapi/verbs/interacted",
+      "interacted"
+    );
+    let activity = new ADL.XAPIStatement.Activity(location, title);
+    let statement = new ADL.XAPIStatement(agent, verb, activity);
+
+    statement.object.definition.type =
+      "http://adlnet.gov/expapi/activities/interaction";
+    statement.object.definition.interactionType = "other";
+
+    this.store(statement);
+  }
+}

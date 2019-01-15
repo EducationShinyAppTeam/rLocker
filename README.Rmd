@@ -1,0 +1,44 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# rlocker
+
+Used to add Learning Locker xAPI support for Shiny Applications.
+
+## Installation
+
+You can install the released version of rlocker from [GitHub](https://github.com) with:
+
+``` r
+devtools::install_github("rpc5102/rlocker")
+```
+
+## Example
+__server.R__
+```{r server}
+library(httr)
+library(shiny)
+library(rlocker)
+
+# sample lrs endpoint and credentials
+config <- list(
+  endpoint = "http://localhost:8000/xapi/", 
+  auth = "Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA"
+)
+
+# set up an observer to pass credentials to our locker
+server <- function(input, output, session) {
+  learningLocker(session, config)
+}
+```
