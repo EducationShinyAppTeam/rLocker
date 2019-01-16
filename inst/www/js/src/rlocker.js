@@ -83,6 +83,7 @@ export class Locker {
           console.error(request);
         }
         console.info(response);
+        return response;
       });
     } else {
       ADL.XAPIWrapper.sendStatement(statement);
@@ -112,10 +113,10 @@ export class Locker {
     return new ADL.XAPIStatement.Verb(ref, verb);
   }
 
-  createBasicStatement(verb) {
+  createBasicStatement(verb, ref = "http://adlnet.gov/expapi/verbs/" + verb) {
     let statement = new ADL.XAPIStatement(
       this.getCurrentAgent(),
-      this.getVerb("http://adlnet.gov/expapi/verbs/" + verb, verb),
+      this.getVerb(ref, verb),
       this.getCurrentActivity()
     );
     return statement;

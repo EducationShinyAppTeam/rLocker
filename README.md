@@ -3,7 +3,7 @@
 rlocker
 =======
 
-Used to add Learning Locker xAPI support for Shiny Applications. **Warning**: this package is still in development.
+Used to add Learning Locker xAPI support for Shiny Applications.
 
 Installation
 ------------
@@ -32,6 +32,6 @@ config <- list(
 
 # set up an observer to pass credentials to our locker
 server <- function(input, output, session) {
-  rlocker::create(session, config)
+  rlocker::connect(session, config)
 }
 ```

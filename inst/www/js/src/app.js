@@ -6,5 +6,9 @@ var rlocker = rlocker || {};
 /* @config */
 Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
   rlocker = new Locker(config);
-  console.warn('Alerted');
+});
+
+Shiny.addCustomMessageHandler('create-statement', function(statement) {
+  let request = rlocker.createBasicStatement(statement.verb.display['en-US']);
+  rlocker.store(request);
 });
