@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 ```
 # rlocker
 
-Used to add Learning Locker xAPI support for Shiny Applications.
+Used to add Learning Locker xAPI support to Shiny Applications.
 
 ## Installation
 
-You can install the released version of rlocker from [GitHub](https://github.com) with:
+You can install the released version of rlocker from [GitHub](https://github.com/) with:
 
 ``` r
 devtools::install_github("rpc5102/rlocker")

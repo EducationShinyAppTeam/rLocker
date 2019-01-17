@@ -1,0 +1,4 @@
+#'result
+#'
+
+# handle result objects

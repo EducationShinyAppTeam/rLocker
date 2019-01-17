@@ -82,27 +82,3 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
 
   return(toJSON(statement, pretty = TRUE, auto_unbox = TRUE))
 }
-
-#'@export
-getVerbList <- function() {
-  return(names(verbs))
-}
-
-#'@export
-getVerb <- function(name, asJSON = FALSE) {
-  exists = exists(name, verbs)
-
-  if(exists & asJSON) {
-    return(formatJSON(verbs[name]))
-  } else if(exists) {
-    return(verbs[name])
-  } else {
-    return(-1)
-  }
-}
-
-#'@export
-formatJSON <- function(json) {
-  return(toJSON(json, pretty = TRUE, auto_unbox = TRUE))
-}
-

@@ -1,13 +1,31 @@
 #'verbs
 #'
-#'@details https://github.com/adlnet-archive/xAPIVerbs
+#'Note: Language strings have been unicode escaped for better compatibility.
+
+#'@export
+getVerb <- function(name, asJSON = FALSE) {
+  exists = exists(name, verbs)
+
+  if(exists & asJSON) {
+    return(formatJSON(verbs[name]))
+  } else if(exists) {
+    return(verbs[name])
+  } else {
+    return(-1)
+  }
+}
+
+#'@export
+getVerbList <- function() {
+  return(names(verbs))
+}
 
 verbs = list(
   "abandoned" = list(
     "id" = "https://w3id.org/xapi/adl/verbs/abandoned",
     "display" = list(
       "en-US" = "abandoned",
-      "fr-FR" = "a abandonné"
+      "fr-FR" = "a abandonn\u00e9"
     )
   ),
   "answered" = list(
@@ -15,8 +33,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "beantwortete",
       "en-US" = "answered",
-      "fr-FR" = "a répondu",
-      "es-ES" = "contestó"
+      "fr-FR" = "a r\u00e9pondu",
+      "es-ES" = "contest\u00f3"
     )
   ),
   "asked" = list(
@@ -24,8 +42,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "fragte",
       "en-US" = "asked",
-      "fr-FR" = "a demandé",
-      "es-ES" = "preguntó"
+      "fr-FR" = "a demand\u00e9",
+      "es-ES" = "pregunt\u00f3"
     )
   ),
   "attempted" = list(
@@ -33,8 +51,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "versuchte",
       "en-US" = "attempted",
-      "fr-FR" = "a essayé",
-      "es-ES" = "intentó"
+      "fr-FR" = "a essay\u00e9",
+      "es-ES" = "intent\u00f3"
     )
   ),
   "attended" = list(
@@ -43,7 +61,7 @@ verbs = list(
       "de-DE" = "nahm teil an",
       "en-US" = "attended",
       "fr-FR" = "a suivi",
-      "es-ES" = "asistió"
+      "es-ES" = "asisti\u00f3"
     )
   ),
   "commented" = list(
@@ -51,8 +69,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "kommentierte",
       "en-US" = "commented",
-      "fr-FR" = "a commenté",
-      "es-ES" = "comentó"
+      "fr-FR" = "a comment\u00e9",
+      "es-ES" = "coment\u00f3"
     )
   ),
   "completed" = list(
@@ -60,17 +78,17 @@ verbs = list(
     "display" = list(
       "de-DE" = "beendete",
       "en-US" = "completed",
-      "fr-FR" = "a terminé",
-      "es-ES" = "completó"
+      "fr-FR" = "a termin\u00e9",
+      "es-ES" = "complet\u00f3"
     )
   ),
   "exited" = list(
     "id" = "http://adlnet.gov/expapi/verbs/exited",
     "display" = list(
-      "de-DE" = "verließ",
+      "de-DE" = "verlie\u00df",
       "en-US" = "exited",
-      "fr-FR" = "a quitté",
-      "es-ES" = "salió"
+      "fr-FR" = "a quitt\u00e9",
+      "es-ES" = "sali\u00f3"
     )
   ),
   "experienced" = list(
@@ -78,8 +96,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "erlebte",
       "en-US" = "experienced",
-      "fr-FR" = "a éprouvé",
-      "es-ES" = "experimentó"
+      "fr-FR" = "a \u00e9prouv\u00e9",
+      "es-ES" = "experiment\u00f3"
     )
   ),
   "failed" = list(
@@ -87,8 +105,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "verfehlte",
       "en-US" = "failed",
-      "fr-FR" = "a échoué",
-      "es-ES" = "fracasó"
+      "fr-FR" = "a \u00e9chou\u00e9",
+      "es-ES" = "fracas\u00f3"
     )
   ),
   "imported" = list(
@@ -96,8 +114,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "importierte",
       "en-US" = "imported",
-      "fr-FR" = "a importé",
-      "es-ES" = "importó"
+      "fr-FR" = "a import\u00e9",
+      "es-ES" = "import\u00f3"
     )
   ),
   "initialized" = list(
@@ -105,17 +123,17 @@ verbs = list(
     "display" = list(
       "de-DE" = "initialisierte",
       "en-US" = "initialized",
-      "fr-FR" = "a initialisé",
-      "es-ES" = "inicializó"
+      "fr-FR" = "a initialis\u00e9",
+      "es-ES" = "inicializ\u00f3"
     )
   ),
   "interacted" = list(
     "id" = "http://adlnet.gov/expapi/verbs/interacted",
     "display" = list(
       "de-DE" = "interagierte",
-       "en-US" = "interacted",
-       "fr-FR" = "a interagi",
-       "es-ES" = "interactuó"
+      "en-US" = "interacted",
+      "fr-FR" = "a interagi",
+      "es-ES" = "interactu\u00f3"
     )
   ),
   "launched" = list(
@@ -123,8 +141,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "startete",
       "en-US" = "launched",
-      "fr-FR" = "a lancé",
-      "es-ES" = "lanzó"
+      "fr-FR" = "a lanc\u00e9",
+      "es-ES" = "lanz\u00f3"
     )
   ),
   "mastered" = list(
@@ -132,8 +150,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "meisterte",
       "en-US" = "mastered",
-      "fr-FR" = "a maîtrisé",
-      "es-ES" = "dominó"
+      "fr-FR" = "a maîtris\u00e9",
+      "es-ES" = "domin\u00f3"
     )
   ),
   "passed" = list(
@@ -141,8 +159,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "bestand",
       "en-US" = "passed",
-      "fr-FR" = "a réussi",
-      "es-ES" = "aprobó"
+      "fr-FR" = "a r\u00e9ussi",
+      "es-ES" = "aprob\u00f3"
     )
   ),
   "preferred" = list(
@@ -150,8 +168,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "bevorzugte",
       "en-US" = "preferred",
-      "fr-FR" = "a préféré",
-      "es-ES" = "prefirió"
+      "fr-FR" = "a pr\u00e9f\u00e9r\u00e9",
+      "es-ES" = "prefiri\u00f3"
     )
   ),
   "progressed" = list(
@@ -159,8 +177,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "machte Fortschritt mit",
       "en-US" = "progressed",
-      "fr-FR" = "a progressé",
-      "es-ES" = "progresó"
+      "fr-FR" = "a progress\u00e9",
+      "es-ES" = "progres\u00f3"
     )
   ),
   "registered" = list(
@@ -168,8 +186,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "registrierte",
       "en-US" = "registered",
-      "fr-FR" = "a enregistré",
-       "es-ES" = "registró"
+      "fr-FR" = "a enregistr\u00e9",
+      "es-ES" = "registr\u00f3"
     )
   ),
   "responded" = list(
@@ -177,8 +195,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "reagierte",
       "en-US" = "responded",
-      "fr-FR" = "a répondu",
-      "es-ES" = "respondió"
+      "fr-FR" = "a r\u00e9pondu",
+      "es-ES" = "respondi\u00f3"
     )
   ),
   "resumed" = list(
@@ -187,7 +205,7 @@ verbs = list(
       "de-DE" = "setzte fort",
       "en-US" = "resumed",
       "fr-FR" = "a repris",
-      "es-ES" = "continuó"
+      "es-ES" = "continu\u00f3"
     )
   ),
   "satisfied" = list(
@@ -201,8 +219,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "erreichte",
       "en-US" = "scored",
-      "fr-FR" = "a marqué",
-      "es-ES" = "anotó"
+      "fr-FR" = "a marqu\u00e9",
+      "es-ES" = "anot\u00f3"
     )
   ),
   "shared" = list(
@@ -210,8 +228,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "teilte",
       "en-US" = "shared",
-      "fr-FR" = "a partagé",
-      "es-ES" = "compartió"
+      "fr-FR" = "a partag\u00e9",
+      "es-ES" = "comparti\u00f3"
     )
   ),
   "suspended" = list(
@@ -220,7 +238,7 @@ verbs = list(
       "de-DE" = "pausierte",
       "en-US" = "suspended",
       "fr-FR" = "a suspendu",
-      "es-ES" = "aplazó"
+      "es-ES" = "aplaz\u00f3"
     )
   ),
   "terminated" = list(
@@ -228,8 +246,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "beendete",
       "en-US" = "terminated",
-      "fr-FR" = "a terminé",
-      "es-ES" = "terminó"
+      "fr-FR" = "a termin\u00e9",
+      "es-ES" = "termin\u00f3"
     )
   ),
   "voided" = list(
@@ -237,8 +255,8 @@ verbs = list(
     "display" = list(
       "de-DE" = "entwertete",
       "en-US" = "voided",
-       "fr-FR" = "a annulé",
-       "es-ES" = "anuló"
+      "fr-FR" = "a annul\u00e9",
+      "es-ES" = "anul\u00f3"
     )
   ),
   "waived" = list(

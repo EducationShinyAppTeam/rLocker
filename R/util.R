@@ -29,3 +29,10 @@ rlockerJS = htmltools::htmlDependency(
 )
 
 dep <- list(xAPIWrapper, rlockerJS)
+
+## Utility Functions ##
+
+#'@export
+formatJSON <- function(json) {
+  return(toJSON(json, pretty = TRUE, auto_unbox = TRUE))
+}

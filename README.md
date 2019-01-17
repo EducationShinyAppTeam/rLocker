@@ -3,7 +3,7 @@
 rlocker
 =======
 
-Used to add Learning Locker xAPI support for Shiny Applications.
+Used to add Learning Locker xAPI support to Shiny Applications.
 
 Installation
 ------------
