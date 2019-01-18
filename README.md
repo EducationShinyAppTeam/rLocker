@@ -39,7 +39,7 @@ shinyApp(
       session$sendCustomMessage(type = 'create-statement', rlocker::createStatement())
     })
     
-    # Method 2 - createStatement and store
+    # Method 2 - createStatement and store (no js)
     observeEvent(input$button, {
       statement <- rlocker::createStatement()
       rlocker::store(statment)
