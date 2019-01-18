@@ -17,7 +17,7 @@ devtools::install_github("rpc5102/rlocker")
 Example
 -------
 
-**server.R**
+**app.R**
 
 ``` r
 library(shiny)
