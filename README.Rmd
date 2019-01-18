@@ -1,5 +1,6 @@
 ---
 output: github_document
+runtime: shiny
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -31,7 +32,7 @@ library(shiny)
 library(rlocker)
 
 # Contains question setup and rendering functions
-source('./helpers.R')
+# source('./helpers.R')
 
 shinyApp(
   ui = fluidPage(
