@@ -15,16 +15,25 @@ test <- function(config) {
     # Try making a connection to the endpoint
     tryCatch({
 
-      # Todo check if endpoint has data/xapi
-      status <- status_code(GET(paste(c(config$endpoint, "/about"), collapse="")))
+      response <- GET(
+        paste0(config$base_url, "/api/connection/statement"),
+        add_headers(Authorization = config$auth)
+      )
+
+      status <- status_code(response)
 
       #'@details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
       if(!status == 200){
-        warning(paste(c("Unable to connect to xAPI endpoint.\n\tReason: ", http_status(status)$message)))
+        message(paste(c("Unable to connect to xAPI endpoint. Reason: ", http_status(status)$message), "."))
       }
     },
-    error = function(e){
-      stop(e$message)
+    error = function(cond){
+      message(cond)
+      return(NA)
+    },
+    warning = function(cond){
+      message(cond)
+      return(NULL)
     })
   }
 
@@ -38,6 +47,8 @@ test <- function(config) {
 #'@return HTTP Status Code
 #'@export
 connect <- function(session, config) {
+
+  # base_url + data/xAPI/
 
   # Append xapiwrapper to DOM head
   insertUI(

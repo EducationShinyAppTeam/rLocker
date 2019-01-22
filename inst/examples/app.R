@@ -27,8 +27,8 @@ shinyApp(
 
     # Initialize Learning Locker connection
     rlocker::connect(session, list(
-      endpoint = "http://localhost:8000/xapi/",
-      auth = "Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA"
+      base_url = "https://learning-locker.stat.vmhost.psu.edu/",
+      auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2"
     ))
 
     # Set up question list

@@ -30,9 +30,10 @@ export class Locker {
   constructor(config) {
     this.debug = true,
     this.config = config ? config : {
-      endpoint: 'http://localhost:8000/xapi/',
+      base_url: 'http://localhost:8000/xapi/',
       auth: 'Basic ' + toBase64('abcd:1234'),
     },
+    this.config.endpoint = (this.config.base_url + '/data/xAPI/').replace(/([^:]\/)\/+/g, "$1"),
     this.session = {
       id: null,
       launched: null
