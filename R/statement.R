@@ -3,12 +3,24 @@
 #'Contains test data for now.
 #'@import jsonlite
 
-#'@export
-createActor <- function(x = NULL, warn = TRUE, ...) {
-  params <- x
-
-  if(is.null(params$actor) & warn){
-    warning('No actor arguments specified; using default xapi:actor.', call. = FALSE)
+#' Creates an xAPI Actor object
+#' 
+#' @param actor Current user
+#' @param type Type of actor
+#' @param warn Show warnings
+#' 
+#' @return xAPI Actor object
+#' 
+#' @examples
+#' createActor(type = "Agent")
+#' 
+#' @export
+createActor <- function(actor = NULL, type = NULL, warn = TRUE, ...) {
+  
+  actor = ifelse(is.null(actor), list(name = "", email = ""), verb)
+  
+  if(is.null(actor) & warn){
+    warning('Actor arguments not specified; using default xapi:actor.', call. = FALSE)
   }
 
   obj <- list(
@@ -104,17 +116,31 @@ createObject <- function(
   return(obj)
 }
 
-#'@export
-createResult <- function(x = NULL, warn = TRUE, ...) {
+#' Creates an xAPI Result object
+#' 
+#' @param success Holds a value if interaction can be marked as successful/unsuccessful.
+#' @param response Response from the user on a given action
+#' @param warn Show warnings
+#' 
+#' @return xAPI Result object
+#' 
+#' @examples
+#' createResult(success = TRUE, response = "correctAnswer")
+#' 
+#' @export
+createResult <- function(
+  success = NULL,
+  response = NULL,
+  warn = TRUE, ...) {
   params <- x
 
-  if(is.null(params$result) & warn){
-    warning('No object arguments specified; using default xapi:result', call. = FALSE)
+  if(is.null(result) & warn){
+    warning('Result arguments not specified; using default xapi:result', call. = FALSE)
   }
 
   # Set defaults
-  success = ifelse(is.null(params$result$success), FALSE, params$result$success)
-  response = ifelse(is.null(params$result$response), "answer", params$result$response)
+  success = ifelse(is.null(result$success), FALSE, result$success)
+  response = ifelse(is.null(result$response), "answer", result$response)
 
   obj <- list(
     success = success,
@@ -124,11 +150,24 @@ createResult <- function(x = NULL, warn = TRUE, ...) {
   return(obj)
 }
 
-#'@export
+#' Creates an xAPI Statement
+#' 
+#' @param x Statement values
+#' @param warn Show warnings
+#' 
+#' @seealso \code{\link{createActor}}
+#' @seealso \code{\link{createVerb}}
+#' @seealso \code{\link{createObject}}
+#' @seealso \code{\link{createResult}}
+#' 
+#' @return xAPI Statement (json)
+#' 
+#' @examples
+#' createStatement(success = TRUE, response = "correctAnswer")
+#' 
+#' @export
 createStatement <- function(x = NULL, warn = TRUE, ...) {
   params <- x
-
-  print(typeof(params$object))
   
   if(is.null(params)){
     warning('No arguments specified; using default xapi:statement.', call. = FALSE)
@@ -139,7 +178,7 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
 
   statement <- list(
     actor = createActor(list(actor = params$actor), warn),
-    verb = do.call(createVerb, list(params$verb)),
+    verb = do.call(createVerb, c(params$verb, warn = warn)),
     object = do.call(createObject, c(params$object, warn = warn)),
     result = createResult(list(result = params$result), warn)
   )
