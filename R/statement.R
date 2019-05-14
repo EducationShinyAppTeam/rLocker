@@ -18,20 +18,37 @@ createActor <- function(x = NULL, warn = TRUE, ...) {
   return(obj)
 }
 
-#'@export
-createVerb <- function(x = NULL, warn = TRUE, ...) {
-  params <- x
-
-  if(is.null(params$verb) & warn){
-    warning('No verb arguments specified; using default xapi:verb.', call. = FALSE)
+#' Creates an xAPI Verb object
+#' 
+#' @param verb Verb name
+#' @param id URI to verb definition
+#' @param warn Show warnings
+#' 
+#' @seealso \code{\link{verbs}}
+#' 
+#' @return xAPI Verb object
+#' 
+#' @examples
+#' createVerb(verb = "experienced")
+#' createVerb(verb = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb")
+#' 
+#' @export
+createVerb <- function(
+  verb = NULL,
+  id = NULL,
+  warn = TRUE, ...) {
+  
+  if(is.null(verb) & warn){
+    warning('Verb arguments not specified; using default xapi:verb.', call. = FALSE)
   }
 
   # Set defaults
-  verb = ifelse(is.null(params$verb), 'experienced', params$verb)
-  id = ifelse(is.null(params$id), paste(c("http://adlnet.gov/expapi/verbs/", verb), collapse=""), params$id)
+  verb = ifelse(is.null(verb), 'experienced', verb)
+  id = ifelse(is.null(id), paste(c("http://adlnet.gov/expapi/verbs/", verb), collapse=""), id)
 
   # todo: add lookup from verbs list
   # todo: add language support
+  # todo: warn - id should be a valid url
 
   obj <- list(
     id = id,
@@ -43,27 +60,43 @@ createVerb <- function(x = NULL, warn = TRUE, ...) {
   return(obj)
 }
 
-#'@export
-createObject <- function(x = NULL, warn = TRUE, ...) {
-  params <- x
+#' Creates an xAPI Object object
+#' 
+#' @param name Object name
+#' @param description Brief description of the object
+#' @param id URI to object or activity
+#' @param warn Show warnings
+#' 
+#' @return xAPI Object object
+#' 
+#' @examples
+#' createObject(name = "Question 1", description = "Example question description.")
+#' createObject(name = question$title, description = question$description, id = session$clientData)
+#' 
+#' @export
+createObject <- function(
+  name = NULL,
+  description = NULL,
+  id = NULL,
+  warn = TRUE, ...) {
 
-  if(is.null(params$object) & warn){
-    warning('No object arguments specified; using default xapi:object.', call. = FALSE)
+  if(is.null(name) & is.null(description) & warn){
+    warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
   }
 
   # Set defaults
-  id = ifelse(is.null(params$result$success), FALSE, params$result$success)
-  name = ifelse(is.null(params$result$response), "answer", params$result$response)
-  description = ifelse(is.null(params$result$response), "answer", params$result$response)
+  id = ifelse(is.null(id), "http://adlnet.gov/expapi/activities/example", id)
+  name = ifelse(is.null(name), "Example Activity", name)
+  description = ifelse(is.null(description), "Example activity description", description)
 
   obj <- list(
-    id = "http://adlnet.gov/expapi/activities/example",
+    id = id,
     definition = list(
       name = list(
-        "en-US" = "Example Activity"
+        "en-US" = name
       ),
       description = list(
-        "en-US" = "Example activity description"
+        "en-US" = description
       )
     )
   )
@@ -95,6 +128,8 @@ createResult <- function(x = NULL, warn = TRUE, ...) {
 createStatement <- function(x = NULL, warn = TRUE, ...) {
   params <- x
 
+  print(typeof(params$object))
+  
   if(is.null(params)){
     warning('No arguments specified; using default xapi:statement.', call. = FALSE)
     warn = FALSE
@@ -104,8 +139,8 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
 
   statement <- list(
     actor = createActor(list(actor = params$actor), warn),
-    verb = createVerb(list(verb = params$verb), warn),
-    object = createObject(list(object = params$object), warn),
+    verb = do.call(createVerb, list(params$verb)),
+    object = do.call(createObject, c(params$object, warn = warn)),
     result = createResult(list(result = params$result), warn)
   )
 
