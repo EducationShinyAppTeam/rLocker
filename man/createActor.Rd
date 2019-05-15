@@ -2,10 +2,24 @@
 % Please edit documentation in R/statement.R
 \name{createActor}
 \alias{createActor}
-\title{statement}
+\title{Creates an xAPI Actor object}
 \usage{
-createActor(x = NULL, warn = TRUE, ...)
+createActor(actor = NULL, type = NULL, warn = TRUE, ...)
+}
+\arguments{
+\item{actor}{Current user}
+
+\item{type}{Type of actor}
+
+\item{warn}{Show warnings}
+}
+\value{
+xAPI Actor object
 }
 \description{
-Contains test data for now.
+Creates an xAPI Actor object
+}
+\examples{
+createActor(type = "Agent")
+
 }

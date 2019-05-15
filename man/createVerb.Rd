@@ -2,20 +2,22 @@
 % Please edit documentation in R/statement.R
 \name{createVerb}
 \alias{createVerb}
-\title{Create xAPI Verb object}
+\title{Creates an xAPI Verb object}
 \usage{
 createVerb(verb = NULL, id = NULL, warn = TRUE, ...)
 }
 \arguments{
 \item{verb}{Verb name}
 
+\item{id}{URI to verb definition}
+
 \item{warn}{Show warnings}
 }
 \value{
-A structured list verb object
+xAPI Verb object
 }
 \description{
-Create xAPI Verb object
+Creates an xAPI Verb object
 }
 \examples{
 createVerb(verb = "experienced")

@@ -1,7 +1,7 @@
-#'statement
-#'
-#'Contains test data for now.
-#'@import jsonlite
+#' statement
+#' 
+#' @import jsonlite
+NULL
 
 #' Creates an xAPI Actor object
 #' 
@@ -15,9 +15,9 @@
 #' createActor(type = "Agent")
 #' 
 #' @export
-createActor <- function(actor = NULL, type = NULL, warn = TRUE, ...) {
+createActor <- function(na, type = NULL, warn = TRUE, ...) {
   
-  actor = ifelse(is.null(actor), list(name = "", email = ""), verb)
+  actor = ifelse(is.null(actor), list(name = , mbox = "mailto:test@example.org"), actor)
   
   if(is.null(actor) & warn){
     warning('Actor arguments not specified; using default xapi:actor.', call. = FALSE)
