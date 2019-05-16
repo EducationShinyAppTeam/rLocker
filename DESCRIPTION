@@ -15,4 +15,4 @@ Encoding: UTF-8
 NeedsCompilation: no
 LazyData: true
 RoxygenNote: 6.1.1
-Depends: httr, uuid
+Depends: httr, methods
