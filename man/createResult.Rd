@@ -23,3 +23,6 @@ Creates an xAPI Result object
 createResult(success = TRUE, response = "correctAnswer")
 
 }
+\seealso{
+\code{\link{result}}
+}

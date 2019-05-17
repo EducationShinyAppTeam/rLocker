@@ -1,28 +1,26 @@
 #'actor
-#'
-#'@import uuid
-NULL
+#' 
+#' xAPI Actor object definitions
 
-Actor <- setClass("Actor", 
-   slots = c(
-     account = list(
-       name = "character",
-       homePage = "character"
-     ),
-     group_members = "character",
-     mbox = "character",
-     name = "character", 
-     objectType = "character",
-     openid = "character"
-   ), 
-   prototype = list(
-     objectType = "Agent",
-     name = uuid::UUIDgenerate(),
-     mbox = "mailto:test@example.org"
-   )
-)
+#'@export
+getActorDefinition <- function() {
+  actor <- list(
+    account = list(
+      name = "",
+      homePage = ""
+    ),
+    group_members = "",
+    mbox = "",
+    name = "", 
+    objectType = "",
+    openid = ""
+  )
+  
+  return(actor)
+}
 
-Actor.getActorTypes = function() {
+#'@export
+getActorTypes <- function() {
   types <- c(
     "Agent",
     "Group"

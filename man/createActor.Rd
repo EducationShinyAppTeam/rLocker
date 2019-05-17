@@ -2,14 +2,12 @@
 % Please edit documentation in R/statement.R
 \name{createActor}
 \alias{createActor}
-\title{Creates an xAPI Actor object}
+\title{statement}
 \usage{
-createActor(actor = NULL, type = NULL, warn = TRUE, ...)
+createActor(actor = NULL, warn = TRUE, ...)
 }
 \arguments{
-\item{actor}{Current user}
-
-\item{type}{Type of actor}
+\item{actor}{Actor defaults}
 
 \item{warn}{Show warnings}
 }
@@ -17,9 +15,13 @@ createActor(actor = NULL, type = NULL, warn = TRUE, ...)
 xAPI Actor object
 }
 \description{
+xAPI Statement object creation functions
 Creates an xAPI Actor object
 }
 \examples{
-createActor(type = "Agent")
+createActor(name = "John Doe", mbox = "mailto:john@example.com")
 
+}
+\seealso{
+\code{\link{actor}}
 }

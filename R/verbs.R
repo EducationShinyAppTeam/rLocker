@@ -1,6 +1,7 @@
 #'verbs
 #'
-#'Note: Language strings have been unicode escaped for better compatibility.
+#' xAPI Verb object definitions
+#' Note: Language strings have been unicode escaped for better compatibility.
 
 #'@export
 getVerb <- function(name, asJSON = FALSE) {
@@ -20,7 +21,7 @@ getVerbList <- function() {
   return(names(verbs))
 }
 
-verbs = list(
+verbs <- list(
   "abandoned" = list(
     "id" = "https://w3id.org/xapi/adl/verbs/abandoned",
     "display" = list(

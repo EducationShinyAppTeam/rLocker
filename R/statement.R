@@ -1,30 +1,32 @@
 #' statement
-#' 
-#' @import jsonlite
-NULL
+#'
+#' xAPI Statement object creation functions
 
 #' Creates an xAPI Actor object
 #' 
-#' @param actor Current user
-#' @param type Type of actor
+#' @param actor Actor defaults
 #' @param warn Show warnings
+#' 
+#' @seealso \code{\link{actor}}
 #' 
 #' @return xAPI Actor object
 #' 
 #' @examples
-#' createActor(type = "Agent")
+#' createActor(name = "John Doe", mbox = "mailto:john@example.com")
 #' 
 #' @export
-createActor <- function(na, type = NULL, warn = TRUE, ...) {
-  
-  actor = ifelse(is.null(actor), list(name = , mbox = "mailto:test@example.org"), actor)
+createActor <- function(
+  actor = NULL,
+  warn = TRUE, ...) {
   
   if(is.null(actor) & warn){
     warning('Actor arguments not specified; using default xapi:actor.', call. = FALSE)
   }
-
+  
   obj <- list(
-    objectType = "Agent"
+    name = ifelse(is.null(actor$name), uuid::UUIDgenerate(), actor$name),
+    mbox = ifelse(is.null(actor$mbox), "mailto:test@example.org", actor$mbox),
+    objectType = ifelse(is.null(actor$objectType), "Actor", actor$objectType)
   )
 
   return(obj)
@@ -122,6 +124,8 @@ createObject <- function(
 #' @param response Response from the user on a given action
 #' @param warn Show warnings
 #' 
+#' @seealso \code{\link{result}}
+#' 
 #' @return xAPI Result object
 #' 
 #' @examples
@@ -132,7 +136,6 @@ createResult <- function(
   success = NULL,
   response = NULL,
   warn = TRUE, ...) {
-  params <- x
 
   if(is.null(result) & warn){
     warning('Result arguments not specified; using default xapi:result', call. = FALSE)
@@ -177,7 +180,7 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
   # todo: check if verb requires a result object
 
   statement <- list(
-    actor = createActor(list(actor = params$actor), warn),
+    actor = do.call(createActor, c(params$actor, warn)),
     verb = do.call(createVerb, c(params$verb, warn = warn)),
     object = do.call(createObject, c(params$object, warn = warn)),
     result = createResult(list(result = params$result), warn)

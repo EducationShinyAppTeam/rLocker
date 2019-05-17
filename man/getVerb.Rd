@@ -7,5 +7,6 @@
 getVerb(name, asJSON = FALSE)
 }
 \description{
+xAPI Verb object definitions
 Note: Language strings have been unicode escaped for better compatibility.
 }
