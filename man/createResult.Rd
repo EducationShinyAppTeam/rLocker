@@ -4,14 +4,14 @@
 \alias{createResult}
 \title{Creates an xAPI Result object}
 \usage{
-createResult(success = NULL, response = NULL, warn = TRUE, ...)
+createResult(result = NULL, warn = TRUE, ...)
 }
 \arguments{
+\item{warn}{Show warnings}
+
 \item{success}{Holds a value if interaction can be marked as successful/unsuccessful.}
 
 \item{response}{Response from the user on a given action}
-
-\item{warn}{Show warnings}
 }
 \value{
 xAPI Result object

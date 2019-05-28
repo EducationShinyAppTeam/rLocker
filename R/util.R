@@ -1,7 +1,8 @@
-#'Utility Functions
+#' Utility Functions
 #'
-#'Load rlocker javascript dependencies
-#'@import shiny htmltools
+#' Load rlocker javascript dependencies
+#' @import shiny htmltools
+#' @importFrom jsonlite toJSON
 
 .onAttach <- function(...) {
   # @todo register the js input handler to make the element reactive
@@ -33,6 +34,6 @@ dep <- list(xAPIWrapper, rlockerJS)
 ## Utility Functions ##
 
 #'@export
-formatJSON <- function(json) {
-  return(toJSON(json, pretty = TRUE, auto_unbox = TRUE))
+formatJSON <- function(json, ...) {
+  return(jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE))
 }

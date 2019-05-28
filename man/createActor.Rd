@@ -2,7 +2,7 @@
 % Please edit documentation in R/statement.R
 \name{createActor}
 \alias{createActor}
-\title{statement}
+\title{Creates an xAPI Actor object}
 \usage{
 createActor(actor = NULL, warn = TRUE, ...)
 }
@@ -15,7 +15,6 @@ createActor(actor = NULL, warn = TRUE, ...)
 xAPI Actor object
 }
 \description{
-xAPI Statement object creation functions
 Creates an xAPI Actor object
 }
 \examples{

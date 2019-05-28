@@ -1,4 +1,4 @@
-#'actor
+#' actor
 #' 
 #' xAPI Actor object definitions
 

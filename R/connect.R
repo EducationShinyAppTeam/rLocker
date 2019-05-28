@@ -1,11 +1,11 @@
-#'connect
-#'
-#'Tests Learning Locker API Configuration
-#'
-#'@param config API Configuration
-#'@return HTTP Status Code
-#'@import htmltools httr
-#'@export
+#' connect
+#' 
+#' Tests Learning Locker API Configuration
+#' 
+#' @param config API Configuration
+#' @return HTTP Status Code
+#' @import htmltools httr
+#' @export
 test <- function(config) {
 
   # Check to see if auth token is set or if username and password are set instead.
@@ -22,7 +22,7 @@ test <- function(config) {
 
       status <- status_code(response)
 
-      #'@details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+      #' @details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
       if(!status == 200){
         message(paste(c("Unable to connect to xAPI endpoint. Reason: ", http_status(status)$message), "."))
       }
@@ -40,12 +40,12 @@ test <- function(config) {
   return(status)
 }
 
-#'Sets up scripts needed for Learning Locker API
-#'
-#'@param session The current R session
-#'@param config API Configuration
-#'@return HTTP Status Code
-#'@export
+#' Sets up scripts needed for Learning Locker API
+#' 
+#' @param session The current R session
+#' @param config API Configuration
+#' @return HTTP Status Code
+#' @export
 connect <- function(session, config) {
 
   # base_url + data/xAPI/

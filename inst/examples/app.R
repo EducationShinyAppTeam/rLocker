@@ -30,7 +30,11 @@ shinyApp(
       base_url = "https://learning-locker.stat.vmhost.psu.edu/",
       auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2"
     ))
+    
+    currentActor <- rlocker::createActor()
 
+    print(session$clientData)
+    
     # Set up question list
     output$questionset <- renderUI({
       renderQuestionset(questions)

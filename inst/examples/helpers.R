@@ -87,7 +87,6 @@ registerQuestionEvents <- function(session, questions){
   })
 }
 
-# todo: need to properly format url  -- move to util.R
 getCurrentAddress <- function(session){
   return(paste0(
     session$clientData$url_protocol, "//",

@@ -1,6 +1,8 @@
 #' statement
-#'
+#' 
 #' xAPI Statement object creation functions
+#' @importFrom uuid UUIDgenerate
+NULL
 
 #' Creates an xAPI Actor object
 #' 
@@ -89,19 +91,17 @@ createVerb <- function(
 #' 
 #' @export
 createObject <- function(
-  name = NULL,
-  description = NULL,
-  id = NULL,
+  object = NULL,
   warn = TRUE, ...) {
 
-  if(is.null(name) & is.null(description) & warn){
+  if(is.null(object) & warn){
     warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
   }
 
   # Set defaults
-  id = ifelse(is.null(id), "http://adlnet.gov/expapi/activities/example", id)
-  name = ifelse(is.null(name), "Example Activity", name)
-  description = ifelse(is.null(description), "Example activity description", description)
+  id <- ifelse(is.null(object$id), "http://adlnet.gov/expapi/activities/example", object$id)
+  name <- ifelse(is.null(object$name), "Example Activity", object$name)
+  description <- ifelse(is.null(object$description), "Example activity description", object$description)
 
   obj <- list(
     id = id,
@@ -133,8 +133,7 @@ createObject <- function(
 #' 
 #' @export
 createResult <- function(
-  success = NULL,
-  response = NULL,
+  result = NULL,
   warn = TRUE, ...) {
 
   if(is.null(result) & warn){
@@ -143,7 +142,7 @@ createResult <- function(
 
   # Set defaults
   success = ifelse(is.null(result$success), FALSE, result$success)
-  response = ifelse(is.null(result$response), "answer", result$response)
+  response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
 
   obj <- list(
     success = success,
@@ -176,15 +175,15 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
     warning('No arguments specified; using default xapi:statement.', call. = FALSE)
     warn = FALSE
   }
-
+  
   # todo: check if verb requires a result object
 
   statement <- list(
-    actor = do.call(createActor, c(params$actor, warn)),
-    verb = do.call(createVerb, c(params$verb, warn = warn)),
-    object = do.call(createObject, c(params$object, warn = warn)),
-    result = createResult(list(result = params$result), warn)
+    actor = do.call(createActor, list(actor = params$actor, warn)),
+    verb = do.call(createVerb, list(verb = params$verb, warn)),
+    object = do.call(createObject, list(object = params$object, warn)),
+    result = do.call(createResult, list(result = params$result, warn))
   )
 
-  return(toJSON(statement, pretty = TRUE, auto_unbox = TRUE))
+  return(formatJSON(statement, pretty = TRUE, auto_unbox = TRUE))
 }

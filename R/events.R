@@ -1,4 +1,4 @@
-#'events
+#' events
 #' @import htmltools httr
 
 #' @export
