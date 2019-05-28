@@ -4,14 +4,14 @@
 \alias{createVerb}
 \title{Creates an xAPI Verb object}
 \usage{
-createVerb(verb = NULL, id = NULL, warn = TRUE, ...)
+createVerb(verb = NULL, warn = TRUE, ...)
 }
 \arguments{
 \item{verb}{Verb name}
 
-\item{id}{URI to verb definition}
-
 \item{warn}{Show warnings}
+
+\item{id}{URI to verb definition}
 }
 \value{
 xAPI Verb object
@@ -20,8 +20,8 @@ xAPI Verb object
 Creates an xAPI Verb object
 }
 \examples{
-createVerb(verb = "experienced")
-createVerb(verb = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb")
+createVerb(verb = list(display = "experienced"))
+createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
 
 }
 \seealso{

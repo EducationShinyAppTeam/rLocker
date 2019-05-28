@@ -2,6 +2,7 @@
 #' 
 #' xAPI Statement object creation functions
 #' @importFrom uuid UUIDgenerate
+#' @name statement
 NULL
 
 #' Creates an xAPI Actor object
@@ -14,7 +15,7 @@ NULL
 #' @return xAPI Actor object
 #' 
 #' @examples
-#' createActor(name = "John Doe", mbox = "mailto:john@example.com")
+#' createActor(actor = list(name = "John Doe", mbox = "mailto:john@example.com"))
 #' 
 #' @export
 createActor <- function(
@@ -45,8 +46,8 @@ createActor <- function(
 #' @return xAPI Verb object
 #' 
 #' @examples
-#' createVerb(verb = "experienced")
-#' createVerb(verb = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb")
+#' createVerb(verb = list(display = "experienced"))
+#' createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
 #' 
 #' @export
 createVerb <- function(
@@ -85,8 +86,8 @@ createVerb <- function(
 #' @return xAPI Object object
 #' 
 #' @examples
-#' createObject(name = "Question 1", description = "Example question description.")
-#' createObject(name = question$title, description = question$description, id = session$clientData)
+#' createObject(object = list(name = "Question 1", description = "Example question description."))
+#' createObject(object = list(name = question$title, description = question$description, id = session$clientData))
 #' 
 #' @export
 createObject <- function(
@@ -128,7 +129,7 @@ createObject <- function(
 #' @return xAPI Result object
 #' 
 #' @examples
-#' createResult(success = TRUE, response = "correctAnswer")
+#' createResult(result = list(success = TRUE, response = "correctAnswer"))
 #' 
 #' @export
 createResult <- function(
@@ -164,7 +165,23 @@ createResult <- function(
 #' @return xAPI Statement (json)
 #' 
 #' @examples
-#' createStatement(success = TRUE, response = "correctAnswer")
+#' createStatement(
+#'  list(
+#'   actor = currentUser,
+#'   verb = list(
+#     display = "answered"
+#'   ),
+#'   object = list(
+#'    id = paste0(getCurrentAddress(session), "#", question$id),
+#'    name = question$title,
+#'    description = question$text
+#'  ),
+#'  result = list(
+#'    success = session$input[[question$id]] == question$answer,
+#'    response = session$input[[question$id]]
+#'  )
+#' )
+#')
 #' 
 #' @export
 createStatement <- function(x = NULL, warn = TRUE, ...) {

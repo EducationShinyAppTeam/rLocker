@@ -18,7 +18,7 @@ xAPI Actor object
 Creates an xAPI Actor object
 }
 \examples{
-createActor(name = "John Doe", mbox = "mailto:john@example.com")
+createActor(actor = list(name = "John Doe", mbox = "mailto:john@example.com"))
 
 }
 \seealso{

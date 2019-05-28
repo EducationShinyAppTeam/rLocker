@@ -22,7 +22,7 @@ xAPI Object object
 Creates an xAPI Object object
 }
 \examples{
-createObject(name = "Question 1", description = "Example question description.")
-createObject(name = question$title, description = question$description, id = session$clientData)
+createObject(object = list(name = "Question 1", description = "Example question description."))
+createObject(object = list(name = question$title, description = question$description, id = session$clientData))
 
 }

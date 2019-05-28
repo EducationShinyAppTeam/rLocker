@@ -20,7 +20,7 @@ xAPI Result object
 Creates an xAPI Result object
 }
 \examples{
-createResult(success = TRUE, response = "correctAnswer")
+createResult(result = list(success = TRUE, response = "correctAnswer"))
 
 }
 \seealso{
