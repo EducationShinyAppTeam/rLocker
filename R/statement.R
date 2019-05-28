@@ -51,7 +51,6 @@ createActor <- function(
 #' @export
 createVerb <- function(
   verb = NULL,
-  id = NULL,
   warn = TRUE, ...) {
   
   if(is.null(verb) & warn){
@@ -59,8 +58,8 @@ createVerb <- function(
   }
 
   # Set defaults
-  verb = ifelse(is.null(verb), 'experienced', verb)
-  id = ifelse(is.null(id), paste(c("http://adlnet.gov/expapi/verbs/", verb), collapse=""), id)
+  display = ifelse(is.null(verb$display), 'experienced', verb$display)
+  id = ifelse(is.null(verb$id), paste(c("http://adlnet.gov/expapi/verbs/", verb$display), collapse = ""), verb$id)
 
   # todo: add lookup from verbs list
   # todo: add language support
@@ -69,7 +68,7 @@ createVerb <- function(
   obj <- list(
     id = id,
     display = list(
-      "en-US" = verb
+      "en-US" = display
     )
   )
 
@@ -186,4 +185,26 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
   )
 
   return(formatJSON(statement, pretty = TRUE, auto_unbox = TRUE))
+}
+
+#' Stores an xAPI Statement
+#' 
+#' @param statement xAPI Statement
+#' @param warn Show warnings
+#' 
+#' @seealso \code{\link{createStatement}}
+#' 
+#' @return HTTP Status
+#' 
+#' @examples
+#' store(statement, connection)
+#' 
+#' @export
+store <- function(session, statement = NULL, warn = TRUE, ...) {
+  # Pass the statement to the js handler
+  session$sendCustomMessage("rlocker-store", statement)
+  
+  # Return HTTP STATUS 200 - OK
+  # todo: listen for actual status updates
+  return(200)
 }

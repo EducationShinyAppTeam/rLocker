@@ -106,9 +106,10 @@ typings/
 *.sw*
 
 ### VisualStudioCode ###
+.code-workspace
+.history
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history

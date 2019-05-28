@@ -1,8 +1,8 @@
 library(shiny)
 library(rlocker)
 
-# Contains question setup and rendering functions
-source('./helpers.R')
+# Import question set as global var to save on resources.
+source('./questions.R')
 
 shinyApp(
   ui = fluidPage(
@@ -24,22 +24,22 @@ shinyApp(
     )
   ),
   server = function(input, output, session) {
-
+    
     # Initialize Learning Locker connection
     rlocker::connect(session, list(
       base_url = "https://learning-locker.stat.vmhost.psu.edu/",
       auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2"
     ))
     
-    currentActor <- rlocker::createActor()
-
-    print(session$clientData)
+    # Import helper functions to setup demo app and user.
+    source('./helpers.R', local = TRUE)
     
-    # Set up question list
+    # Set up question input list
     output$questionset <- renderUI({
       renderQuestionset(questions)
     })
 
+    # Set up graphics for question items
     output$rnorm <- renderPlot({
       hist(main = "", xlab = "", ylab = "", rnorm(n = 1000, m = 24.2, sd = 2.2))
     })
@@ -50,11 +50,6 @@ shinyApp(
 
     # Register events for question inputs
     registerQuestionEvents(session, questions)
-
-    # Watch for submit button presses
-    observeEvent(input$submit, {
-      session$sendCustomMessage(type = 'create-statement', rlocker::createStatement())
-    })
   }
 )
 

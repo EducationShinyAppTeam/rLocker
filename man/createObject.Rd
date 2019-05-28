@@ -4,17 +4,16 @@
 \alias{createObject}
 \title{Creates an xAPI Object object}
 \usage{
-createObject(name = NULL, description = NULL, id = NULL,
-  warn = TRUE, ...)
+createObject(object = NULL, warn = TRUE, ...)
 }
 \arguments{
+\item{warn}{Show warnings}
+
 \item{name}{Object name}
 
 \item{description}{Brief description of the object}
 
 \item{id}{URI to object or activity}
-
-\item{warn}{Show warnings}
 }
 \value{
 xAPI Object object

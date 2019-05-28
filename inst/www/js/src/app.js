@@ -8,6 +8,10 @@ Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
   rlocker = new Locker(config);
 });
 
+Shiny.addCustomMessageHandler('rlocker-store', function(statement) {
+  rlocker.store(statement);
+});
+
 Shiny.addCustomMessageHandler('create-statement', function(statement) {
   let request = rlocker.createBasicStatement(statement.verb.display['en-US']);
   rlocker.store(request);
