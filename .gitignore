@@ -3,6 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
+*.Rproj
 
 # Packages #
 ############
@@ -106,7 +107,7 @@ typings/
 *.sw*
 
 ### VisualStudioCode ###
-.code-workspace
+*.code-workspace
 .history
 .vscode/*
 !.vscode/settings.json
