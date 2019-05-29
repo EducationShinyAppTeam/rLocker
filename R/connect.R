@@ -49,6 +49,7 @@ test <- function(config) {
 connect <- function(session, config) {
 
   # base_url + data/xAPI/
+  message('Opening new Learning Locker connection.')
 
   # Append xapiwrapper to DOM head
   insertUI(
@@ -63,5 +64,5 @@ connect <- function(session, config) {
   session$sendCustomMessage("rlocker-setup", config)
 
   # Test the config and return the results
-  return(test(config))
+  return(list(status = test(config), agent = config$agent))
 }

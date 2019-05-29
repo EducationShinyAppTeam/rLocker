@@ -26,9 +26,10 @@ shinyApp(
   server = function(input, output, session) {
     
     # Initialize Learning Locker connection
-    rlocker::connect(session, list(
+    connection <- rlocker::connect(session, list(
       base_url = "https://learning-locker.stat.vmhost.psu.edu/",
-      auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2"
+      auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
+      agent = rlocker::createAgent()
     ))
     
     # Import helper functions to setup demo app and user.

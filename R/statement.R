@@ -5,31 +5,31 @@
 #' @name statement
 NULL
 
-#' Creates an xAPI Actor object
+#' Creates an xAPI Agent object
 #' 
-#' @param actor Actor defaults
+#' @param agent Agent defaults
 #' @param warn Show warnings
 #' 
-#' @seealso \code{\link{actor}}
+#' @seealso \code{\link{agent}}
 #' 
-#' @return xAPI Actor object
+#' @return xAPI Agent object
 #' 
 #' @examples
-#' createActor(actor = list(name = "John Doe", mbox = "mailto:john@example.com"))
+#' createAgent(agent = list(name = "John Doe", mbox = "mailto:john@example.com"))
 #' 
 #' @export
-createActor <- function(
-  actor = NULL,
+createAgent <- function(
+  agent = NULL,
   warn = TRUE, ...) {
   
-  if(is.null(actor) & warn){
-    warning('Actor arguments not specified; using default xapi:actor.', call. = FALSE)
+  if(is.null(agent) & warn){
+    warning('agent arguments not specified; using default xapi:agent.', call. = FALSE)
   }
   
   obj <- list(
-    name = ifelse(is.null(actor$name), uuid::UUIDgenerate(), actor$name),
-    mbox = ifelse(is.null(actor$mbox), "mailto:test@example.org", actor$mbox),
-    objectType = ifelse(is.null(actor$objectType), "Agent", actor$objectType)
+    name = ifelse(is.null(agent$name), uuid::UUIDgenerate(), agent$name),
+    mbox = ifelse(is.null(agent$mbox), "mailto:test@example.org", agent$mbox),
+    objectType = ifelse(is.null(agent$objectType), "Agent", agent$objectType)
   )
 
   return(obj)
@@ -157,7 +157,7 @@ createResult <- function(
 #' @param x Statement values
 #' @param warn Show warnings
 #' 
-#' @seealso \code{\link{createActor}}
+#' @seealso \code{\link{createAgent}}
 #' @seealso \code{\link{createVerb}}
 #' @seealso \code{\link{createObject}}
 #' @seealso \code{\link{createResult}}
@@ -167,7 +167,7 @@ createResult <- function(
 #' @examples
 #' createStatement(
 #'  list(
-#'   actor = currentUser,
+#'   agent = currentUser,
 #'   verb = list(
 #     display = "answered"
 #'   ),
@@ -195,7 +195,7 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
   # todo: check if verb requires a result object
 
   statement <- list(
-    actor = do.call(createActor, list(actor = params$actor, warn)),
+    agent = do.call(createAgent, list(agent = params$agent, warn)),
     verb = do.call(createVerb, list(verb = params$verb, warn)),
     object = do.call(createObject, list(object = params$object, warn)),
     result = do.call(createResult, list(result = params$result, warn))

@@ -124,16 +124,15 @@ export class Locker {
     return statement;
   }
 
+  /* @todo: ignoring passed agent values for now */
   createStatement(values) {
     let statement = new ADL.XAPIStatement(
-      new ADL.XAPIStatement.Agent(values.actor),
+      this.getCurrentAgent(),
       new ADL.XAPIStatement.Verb(values.verb),
       new ADL.XAPIStatement.Activity(values.object)
     );
 
     statement.result = values.result;
-
-    console.table(statement);
 
     return statement;
   }

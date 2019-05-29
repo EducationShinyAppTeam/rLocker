@@ -1,7 +1,7 @@
 ## Setup for demo application
 
-# Create an Actor object for our current user
-currentUser <- rlocker::createActor()
+# Set current user to var for convenience
+currentUser <- connection$agent
 
 # Render an individual question from a list
 renderQuestion <- function(question){
@@ -56,7 +56,7 @@ registerQuestionEvents <- function(session, questions){
       observeEvent(session$input[[question$id]], {
         statement <- rlocker::createStatement(
           list(
-            actor = currentUser,
+            agent = currentUser,
             verb = list(
               display = "answered"
             ),

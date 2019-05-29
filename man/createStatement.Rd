@@ -20,7 +20,7 @@ Creates an xAPI Statement
 \examples{
 createStatement(
  list(
-  actor = currentUser,
+  agent = currentUser,
   verb = list(
   ),
   object = list(
@@ -37,7 +37,7 @@ createStatement(
 
 }
 \seealso{
-\code{\link{createActor}}
+\code{\link{createAgent}}
 
 \code{\link{createVerb}}
 

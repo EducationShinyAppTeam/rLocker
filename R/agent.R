@@ -1,10 +1,10 @@
-#' actor
+#' agent
 #' 
-#' xAPI Actor object definitions
+#' xAPI Agent object definitions
 
 #'@export
-getActorDefinition <- function() {
-  actor <- list(
+getAgentDefinition <- function() {
+  agent <- list(
     account = list(
       name = "",
       homePage = ""
@@ -16,11 +16,11 @@ getActorDefinition <- function() {
     openid = ""
   )
   
-  return(actor)
+  return(agent)
 }
 
 #'@export
-getActorTypes <- function() {
+getAgentTypes <- function() {
   types <- c(
     "Agent",
     "Group"
