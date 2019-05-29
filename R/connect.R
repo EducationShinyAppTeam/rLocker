@@ -47,10 +47,6 @@ test <- function(config) {
 #' @return HTTP Status Code
 #' @export
 connect <- function(session, config) {
-
-  # base_url + data/xAPI/
-  message('Opening new Learning Locker connection.')
-
   # Append xapiwrapper to DOM head
   insertUI(
     selector = "head",

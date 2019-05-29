@@ -4,7 +4,7 @@
 \alias{createAgent}
 \title{Creates an xAPI Agent object}
 \usage{
-createAgent(agent = NULL, warn = TRUE, ...)
+createAgent(agent = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{agent}{Agent defaults}

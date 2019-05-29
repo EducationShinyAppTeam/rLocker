@@ -4,7 +4,7 @@
 \alias{createStatement}
 \title{Creates an xAPI Statement}
 \usage{
-createStatement(x = NULL, warn = TRUE, ...)
+createStatement(x = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{x}{Statement values}

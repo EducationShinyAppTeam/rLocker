@@ -4,7 +4,7 @@
 \alias{createResult}
 \title{Creates an xAPI Result object}
 \usage{
-createResult(result = NULL, warn = TRUE, ...)
+createResult(result = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{warn}{Show warnings}

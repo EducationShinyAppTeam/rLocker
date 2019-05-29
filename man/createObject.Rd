@@ -4,7 +4,7 @@
 \alias{createObject}
 \title{Creates an xAPI Object object}
 \usage{
-createObject(object = NULL, warn = TRUE, ...)
+createObject(object = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{warn}{Show warnings}

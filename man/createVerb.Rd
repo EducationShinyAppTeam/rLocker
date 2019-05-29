@@ -4,7 +4,7 @@
 \alias{createVerb}
 \title{Creates an xAPI Verb object}
 \usage{
-createVerb(verb = NULL, warn = TRUE, ...)
+createVerb(verb = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{verb}{Verb name}

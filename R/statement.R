@@ -20,7 +20,7 @@ NULL
 #' @export
 createAgent <- function(
   agent = NULL,
-  warn = TRUE, ...) {
+  warn = FALSE, ...) {
   
   if(is.null(agent) & warn){
     warning('Agent arguments not specified; using default xapi:agent.', call. = FALSE)
@@ -51,7 +51,7 @@ createAgent <- function(
 #' @export
 createVerb <- function(
   verb = NULL,
-  warn = TRUE, ...) {
+  warn = FALSE, ...) {
   
   if(is.null(verb) & warn){
     warning('Verb arguments not specified; using default xapi:verb.', call. = FALSE)
@@ -90,7 +90,7 @@ createVerb <- function(
 #' @export
 createObject <- function(
   object = NULL,
-  warn = TRUE, ...) {
+  warn = FALSE, ...) {
 
   if(is.null(object) & warn){
     warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
@@ -132,7 +132,7 @@ createObject <- function(
 #' @export
 createResult <- function(
   result = NULL,
-  warn = TRUE, ...) {
+  warn = FALSE, ...) {
 
   if(is.null(result) & warn){
     warning('Result arguments not specified; using default xapi:result', call. = FALSE)
@@ -163,7 +163,7 @@ createResult <- function(
 #' @return xAPI Statement (json)
 #' 
 #' @export
-createStatement <- function(x = NULL, warn = TRUE, ...) {
+createStatement <- function(x = NULL, warn = FALSE, ...) {
   params <- x
   
   if(is.null(params)){
@@ -174,10 +174,10 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
   # todo: check if verb requires a result object
 
   statement <- list(
-    agent = do.call(createAgent, list(agent = params$agent, warn)),
-    verb = do.call(createVerb, list(verb = params$verb, warn)),
-    object = do.call(createObject, list(object = params$object, warn)),
-    result = do.call(createResult, list(result = params$result, warn))
+    agent = do.call(createAgent, list(agent = params$agent, warn = warn)),
+    verb = do.call(createVerb, list(verb = params$verb, warn = warn)),
+    object = do.call(createObject, list(object = params$object, warn = warn)),
+    result = do.call(createResult, list(result = params$result, warn = warn))
   )
 
   return(formatJSON(statement, pretty = TRUE, auto_unbox = TRUE))
@@ -193,7 +193,7 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
 #' @return HTTP Status
 #' 
 #' @export
-store <- function(session, statement = NULL, warn = TRUE, ...) {
+store <- function(session, statement = NULL, warn = FALSE, ...) {
   # Pass the statement to the js handler
   session$sendCustomMessage("rlocker-store", statement)
   

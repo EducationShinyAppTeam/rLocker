@@ -4,7 +4,7 @@
 \alias{store}
 \title{Stores an xAPI Statement}
 \usage{
-store(session, statement = NULL, warn = TRUE, ...)
+store(session, statement = NULL, warn = FALSE, ...)
 }
 \arguments{
 \item{statement}{xAPI Statement}
