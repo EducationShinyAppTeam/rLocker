@@ -17,10 +17,6 @@ HTTP Status
 \description{
 Stores an xAPI Statement
 }
-\examples{
-store(statement, connection)
-
-}
 \seealso{
 \code{\link{createStatement}}
 }

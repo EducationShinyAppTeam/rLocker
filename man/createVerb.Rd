@@ -20,7 +20,6 @@ xAPI Verb object
 Creates an xAPI Verb object
 }
 \examples{
-createVerb(verb = list(display = "experienced"))
 createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
 
 }

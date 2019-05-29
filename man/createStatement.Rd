@@ -17,25 +17,6 @@ xAPI Statement (json)
 \description{
 Creates an xAPI Statement
 }
-\examples{
-createStatement(
- list(
-  agent = currentUser,
-  verb = list(
-  ),
-  object = list(
-   id = paste0(getCurrentAddress(session), "#", question$id),
-   name = question$title,
-   description = question$text
- ),
- result = list(
-   success = session$input[[question$id]] == question$answer,
-   response = session$input[[question$id]]
- )
-)
-)
-
-}
 \seealso{
 \code{\link{createAgent}}
 

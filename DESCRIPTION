@@ -1,7 +1,7 @@
 Package: rlocker
 Type: Package
 Title: Learning Locker for Shiny
-Version: 0.1.2
+Version: 0.1.3
 Date: 2019-05-28
 Authors@R: c(person("Robert", "Carey", email = "rpc5102@psu.edu",
   role = c("aut", "cre")))

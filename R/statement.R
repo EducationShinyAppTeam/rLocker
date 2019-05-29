@@ -23,7 +23,7 @@ createAgent <- function(
   warn = TRUE, ...) {
   
   if(is.null(agent) & warn){
-    warning('agent arguments not specified; using default xapi:agent.', call. = FALSE)
+    warning('Agent arguments not specified; using default xapi:agent.', call. = FALSE)
   }
   
   obj <- list(
@@ -46,7 +46,6 @@ createAgent <- function(
 #' @return xAPI Verb object
 #' 
 #' @examples
-#' createVerb(verb = list(display = "experienced"))
 #' createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
 #' 
 #' @export
@@ -87,7 +86,6 @@ createVerb <- function(
 #' 
 #' @examples
 #' createObject(object = list(name = "Question 1", description = "Example question description."))
-#' createObject(object = list(name = question$title, description = question$description, id = session$clientData))
 #' 
 #' @export
 createObject <- function(
@@ -164,25 +162,6 @@ createResult <- function(
 #' 
 #' @return xAPI Statement (json)
 #' 
-#' @examples
-#' createStatement(
-#'  list(
-#'   agent = currentUser,
-#'   verb = list(
-#     display = "answered"
-#'   ),
-#'   object = list(
-#'    id = paste0(getCurrentAddress(session), "#", question$id),
-#'    name = question$title,
-#'    description = question$text
-#'  ),
-#'  result = list(
-#'    success = session$input[[question$id]] == question$answer,
-#'    response = session$input[[question$id]]
-#'  )
-#' )
-#')
-#' 
 #' @export
 createStatement <- function(x = NULL, warn = TRUE, ...) {
   params <- x
@@ -212,9 +191,6 @@ createStatement <- function(x = NULL, warn = TRUE, ...) {
 #' @seealso \code{\link{createStatement}}
 #' 
 #' @return HTTP Status
-#' 
-#' @examples
-#' store(statement, connection)
 #' 
 #' @export
 store <- function(session, statement = NULL, warn = TRUE, ...) {
