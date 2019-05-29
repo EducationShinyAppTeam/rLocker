@@ -29,7 +29,7 @@ createActor <- function(
   obj <- list(
     name = ifelse(is.null(actor$name), uuid::UUIDgenerate(), actor$name),
     mbox = ifelse(is.null(actor$mbox), "mailto:test@example.org", actor$mbox),
-    objectType = ifelse(is.null(actor$objectType), "Actor", actor$objectType)
+    objectType = ifelse(is.null(actor$objectType), "Agent", actor$objectType)
   )
 
   return(obj)

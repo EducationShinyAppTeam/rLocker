@@ -120,6 +120,21 @@ export class Locker {
       this.getVerb(ref, verb),
       this.getCurrentActivity()
     );
+
+    return statement;
+  }
+
+  createStatement(values) {
+    let statement = new ADL.XAPIStatement(
+      new ADL.XAPIStatement.Agent(values.actor),
+      new ADL.XAPIStatement.Verb(values.verb),
+      new ADL.XAPIStatement.Activity(values.object)
+    );
+
+    statement.result = values.result;
+
+    console.table(statement);
+
     return statement;
   }
 
