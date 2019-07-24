@@ -139,7 +139,7 @@ createResult <- function(
   }
 
   # Set defaults
-  success = ifelse(is.null(result$success), FALSE, result$success)
+  success = ifelse(is.null(result$success), NA, result$success)
   response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
 
   obj <- list(
@@ -147,6 +147,41 @@ createResult <- function(
     response = response
   )
 
+  return(obj)
+}
+
+#' Creates an xAPI Extension object
+#' 
+#' @param ref Internationalized resource identifier (uri extension)
+#' @param value Any value matching corresponding reference definition constraints
+#' 
+#' @seealso \code{\link{result}}
+#' 
+#' @return xAPI Result object
+#' 
+#' @examples
+#' createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))
+#' 
+#' @export
+createExtension <- function(
+  extension = NULL,
+  warn = FALSE, ...) {
+  
+  if(is.null(extension) & warn){
+    warning('Extension arguments not specified; using default xapi:extension', call. = FALSE)
+  }
+  
+  # Set defaults
+  dfn <- getExtensionDefinition()
+  
+  ref = ifelse(is.null(extension$ref), dfn$ref, extension$ref)
+  value = ifelse(is.null(extension$value), dfn$value, extension$value)
+  
+  obj <- list(
+    ref = ref,
+    value = value
+  )
+  
   return(obj)
 }
 
