@@ -3,11 +3,11 @@
 
 #'@export
 getActivityType <- function(name, asJSON = FALSE) {
-  exists = exists(name, verbs)
+  exists <- exists(name, verbs)
 
-  if(exists & asJSON) {
+  if (exists & asJSON) {
     return(formatJSON(verbs[name]))
-  } else if(exists) {
+  } else if (exists) {
     return(verbs[name])
   } else {
     return(-1)
@@ -19,7 +19,7 @@ getActivityTypes <- function() {
   return(names(verbs))
 }
 
-activityTypes = list(
+activityTypes <- list(
   "assessment" = "http://adlnet.gov/expapi/activities/assessment",
   "attempt" = "http://adlnet.gov/expapi/activities/attempt",
   "course" = "http://adlnet.gov/expapi/activities/course",

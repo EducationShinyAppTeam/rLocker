@@ -12,7 +12,7 @@ createExtension(extension = NULL, warn = FALSE, ...)
 \item{value}{Any value matching corresponding reference definition constraints}
 }
 \value{
-xAPI Result object
+xAPI Extension object
 }
 \description{
 Creates an xAPI Extension object
@@ -22,5 +22,5 @@ createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extens
 
 }
 \seealso{
-\code{\link{result}}
+\code{extension}
 }

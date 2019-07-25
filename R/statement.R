@@ -10,7 +10,7 @@ NULL
 #' @param agent Agent defaults
 #' @param warn Show warnings
 #' 
-#' @seealso \code{\link{agent}}
+#' @seealso \code{agent}
 #' 
 #' @return xAPI Agent object
 #' 
@@ -41,7 +41,7 @@ createAgent <- function(
 #' @param id URI to verb definition
 #' @param warn Show warnings
 #' 
-#' @seealso \code{\link{verbs}}
+#' @seealso \code{verbs}
 #' 
 #' @return xAPI Verb object
 #' 
@@ -82,6 +82,8 @@ createVerb <- function(
 #' @param id URI to object or activity
 #' @param warn Show warnings
 #' 
+#' @seealso \code{object}
+#' 
 #' @return xAPI Object object
 #' 
 #' @examples
@@ -118,11 +120,15 @@ createObject <- function(
 
 #' Creates an xAPI Result object
 #' 
-#' @param success Holds a value if interaction can be marked as successful/unsuccessful.
-#' @param response Response from the user on a given action
+#' @section Extras:
+#' This function accepts an optional result value \code{extension}.
+#' 
+#' @param success Indicates whether or not the attempt on the Activity was successful.
+#' @param response A response appropriately formatted for the given Activity.
 #' @param warn Show warnings
 #' 
 #' @seealso \code{\link{result}}
+#' @seealso \code{\link{createExtension}}
 #' 
 #' @return xAPI Result object
 #' 
@@ -141,11 +147,16 @@ createResult <- function(
   # Set defaults
   success = ifelse(is.null(result$success), NA, result$success)
   response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
+  extension = ifelse(is.null(result$extension), NA, result$extension)
 
   obj <- list(
     success = success,
     response = response
   )
+  
+  if(!is.na(extension)){
+    obj$extension = do.call(createExtension, list(extension = result$extension, warn = warn))
+  }
 
   return(obj)
 }
@@ -155,9 +166,9 @@ createResult <- function(
 #' @param ref Internationalized resource identifier (uri extension)
 #' @param value Any value matching corresponding reference definition constraints
 #' 
-#' @seealso \code{\link{result}}
+#' @seealso \code{extension}
 #' 
-#' @return xAPI Result object
+#' @return xAPI Extension object
 #' 
 #' @examples
 #' createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))

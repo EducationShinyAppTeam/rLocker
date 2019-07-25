@@ -22,5 +22,5 @@ createAgent(agent = list(name = "John Doe", mbox = "mailto:john@example.com"))
 
 }
 \seealso{
-\code{\link{agent}}
+\code{agent}
 }

@@ -9,9 +9,9 @@ createResult(result = NULL, warn = FALSE, ...)
 \arguments{
 \item{warn}{Show warnings}
 
-\item{success}{Holds a value if interaction can be marked as successful/unsuccessful.}
+\item{success}{Indicates whether or not the attempt on the Activity was successful.}
 
-\item{response}{Response from the user on a given action}
+\item{response}{A response appropriately formatted for the given Activity.}
 }
 \value{
 xAPI Result object
@@ -19,10 +19,17 @@ xAPI Result object
 \description{
 Creates an xAPI Result object
 }
+\section{Extras}{
+
+This function accepts an optional result value \code{extension}.
+}
+
 \examples{
 createResult(result = list(success = TRUE, response = "correctAnswer"))
 
 }
 \seealso{
 \code{\link{result}}
+
+\code{\link{createExtension}}
 }

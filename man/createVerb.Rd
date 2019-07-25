@@ -24,5 +24,5 @@ createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/v
 
 }
 \seealso{
-\code{\link{verbs}}
+\code{verbs}
 }

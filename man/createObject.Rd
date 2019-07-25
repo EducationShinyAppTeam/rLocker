@@ -25,3 +25,6 @@ Creates an xAPI Object object
 createObject(object = list(name = "Question 1", description = "Example question description."))
 
 }
+\seealso{
+\code{object}
+}

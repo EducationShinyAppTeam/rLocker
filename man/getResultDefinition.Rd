@@ -9,3 +9,8 @@ getResultDefinition()
 \description{
 xAPI Result object definitions
 }
+\section{Description}{
+
+ An optional property that represents a measured outcome related to the Statement in which it is included.
+}
+

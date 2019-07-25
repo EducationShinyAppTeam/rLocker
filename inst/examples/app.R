@@ -31,10 +31,10 @@ shinyApp(
       auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
       agent = rlocker::createAgent()
     ))
-    
+
     # Import helper functions to setup demo app and user.
-    source('./helpers.R', local = TRUE)
-    
+    source("./helpers.R", local = TRUE)
+
     # Set up question input list
     output$questionset <- renderUI({
       renderQuestionset(questions)
@@ -53,5 +53,3 @@ shinyApp(
     registerQuestionEvents(session, questions)
   }
 )
-
-
