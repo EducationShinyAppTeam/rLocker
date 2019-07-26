@@ -86,7 +86,7 @@ components <- list(
     "definition" = "An Array of interaction components",
     "sample" = ""
   )
-  )
+)
 
 interactionTypes <- list(
   "choice" = list(
