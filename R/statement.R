@@ -102,6 +102,8 @@ createObject <- function(
   id <- ifelse(is.null(object$id), "http://adlnet.gov/expapi/activities/example", object$id)
   name <- ifelse(is.null(object$name), "Example Activity", object$name)
   description <- ifelse(is.null(object$description), "Example activity description", object$description)
+  type <- ifelse(is.null(object$type), "Activity", object$id)
+  extension <- ifelse(is.null(object$extension), NA, object$extension)
 
   obj <- list(
     id = id,
@@ -111,9 +113,14 @@ createObject <- function(
       ),
       description = list(
         "en-US" = description
-      )
+      ),
+      objextType = type
     )
   )
+  
+  if(!is.na(extension) && type == "Activity"){
+    obj$definition$extension = do.call(createExtension, list(extension = object$extension, warn = warn))
+  }
 
   return(obj)
 }
