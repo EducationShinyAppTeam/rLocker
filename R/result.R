@@ -16,7 +16,8 @@ getResultDefinition <- function() {
     ),
     success = c(TRUE, FALSE),
     completion = c(TRUE, FALSE),
-    response = NA_character_
+    response = NA_character_,
+    extensions = NA
   )
   return(definition)
 }

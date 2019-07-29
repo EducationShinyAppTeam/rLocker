@@ -3,12 +3,12 @@
 
 #'@export
 getActivityType <- function(name, asJSON = FALSE) {
-  exists <- exists(name, verbs)
+  exists <- exists(name, activityTypes)
 
   if (exists & asJSON) {
-    return(formatJSON(verbs[name]))
+    return(formatJSON(activityTypes[name]))
   } else if (exists) {
-    return(verbs[name])
+    return(activityTypes[name])
   } else {
     return(-1)
   }
@@ -16,7 +16,7 @@ getActivityType <- function(name, asJSON = FALSE) {
 
 #'@export
 getActivityTypes <- function() {
-  return(names(verbs))
+  return(names(activityTypes))
 }
 
 activityTypes <- list(

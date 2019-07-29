@@ -7,7 +7,25 @@
 #' @section Details:
 #'   Objects which are provided as a value for this property SHOULD include an "objectType" property. If not specified, the objectType is assumed to be Activity. Other valid values are: Agent, Group, SubStatement or StatementRef. The properties of an Object change according to the objectType.
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#object}
-#'
+
+#'@export
+getObjectDefinition <- function() {
+  definition <- list(
+    name = NA_character_,
+    description = NA_character_,
+    type = NA_character_,
+    moreInfo = NA_character_,
+    interactionType = NA_character_,
+    choices = NA_character_,
+    sequencing = NA_character_,
+    likert = NA_character_,
+    source = NA_character_,
+    target = NA_character_,
+    steps = NA_character_,
+    extensions = NA
+  )
+  return(definition)
+}
 
 #'@export
 getObjectTypes <- function() {
@@ -32,6 +50,75 @@ getInteractionType <- function(name, asJSON = FALSE) {
   }
 }
 
+#'@export
+getInteractionComponent <- function(name, asJSON = FALSE){
+  exists = exists(name, components)
+  
+  if(exists & asJSON) {
+    return(formatJSON(components[name]))
+  } else if(exists) {
+    return(components[name])
+  } else {
+    return(-1)
+  }
+}
+
+#'@export
+getInteractionComponents <- function(){
+  return(names(components))
+}
+
+#'@export
+getSupportedComponents <- function(interactionType) {
+  exists <- match(interactionType, getInteractionTypes())
+
+  if(is.na(exists)){
+    return(NA)
+  } else {
+    return(getInteractionType(interactionType)[[1]]$components)
+  }
+}
+
+#'@export
+checkSupportedComponents <- function(object) {
+  supported <- getSupportedComponents(object$interactionType)
+  available <- getInteractionComponents()
+  exists <- match(object$interactionType, getInteractionTypes())
+  
+  flag <- FALSE
+  
+  if(!is.na(exists)){
+    for(i in names(object)){
+      if(!is.na(match(i, available) >= 1)){
+        if(is.na(match(i, supported))){
+          warning(paste0('Interaction component "', i, '" not supported by interaction type "', object$interactionType, '" provided; this value will be dropped.'), call. = FALSE)
+          flag <- TRUE
+        }
+      }
+    }
+  } else {
+    warning(paste0('Interaction type "', object$interactionType, '" is not a valid type.'), call. = FALSE)
+    flag <- TRUE
+  }
+  
+  return(!flag)
+}
+
+#'@export
+validateObject <- function(object) {
+  dfn <- names(getObjectDefinition())
+  validKeys <- all(names(object) %in% dfn)
+  for(key in names(object)){
+    if(!(key %in% dfn)){
+      warning(paste0('Object property "', key, '" is not valid.'), call. = FALSE)
+    }
+  }
+  validComponents <- checkSupportedComponents(object)
+  passed <- validKeys & validComponents
+  
+  return(passed)
+}
+
 objectTypes <- c(
   "Activity",
   "Agent",
@@ -40,73 +127,203 @@ objectTypes <- c(
   "SubStatement"
 )
 
+# todo: format as r object instead of json
 components <- list(
   "choices" = list(
-    "definition" = "An Array of interaction components",
-    "sample" = "[
-    {
-    'id': 'likert_0',
-    'description': {
-    'en-US': 'It\'s OK'
-    }
-    },
-    {
-    'id': 'likert_1',
-    'description': {
-    'en-US': 'It\'s Pretty Cool'
-    }
-    },
-    {
-    'id': 'likert_2',
-    'description': {
-    'en-US': 'It\'s Very Cool'
-    }
-    },
-    {
-    'id': 'likert_3',
-    'description': {
-    'en-US': 'It\'s Gonna Change the World'
-    }
-    }
-    ]"
+    "definition" = "An Array of interaction components to be chosen.",
+    "sample" = '[
+      {
+        "id": "choice_a",
+        "description": {
+          "en-US": "Cyan"
+        }
+      },
+      {
+        "id": "choice_b",
+        "description": {
+          "en-US": "Magenta"
+        }
+      },
+      {
+        "id": "choice_c",
+        "description": {
+          "en-US": "Yellow"
+        }
+      },
+      {
+        "id": "choice_d",
+        "description": {
+          "en-US": "Black"
+        }
+      }
+    ]'
   ),
   "sequencing" = list(
-    "definition" = "An Array of interaction components",
-    "sample" = ""
+    "definition" = "An Array of interaction components to be ordered.",
+    "sample" = '[
+      {
+        "id": "choice_1",
+        "description": {
+          "en-US": "1"
+        }
+      },
+      {
+        "id": "choice_2",
+        "description": {
+          "en-US": "2"
+        }
+      },
+      {
+        "id": "choice_3",
+        "description": {
+          "en-US": "3"
+        }
+      },
+      {
+        "id": "choice_4",
+        "description": {
+          "en-US": "4"
+        }
+      }
+    ]'
+  ),
+  "likert"= list(
+    "definition" = "A list of the options on the likert scale.",
+    "sample" = '[
+      {
+        "id": "likert_1",
+        "description": {
+          "en-US": "Strongly disagree"
+        }
+      },
+      {
+        "id": "likert_2",
+        "description": {
+          "en-US": "Disagree"
+        }
+      },
+      {
+        "id": "likert_3",
+        "description": {
+          "en-US": "Neutral"
+        }
+      },
+      {
+        "id": "likert_4",
+        "description": {
+          "en-US": "Agree"
+        }
+      },
+      {
+        "id": "likert_5",
+        "description": {
+          "en-US": "Strongly agree"
+        }
+      }
+    ]'
   ),
   "source"= list(
-    "definition" = "An Array of interaction components",
-    "sample" = ""
+    "definition" = "An Array of origin interaction components (for matching).",
+    "sample" = '[
+      {
+        "id": "source_1",
+        "description": {
+          "en-US": "Apple"
+        }
+      },
+      {
+        "id": "source_2",
+        "description": {
+          "en-US": "Broccoli"
+        }
+      },
+      {
+        "id": "source_3",
+        "description": {
+          "en-US": "Carrot"
+        }
+      },
+      {
+        "id": "source_4",
+        "description": {
+          "en-US": "Durian"
+        }
+      }
+    ]'
   ),
   "target"= list(
-    "definition" = "An Array of interaction components",
-    "sample" = ""
+    "definition" = "An Array of destination interaction components (for matching).",
+    "sample" = '[
+      {
+        "id": "target_1",
+        "description": {
+          "en-US": "Fruit"
+        }
+      },
+      {
+        "id": "target_2",
+        "description": {
+          "en-US": "Vegetable"
+        }
+      }
+    ]'
   ),
   "steps"= list(
-    "definition" = "An Array of interaction components",
-    "sample" = ""
+    "definition" = "An Array of interaction components by logical steps.",
+    "sample" = '[
+      {
+        "id": "step_1",
+        "description": {
+          "en-US": "Novice"
+        }
+      },
+      {
+        "id": "step_2",
+        "description": {
+          "en-US": "Advanced Beginner"
+        }
+      },
+      {
+        "id": "step_3",
+        "description": {
+          "en-US": "Competent"
+        }
+      },
+      {
+        "id": "step_4",
+        "description": {
+          "en-US": "Proficient"
+        }
+      },
+      {
+        "id": "step_5",
+        "description": {
+          "en-US": "Expert"
+        }
+      }
+    ]'
   )
-  )
+)
 
 interactionTypes <- list(
   "choice" = list(
-    "components" = components$choices,
-    "description" = "A list of the options available in the interaction for selection or ordering."
+    "components" = "choices",
+    "description" = "A list of the options available in the interaction for selection."
   ),
   "sequencing" = list(
-    "components" = components$choices,
-    "description" = "A list of the options available in the interaction for selection or ordering."
+    "components" = "choices",
+    "description" = "A list of the options available in the interaction for ordering."
   ),
   "likert" = list(
-    "components" = components$scale,
+    "components" = "scale",
     "description" = "A list of the options on the likert scale."
   ),
   "matching" = list(
-    "components" = c(components$source, components$target),
+    "components" = c("source", "target"),
     "description" = "Lists of sources and targets to be matched."
   ),
   "performance" = list(
-    "components" = components$steps,
+    "components" = "steps",
     "description" = "A list of the elements making up the performance interaction."
   ),
   "true-false" = list(

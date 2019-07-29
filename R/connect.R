@@ -5,6 +5,7 @@
 #' @param config API Configuration
 #' @return HTTP Status Code
 #' @import htmltools httr
+
 #' @export
 test <- function(config) {
 

@@ -33,7 +33,6 @@ dep <- list(xAPIWrapper, rlockerJS)
 
 ## Utility Functions ##
 
-#'@export
 formatJSON <- function(json, ...) {
   return(jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE))
 }

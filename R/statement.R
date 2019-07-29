@@ -103,8 +103,13 @@ createObject <- function(
   name <- ifelse(is.null(object$name), "Example Activity", object$name)
   description <- ifelse(is.null(object$description), "Example activity description", object$description)
   type <- ifelse(is.null(object$type), "Activity", object$id)
-  extension <- ifelse(is.null(object$extension), NA, object$extension)
-
+  moreInfo <- ifelse(is.null(object$moreInfo), NA, object$moreInfo)
+  interactionType <- ifelse(is.null(object$interactionType), NA, object$interactionType)
+  extensions <- ifelse(is.null(object$extensions), NA, object$extensions)
+  
+  # todo: split option path by object type (not all values will be supported by each type)
+  
+  # Set required values
   obj <- list(
     id = id,
     definition = list(
@@ -113,14 +118,32 @@ createObject <- function(
       ),
       description = list(
         "en-US" = description
-      ),
-      objextType = type
+      )
     )
   )
   
-  if(!is.na(extension) && type == "Activity"){
-    obj$definition$extension = do.call(createExtension, list(extension = object$extension, warn = warn))
+  # ---- Optional Values ----
+  
+  # More info link
+  if(!is.na(moreInfo) && type == "Activity"){
+    obj$moreInfo = moreInfo
   }
+  
+  # Interaction type
+  if(!is.na(interactionType) && type == "Activity"){
+    obj$definition$interactionType = interactionType
+    
+    # Check for warnings
+    validateObject(obj$definition)
+  }
+  
+  # Extensions
+  # todo: allow multiple extensions
+  if(!is.na(extensions) && type == "Activity"){
+    obj$definition$extensions = do.call(createExtension, list(extension = object$extensions, warn = warn))
+  }
+  
+  obj$objectType <- type
 
   return(obj)
 }
@@ -154,15 +177,16 @@ createResult <- function(
   # Set defaults
   success = ifelse(is.null(result$success), NA, result$success)
   response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
-  extension = ifelse(is.null(result$extension), NA, result$extension)
+  extensions = ifelse(is.null(result$extensions), NA, result$extensions)
 
   obj <- list(
     success = success,
     response = response
   )
   
-  if(!is.na(extension)){
-    obj$extension = do.call(createExtension, list(extension = result$extension, warn = warn))
+  # todo: allow multiple extensions
+  if(!is.na(extensions)){
+    obj$extensions = do.call(createExtension, list(extension = result$extensions, warn = warn))
   }
 
   return(obj)
@@ -195,10 +219,8 @@ createExtension <- function(
   ref = ifelse(is.null(extension$ref), dfn$ref, extension$ref)
   value = ifelse(is.null(extension$value), dfn$value, extension$value)
   
-  obj <- list(
-    ref = ref,
-    value = value
-  )
+  obj <- list()
+  obj[ref] <- value
   
   return(obj)
 }

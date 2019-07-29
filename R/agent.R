@@ -6,14 +6,14 @@
 getAgentDefinition <- function() {
   agent <- list(
     account = list(
-      name = "",
-      homePage = ""
+      name = NA_character_,
+      homePage = NA_character_
     ),
-    group_members = "",
-    mbox = "",
-    name = "", 
-    objectType = "",
-    openid = ""
+    group_members = NA_character_,
+    mbox = NA_character_,
+    name = NA_character_, 
+    objectType = NA_character_,
+    openid = NA_character_
   )
   
   return(agent)
