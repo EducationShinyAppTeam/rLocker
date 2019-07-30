@@ -42,6 +42,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+package.json
 
 # Runtime data
 pids
@@ -114,3 +116,4 @@ typings/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+rlocker.code-workspace
