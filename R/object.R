@@ -7,6 +7,80 @@
 #' @section Details:
 #'   Objects which are provided as a value for this property SHOULD include an "objectType" property. If not specified, the objectType is assumed to be Activity. Other valid values are: Agent, Group, SubStatement or StatementRef. The properties of an Object change according to the objectType.
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#object}
+#' 
+
+#' Creates an xAPI Object object
+#' 
+#' @param name Object name
+#' @param description Brief description of the object
+#' @param id URI to object or activity
+#' @param warn Show warnings
+#' 
+#' @seealso \code{object}
+#' 
+#' @return xAPI Object object
+#' 
+#' @examples
+#' createObject(object = list(name = "Question 1", description = "Example question description."))
+#' 
+#' @export
+createObject <- function(
+  object = NULL,
+  warn = FALSE, ...) {
+  
+  if(is.null(object) & warn){
+    warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
+  }
+  
+  # Set defaults
+  id <- ifelse(is.null(object$id), "http://adlnet.gov/expapi/activities/example", object$id)
+  name <- ifelse(is.null(object$name), "Example Activity", object$name)
+  description <- ifelse(is.null(object$description), "Example activity description", object$description)
+  type <- ifelse(is.null(object$type), "Activity", object$id)
+  moreInfo <- ifelse(is.null(object$moreInfo), NA, object$moreInfo)
+  interactionType <- ifelse(is.null(object$interactionType), NA, object$interactionType)
+  extensions <- ifelse(is.null(object$extensions), NA, object$extensions)
+  
+  # todo: split option path by object type (not all values will be supported by each type)
+  
+  # Set required values
+  obj <- list(
+    id = id,
+    definition = list(
+      name = list(
+        "en-US" = name
+      ),
+      description = list(
+        "en-US" = description
+      )
+    )
+  )
+  
+  # ---- Optional Values ----
+  
+  # More info link
+  if(!is.na(moreInfo) && type == "Activity"){
+    obj$moreInfo = moreInfo
+  }
+  
+  # Interaction type
+  if(!is.na(interactionType) && type == "Activity"){
+    obj$definition$interactionType = interactionType
+    
+    # Check for warnings
+    validateObject(obj$definition)
+  }
+  
+  # Extensions
+  # todo: allow multiple extensions
+  if(!is.na(extensions) && type == "Activity"){
+    obj$definition$extensions = do.call(createExtension, list(extension = object$extensions, warn = warn))
+  }
+  
+  obj$objectType <- type
+  
+  return(obj)
+}
 
 #'@export
 getObjectDefinition <- function() {

@@ -63,3 +63,22 @@ connect <- function(session, config) {
   # Test the config and return the results
   return(list(status = test(config), agent = config$agent))
 }
+
+#' Stores an xAPI Statement
+#' 
+#' @param statement xAPI Statement
+#' @param warn Show warnings
+#' 
+#' @seealso \code{\link{createStatement}}
+#' 
+#' @return HTTP Status
+#' 
+#' @export
+store <- function(session, statement = NULL, warn = FALSE, ...) {
+  # Pass the statement to the js handler
+  session$sendCustomMessage("rlocker-store", statement)
+  
+  # Return HTTP STATUS 200 - OK
+  # todo: listen for actual status updates
+  return(200)
+}

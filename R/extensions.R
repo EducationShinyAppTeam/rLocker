@@ -8,6 +8,39 @@
 #'   Extensions are defined by a map and logically relate to the part of the Statement where they are present. The values of an extension can be any JSON value or data structure. Extensions in the "context" property provide context to the core experience, while those in the "result" property provide elements related to some outcome. Within Activities, extensions provide additional information that helps define an Activity within some custom application or Community of Practice. The meaning and structure of extension values under an IRI key are defined by the person who controls the IRI
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#miscext}
 
+#' Creates an xAPI Extension object
+#' 
+#' @param ref Internationalized resource identifier (uri extension)
+#' @param value Any value matching corresponding reference definition constraints
+#' 
+#' @seealso \code{extension}
+#' 
+#' @return xAPI Extension object
+#' 
+#' @examples
+#' createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))
+#' 
+#' @export
+createExtension <- function(
+  extension = NULL,
+  warn = FALSE, ...) {
+  
+  if(is.null(extension) & warn){
+    warning('Extension arguments not specified; using default xapi:extension', call. = FALSE)
+  }
+  
+  # Set defaults
+  dfn <- getExtensionDefinition()
+  
+  ref = ifelse(is.null(extension$ref), dfn$ref, extension$ref)
+  value = ifelse(is.null(extension$value), dfn$value, extension$value)
+  
+  obj <- list()
+  obj[ref] <- value
+  
+  return(obj)
+}
+
 #'@export
 getExtensionDefinition <- function(){
   definition <- list(
