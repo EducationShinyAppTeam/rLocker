@@ -1,8 +1,10 @@
+### RStudio ###
 .Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.Rbuildignore
 *.Rproj
 
 # Packages #
@@ -44,6 +46,9 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 package.json
+
+### Webpack ###
+webpack.config.js
 
 # Runtime data
 pids
