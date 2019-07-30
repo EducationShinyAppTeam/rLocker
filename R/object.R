@@ -269,7 +269,6 @@ components <- list(
     ]'
   ),
   "steps"= list(
-<<<<<<< HEAD
     "definition" = "An Array of interaction components by logical steps.",
     "sample" = '[
       {
@@ -303,10 +302,6 @@ components <- list(
         }
       }
     ]'
-=======
-    "definition" = "An Array of interaction components",
-    "sample" = ""
->>>>>>> c9baddcb842a299cd9861140a9ca3e8371cfa3cf
   )
 )
 
