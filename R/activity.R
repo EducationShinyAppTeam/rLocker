@@ -1,5 +1,12 @@
 #'activity
 #'
+#' xAPI Activity object definitions
+#' 
+#' @name activity
+#' @section Details:
+#'  A Statement can represent an Activity as the Object of the Statement.
+#' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#activity-definition}
+NULL
 
 #'@export
 getActivityType <- function(name, asJSON = FALSE) {

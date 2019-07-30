@@ -1,19 +1,18 @@
 #'object
 #'
 #' xAPI Object object definitions
-#'
+#' 
+#' @name object
 #' @section Description:
 #'   The Object defines the thing that was acted on. The Object of a Statement can be an Activity, Agent/Group, SubStatement, or Statement Reference.
 #' @section Details:
 #'   Objects which are provided as a value for this property SHOULD include an "objectType" property. If not specified, the objectType is assumed to be Activity. Other valid values are: Agent, Group, SubStatement or StatementRef. The properties of an Object change according to the objectType.
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#object}
-#' 
+NULL
 
 #' Creates an xAPI Object object
 #' 
-#' @param name Object name
-#' @param description Brief description of the object
-#' @param id URI to object or activity
+#' @param object Object params
 #' @param warn Show warnings
 #' 
 #' @seealso \code{object}
@@ -30,6 +29,8 @@ createObject <- function(
   
   if(is.null(object) & warn){
     warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
+  } else if(is.null(object$type) & warn){
+    warning('Object type not specified; assuming xapi:activity.', call. = FALSE)
   }
   
   # Set defaults
@@ -58,25 +59,36 @@ createObject <- function(
   
   # ---- Optional Values ----
   
-  # More info link
-  if(!is.na(moreInfo) && type == "Activity"){
-    obj$moreInfo = moreInfo
-  }
-  
-  # Interaction type
-  if(!is.na(interactionType) && type == "Activity"){
-    obj$definition$interactionType = interactionType
+  if(type == "Activity"){
+    # More info link
+    if(!is.na(moreInfo)){
+      obj$moreInfo = moreInfo
+    }
     
-    # Check for warnings
-    validateObject(obj$definition)
+    # Interaction type
+    if(!is.na(interactionType)){
+      obj$definition$interactionType = interactionType
+      
+      # Check for warnings
+      validateObject(obj$definition)
+    }
+    
+    # Extensions
+    # todo: allow multiple extensions
+    if(!is.na(extensions)){
+      obj$definition$extensions = do.call(createExtension, list(extension = object$extensions, warn = warn))
+    }
+  } else if(type == "Agent") {
+    
+  } else if(type == "Group") {
+    
+  } else if(type == "StatementRef") {
+    
+  } else if(type == "SubStatement") {
+    
   }
   
-  # Extensions
-  # todo: allow multiple extensions
-  if(!is.na(extensions) && type == "Activity"){
-    obj$definition$extensions = do.call(createExtension, list(extension = object$extensions, warn = warn))
-  }
-  
+  # Pushed to the bottom just to match default order
   obj$objectType <- type
   
   return(obj)

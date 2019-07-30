@@ -7,7 +7,7 @@ NULL
 
 #' Creates an xAPI Statement
 #' 
-#' @param x Statement values
+#' @param stmt Statement values
 #' @param warn Show warnings
 #' 
 #' @seealso \code{\link{createAgent}}
@@ -18,22 +18,22 @@ NULL
 #' @return xAPI Statement (json)
 #' 
 #' @export
-createStatement <- function(x = NULL, warn = FALSE, ...) {
-  params <- x
+createStatement <- function(stmt = NULL, warn = FALSE, ...) {
   
-  if(is.null(params)){
+  if(is.null(stmt)){
     warning('No arguments specified; using default xapi:statement.', call. = FALSE)
     warn = FALSE
   }
-  
-  # todo: check if verb requires a result object
 
   statement <- list(
-    agent = do.call(createAgent, list(agent = params$agent, warn = warn)),
-    verb = do.call(createVerb, list(verb = params$verb, warn = warn)),
-    object = do.call(createObject, list(object = params$object, warn = warn)),
-    result = do.call(createResult, list(result = params$result, warn = warn))
+    agent = do.call(createAgent, list(agent = stmt$agent, warn = warn)),
+    verb = do.call(createVerb, list(verb = stmt$verb, warn = warn)),
+    object = do.call(createObject, list(object = stmt$object, warn = warn))
   )
 
+  if(!is.null(stmt$result)){
+    statement$result <- do.call(createResult, list(result = stmt$result, warn = warn))
+  }
+  
   return(formatJSON(statement, pretty = TRUE, auto_unbox = TRUE))
 }

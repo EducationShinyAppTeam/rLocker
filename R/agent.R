@@ -1,6 +1,11 @@
 #' agent
 #' 
 #' xAPI Agent object definitions
+#' 
+#' @name agent
+#' @section Description:
+#'  An Agent (an individual) is a persona or system.
+NULL
 
 #' Creates an xAPI Agent object
 #' 

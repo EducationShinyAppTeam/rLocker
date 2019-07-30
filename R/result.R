@@ -2,16 +2,18 @@
 #'
 #' xAPI Result object definitions
 #' 
+#' @name result
 #' @section Description:
 #'  An optional property that represents a measured outcome related to the Statement in which it is included.
+#' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#result}
+NULL
 
 #' Creates an xAPI Result object
 #' 
 #' @section Extras:
 #' This function accepts an optional result value \code{extension}.
 #' 
-#' @param success Indicates whether or not the attempt on the Activity was successful.
-#' @param response A response appropriately formatted for the given Activity.
+#' @param result Result params
 #' @param warn Show warnings
 #' 
 #' @seealso \code{\link{result}}
@@ -21,6 +23,7 @@
 #' 
 #' @examples
 #' createResult(result = list(success = TRUE, response = "correctAnswer"))
+#' createResult(result = list(success = TRUE, response = "correctAnswer", extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100)))
 #' 
 #' @export
 createResult <- function(
@@ -32,14 +35,23 @@ createResult <- function(
   }
   
   # Set defaults
+  score = ifelse(is.null(result$score), NA, result$score)
   success = ifelse(is.null(result$success), NA, result$success)
+  completion = ifelse(is.null(result$completion), NA, result$completion)
   response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
+  duration = ifelse(is.null(result$duration), NA, result$duration)
   extensions = ifelse(is.null(result$extensions), NA, result$extensions)
   
   obj <- list(
     success = success,
-    response = response
+    completion = completion,
+    response = response,
+    duration = duration
   )
+  
+  if(!is.na(score)){
+    obj$score = do.call(createScore, list(score = result$score, warn = warn))
+  }
   
   # todo: allow multiple extensions
   if(!is.na(extensions)){

@@ -1,15 +1,21 @@
-#'verbs
+#'verb
 #'
 #' xAPI Verb object definitions
-#' Note: Language strings have been unicode escaped for better compatibility.
+#' 
+#' @name verb
+#' @section Description:
+#'   The Verb defines the action between an Actor and an Activity.
+#' @section Details:
+#'   Verbs appear in Statements as Objects consisting of an IRI and a set of display names corresponding to multiple languages or dialects which provide human-readable meanings of the Verb. The table below lists all properties of the Verb Object.
+#' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#verbs}
+NULL
 
 #' Creates an xAPI Verb object
 #' 
-#' @param verb Verb name
-#' @param id URI to verb definition
+#' @param verb Verb params
 #' @param warn Show warnings
 #' 
-#' @seealso \code{verbs}
+#' @seealso \code{verb}
 #' 
 #' @return xAPI Verb object
 #' 
