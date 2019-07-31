@@ -26,34 +26,30 @@ NULL
 createVerb <- function(
   verb = NULL,
   warn = FALSE, ...) {
-  
+
   if(is.null(verb) & warn){
-    warning('Verb arguments not specified; using default xapi:verb.', call. = FALSE)
+    warning("Verb arguments not specified; using default xapi:verb.", call. = FALSE)
   }
-  
+
   # Set defaults
-  display = ifelse(is.null(verb$display), 'experienced', verb$display)
-  id = ifelse(is.null(verb$id), paste(c("http://adlnet.gov/expapi/verbs/", verb$display), collapse = ""), verb$id)
-  
   # todo: add lookup from verbs list
   # todo: add language support
   # todo: warn - id should be a valid url
-  
   obj <- list(
-    id = id,
+    id = ifelse(is.null(verb$id), paste(c("http://adlnet.gov/expapi/verbs/", verb$display), collapse = ""), verb$id),
     display = list(
-      "en-US" = display
+      "en-US" = ifelse(is.null(verb$display), "experienced", verb$display)
     )
   )
-  
+
   return(obj)
 }
 
 #'@export
 getVerb <- function(name, asJSON = FALSE) {
-  exists = exists(name, verbs)
+  exists <- exists(name, verbs)
 
-  if(exists & asJSON) {
+  if (exists & asJSON) {
     return(formatJSON(verbs[name]))
   } else if(exists) {
     return(verbs[name])

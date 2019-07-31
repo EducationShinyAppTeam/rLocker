@@ -26,13 +26,13 @@ NULL
 createObject <- function(
   object = NULL,
   warn = FALSE, ...) {
-  
-  if(is.null(object) & warn){
-    warning('Object arguments not specified; using default xapi:object.', call. = FALSE)
-  } else if(is.null(object$type) & warn){
-    warning('Object type not specified; assuming xapi:activity.', call. = FALSE)
+
+  if (is.null(object) & warn) {
+    warning("Object arguments not specified; using default xapi:object.", call. = FALSE)
+  } else if (is.null(object$type) & warn) {
+    warning("Object type not specified; assuming xapi:activity.", call. = FALSE)
   }
-  
+
   # Set defaults
   id <- ifelse(is.null(object$id), "http://adlnet.gov/expapi/activities/example", object$id)
   name <- ifelse(is.null(object$name), "Example Activity", object$name)
@@ -41,9 +41,9 @@ createObject <- function(
   moreInfo <- ifelse(is.null(object$moreInfo), NA, object$moreInfo)
   interactionType <- ifelse(is.null(object$interactionType), NA, object$interactionType)
   extensions <- ifelse(is.null(object$extensions), NA, object$extensions)
-  
+
   # todo: split option path by object type (not all values will be supported by each type)
-  
+
   # Set required values
   obj <- list(
     id = id,
@@ -56,41 +56,41 @@ createObject <- function(
       )
     )
   )
-  
-  # ---- Optional Values ----
-  
-  if(type == "Activity"){
+
+  # ---- Optional Values ---- #
+
+  if (type == "Activity") {
     # More info link
-    if(!is.na(moreInfo)){
-      obj$moreInfo = moreInfo
+    if (!is.na(moreInfo)) {
+      obj$moreInfo <- moreInfo
     }
-    
+
     # Interaction type
-    if(!is.na(interactionType)){
-      obj$definition$interactionType = interactionType
-      
+    if (!is.na(interactionType)) {
+      obj$definition$interactionType <- interactionType
+
       # Check for warnings
       validateObject(obj$definition)
     }
-    
+
     # Extensions
     # todo: allow multiple extensions
-    if(!is.na(extensions)){
-      obj$definition$extensions = do.call(createExtension, list(extension = object$extensions, warn = warn))
+    if (!is.na(extensions)) {
+      obj$definition$extensions <- do.call(createExtension, list(extension = object$extensions, warn = warn))
     }
   } else if(type == "Agent") {
-    
+
   } else if(type == "Group") {
-    
+
   } else if(type == "StatementRef") {
-    
+
   } else if(type == "SubStatement") {
-    
+
   }
-  
+
   # Pushed to the bottom just to match default order
   obj$objectType <- type
-  
+
   return(obj)
 }
 
@@ -110,6 +110,7 @@ getObjectDefinition <- function() {
     steps = NA_character_,
     extensions = NA
   )
+
   return(definition)
 }
 
@@ -125,7 +126,7 @@ getInteractionTypes <- function() {
 
 #'@export
 getInteractionType <- function(name, asJSON = FALSE) {
-  exists = exists(name, interactionTypes)
+  exists <- exists(name, interactionTypes)
   
   if(exists & asJSON) {
     return(formatJSON(interactionTypes[name]))
@@ -138,7 +139,7 @@ getInteractionType <- function(name, asJSON = FALSE) {
 
 #'@export
 getInteractionComponent <- function(name, asJSON = FALSE){
-  exists = exists(name, components)
+  exists <- exists(name, components)
   
   if(exists & asJSON) {
     return(formatJSON(components[name]))
@@ -173,17 +174,17 @@ checkSupportedComponents <- function(object) {
   
   flag <- FALSE
   
-  if(!is.na(exists)){
-    for(i in names(object)){
-      if(!is.na(match(i, available) >= 1)){
-        if(is.na(match(i, supported))){
-          warning(paste0('Interaction component "', i, '" not supported by interaction type "', object$interactionType, '" provided; this value will be dropped.'), call. = FALSE)
+  if (!is.na(exists)) {
+    for (i in names(object)) {
+      if (!is.na(match(i, available) >= 1)) {
+        if (is.na(match(i, supported))) {
+          warning(paste0("Interaction component \"", i, "\" not supported by interaction type \"", object$interactionType, "\" provided; this value will be dropped."), call. = FALSE)
           flag <- TRUE
         }
       }
     }
   } else {
-    warning(paste0('Interaction type "', object$interactionType, '" is not a valid type.'), call. = FALSE)
+    warning(paste0("Interaction type \"", object$interactionType, "\" is not a valid type."), call. = FALSE)
     flag <- TRUE
   }
   
@@ -192,13 +193,16 @@ checkSupportedComponents <- function(object) {
 
 #'@export
 validateObject <- function(object) {
+  
   dfn <- names(getObjectDefinition())
   validKeys <- all(names(object) %in% dfn)
-  for(key in names(object)){
-    if(!(key %in% dfn)){
-      warning(paste0('Object property "', key, '" is not valid.'), call. = FALSE)
+  
+  for (key in names(object)) {
+    if (!(key %in% dfn)) {
+      warning(paste0("Object property \"", key, "\" is not valid."), call. = FALSE)
     }
   }
+  
   validComponents <- checkSupportedComponents(object)
   passed <- validKeys & validComponents
   
@@ -433,4 +437,3 @@ interactionTypes <- list(
     "description" = NA_character_
   )
 )
-

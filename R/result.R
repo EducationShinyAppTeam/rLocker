@@ -29,51 +29,41 @@ NULL
 createResult <- function(
   result = NULL,
   warn = FALSE, ...) {
-  
-  if(is.null(result) & warn){
-    warning('Result arguments not specified; using default xapi:result', call. = FALSE)
+
+  if (is.null(result) & warn) {
+    warning("Result arguments not specified; using default xapi:result", call. = FALSE)
   }
-  
+
   # Set defaults
-  score = ifelse(is.null(result$score), NA, result$score)
-  success = ifelse(is.null(result$success), NA, result$success)
-  completion = ifelse(is.null(result$completion), NA, result$completion)
-  response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
-  duration = ifelse(is.null(result$duration), NA, result$duration)
-  extensions = ifelse(is.null(result$extensions), NA, result$extensions)
-  
   obj <- list(
-    success = success,
-    completion = completion,
-    response = response,
-    duration = duration
+    success = ifelse(is.null(result$success), NA, result$success),
+    completion = ifelse(is.null(result$completion), NA, result$completion),
+    response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response),
+    duration = ifelse(is.null(result$duration), NA, result$duration)
   )
-  
-  if(!is.na(score)){
-    obj$score = do.call(createScore, list(score = result$score, warn = warn))
+
+  # ---- Optional Values ---- #
+  if (!is.null(result$score)) {
+    obj$score <- do.call(createScore, list(score = result$score, warn = warn))
   }
-  
+
   # todo: allow multiple extensions
-  if(!is.na(extensions)){
-    obj$extensions = do.call(createExtension, list(extension = result$extensions, warn = warn))
+  if (!is.null(result$extensions)) {
+    obj$extensions <- do.call(createExtension, list(extension = result$extensions, warn = warn))
   }
-  
+
   return(obj)
 }
 
 #'@export
 getResultDefinition <- function() {
-  definition = list(
-    score = list(
-      scale = NA_integer_,
-      raw = NA_integer_,
-      min = NA_integer_,
-      max = NA_integer_
-    ),
+  definition <- list(
+    score = getScoreDefinition(),
     success = c(TRUE, FALSE),
     completion = c(TRUE, FALSE),
     response = NA_character_,
-    extensions = NA
+    extensions = getExtensionDefinition()
   )
+  
   return(definition)
 }

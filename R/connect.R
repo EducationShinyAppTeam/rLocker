@@ -10,7 +10,7 @@
 test <- function(config) {
 
   # Check to see if auth token is set or if username and password are set instead.
-  if(is.null(config$auth) & (is.null(config$user) | is.null(config$pass))){
+  if (is.null(config$auth) & (is.null(config$user) | is.null(config$pass))) {
     warning("Locker credentials are not set; unable to proceed with test.")
   } else {
     # Try making a connection to the endpoint
@@ -24,7 +24,7 @@ test <- function(config) {
       status <- status_code(response)
 
       #' @details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-      if(!status == 200){
+      if (!status == 200) {
         message(paste(c("Unable to connect to xAPI endpoint. Reason: ", http_status(status)$message), "."))
       }
     },
@@ -77,7 +77,7 @@ connect <- function(session, config) {
 store <- function(session, statement = NULL, warn = FALSE, ...) {
   # Pass the statement to the js handler
   session$sendCustomMessage("rlocker-store", statement)
-  
+
   # Return HTTP STATUS 200 - OK
   # todo: listen for actual status updates
   return(200)

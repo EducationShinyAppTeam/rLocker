@@ -4,11 +4,8 @@
 #' @import shiny htmltools
 #' @importFrom jsonlite toJSON
 
+# Create link to javascript files for package
 .onAttach <- function(...) {
-  # @todo register the js input handler to make the element reactive
-  # shiny::registerInputHandler()
-
-  # Create link to javascript files for package
   shiny::addResourcePath("xapiwrapper", system.file("www/js/dist/", package = "rlocker"))
   shiny::addResourcePath("rlocker", system.file("www/js/dist/", package = "rlocker"))
 }
@@ -31,7 +28,7 @@ rlockerJS = htmltools::htmlDependency(
 
 dep <- list(xAPIWrapper, rlockerJS)
 
-## Utility Functions ##
+# ---- Utility Functions ---- #
 
 formatJSON <- function(json, ...) {
   return(jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE))

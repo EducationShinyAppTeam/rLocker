@@ -26,20 +26,20 @@ NULL
 createExtension <- function(
   extension = NULL,
   warn = FALSE, ...) {
-  
-  if(is.null(extension) & warn){
-    warning('Extension arguments not specified; using default xapi:extension', call. = FALSE)
+
+  if (is.null(extension) & warn) {
+    warning("Extension arguments not specified; using default xapi:extension", call. = FALSE)
   }
-  
+
   # Set defaults
   dfn <- getExtensionDefinition()
-  
-  ref = ifelse(is.null(extension$ref), dfn$ref, extension$ref)
-  value = ifelse(is.null(extension$value), dfn$value, extension$value)
-  
+
+  ref <- ifelse(is.null(extension$ref), dfn$ref, extension$ref)
+  value <- ifelse(is.null(extension$value), dfn$value, extension$value)
+
   obj <- list()
   obj[ref] <- value
-  
+
   return(obj)
 }
 
