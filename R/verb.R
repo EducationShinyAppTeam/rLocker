@@ -41,6 +41,8 @@ createVerb <- function(
       "en-US" = ifelse(is.null(verb$display), "experienced", verb$display)
     )
   )
+  
+  class(obj) <- "Verb"
 
   return(obj)
 }

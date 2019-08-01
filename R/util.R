@@ -31,5 +31,9 @@ dep <- list(xAPIWrapper, rlockerJS)
 # ---- Utility Functions ---- #
 
 formatJSON <- function(json, ...) {
-  return(jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE))
+  return(jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, force = TRUE))
+}
+
+mailto <- function(email){
+  return(paste0("mailto:", email))
 }

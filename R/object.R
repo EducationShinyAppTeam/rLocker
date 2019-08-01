@@ -90,6 +90,8 @@ createObject <- function(
 
   # Pushed to the bottom just to match default order
   obj$objectType <- type
+  
+  class(obj) <- "Object"
 
   return(obj)
 }

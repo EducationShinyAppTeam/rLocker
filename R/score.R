@@ -59,6 +59,8 @@ createScore <- function(
     min = min,
     max = max
   )
+  
+  class(obj) <- "Score"
 
   return(obj)
 }

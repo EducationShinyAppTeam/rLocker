@@ -39,6 +39,8 @@ createExtension <- function(
 
   obj <- list()
   obj[ref] <- value
+  
+  class(obj) <- "Extension"
 
   return(obj)
 }

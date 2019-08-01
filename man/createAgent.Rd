@@ -2,7 +2,7 @@
 % Please edit documentation in R/agent.R
 \name{createAgent}
 \alias{createAgent}
-\title{Creates an xAPI Agent object}
+\title{Create an xAPI Agent}
 \usage{
 createAgent(agent = NULL, warn = FALSE, ...)
 }
@@ -15,7 +15,7 @@ createAgent(agent = NULL, warn = FALSE, ...)
 xAPI Agent object
 }
 \description{
-Creates an xAPI Agent object
+Create an xAPI Agent
 }
 \examples{
 createAgent(agent = list(name = "John Doe", mbox = "mailto:john@example.com"))

@@ -51,6 +51,8 @@ createResult <- function(
   if (!is.null(result$extensions)) {
     obj$extensions <- do.call(createExtension, list(extension = result$extensions, warn = warn))
   }
+  
+  class(obj) <- "Result"
 
   return(obj)
 }

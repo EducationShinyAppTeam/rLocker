@@ -3,12 +3,28 @@
 \name{group}
 \alias{group}
 \title{group}
+\usage{
+group(name = NULL, mbox = NULL, email = NULL, account = NULL, ...)
+}
+\arguments{
+\item{name}{Name of the Group.
+### FINISH ADDING PARAMS ###
+### FINISH ADDING PARAMS ###
+### FINISH ADDING PARAMS ###
+### FINISH ADDING PARAMS ###
+### FINISH ADDING PARAMS ###}
+
+\item{members}{The members of this Group.}
+}
 \description{
 xAPI Group object definitions
 }
 \section{Description}{
 
   A Group represents a collection of Agents and can be used in most of the same situations an Agent can be used. There are two types of Groups: Anonymous Groups and Identified Groups.
+
+
+  Shorthand method to create Group
 }
 
 \section{Details}{
@@ -18,4 +34,8 @@ xAPI Group object definitions
 
 \seealso{
 \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#group}
+
+\code{\link{agent}}
+
+\code{\link{createGroup}}
 }

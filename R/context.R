@@ -68,6 +68,8 @@ createContext <- function(
   if (!length(obj)) {
     obj <- NA
   }
+  
+  class(obj) <- "Context"
 
   return(obj)
 }

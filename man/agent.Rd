@@ -3,11 +3,33 @@
 \name{agent}
 \alias{agent}
 \title{agent}
+\usage{
+agent(...)
+}
+\arguments{
+\item{email}{Only email addresses that have only ever been and will ever be assigned to this Agent, but no others, SHOULD be used for this property, mbox, and mbox_sha1sum.}
+
+\item{mbox}{The required format is "mailto:email address".}
+
+\item{mbox_sha1sum}{The hex-encoded SHA1 hash of a mailto IRI (i.e. the value of an mbox property).}
+
+\item{account}{A user account Object on an existing system e.g. an LMS or intranet.}
+
+\item{name}{Full name of the Agent.}
+
+\item{openid}{An openID that uniquely identifies the Agent.}
+}
 \description{
 xAPI Agent object definitions
 }
 \section{Description}{
 
  An Agent (an individual) is a persona or system.
+
+
+  Shorthand method to create Agent
 }
 
+\seealso{
+\code{\link{createAgent}}
+}

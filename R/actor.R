@@ -21,6 +21,8 @@ createActor <- function(
   } else {
     obj <- do.call(createGroup, list(group = group, warn = warn))
   }
+  
+  class(obj) <- "Actor"
 
   return(obj)
 }
