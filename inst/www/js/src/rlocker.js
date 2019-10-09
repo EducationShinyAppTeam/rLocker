@@ -82,6 +82,7 @@ export class Locker {
       if (debug) {
         request.status != 200 ? console.error(request) : console.info(response);
       }
+      Shiny.onInputChange("storageStatus", request.status);
       return response;
     });
   }
