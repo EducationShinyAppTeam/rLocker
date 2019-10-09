@@ -77,8 +77,9 @@ export class Locker {
   }
 
   store(statement) {
+    let debug = this.debug;
     ADL.XAPIWrapper.sendStatement(statement, function (request, response) {
-      if (this.debug) {
+      if (debug) {
         request.status != 200 ? console.error(request) : console.info(response);
       }
       return response;
