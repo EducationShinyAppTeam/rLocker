@@ -77,18 +77,12 @@ export class Locker {
   }
 
   store(statement) {
-    if (this.debug) {
-      console.info(statement);
-      ADL.XAPIWrapper.sendStatement(statement, function (request, response) {
-        if (request.status != 200) {
-          console.error(request);
-        }
-        console.info(response);
-        return response;
-      });
-    } else {
-      ADL.XAPIWrapper.sendStatement(statement);
-    }
+    ADL.XAPIWrapper.sendStatement(statement, function (request, response) {
+      if (this.debug) {
+        request.status != 200 ? console.error(request) : console.info(response);
+      }
+      return response;
+    });
   }
 
   setCurrentAgent(mbox, name = this.session.id) {
