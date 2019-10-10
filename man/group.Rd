@@ -4,7 +4,7 @@
 \alias{group}
 \title{group}
 \usage{
-group(name = NULL, mbox = NULL, email = NULL, account = NULL, ...)
+group(...)
 }
 \arguments{
 \item{name}{Name of the Group.
