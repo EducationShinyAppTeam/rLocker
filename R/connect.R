@@ -5,26 +5,27 @@
 #' @param config API Configuration
 #' @return HTTP Status Code
 #' @import htmltools httr
+
 #' @export
 test <- function(config) {
-
+  
   # Check to see if auth token is set or if username and password are set instead.
-  if(is.null(config$auth) & (is.null(config$user) | is.null(config$pass))){
+  if (is.null(config$auth) & (is.null(config$user) | is.null(config$pass))) {
     warning("Locker credentials are not set; unable to proceed with test.")
   } else {
     # Try making a connection to the endpoint
     tryCatch({
-
+      
       response <- GET(
         paste0(config$base_url, "/api/connection/statement"),
         add_headers(Authorization = config$auth)
       )
-
+      
       status <- status_code(response)
-
+      
       #' @details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-      if(!status == 200){
-        message(paste(c("Unable to connect to xAPI endpoint. Reason: ", http_status(status)$message), "."))
+      if (status != 200) {
+        message(paste0("Unable to connect to xAPI endpoint. ", http_status(status)$message), ".")
       }
     },
     error = function(cond){
@@ -36,7 +37,7 @@ test <- function(config) {
       return(NULL)
     })
   }
-
+  
   return(status)
 }
 
@@ -55,10 +56,31 @@ connect <- function(session, config) {
     immediate = TRUE,
     session = getDefaultReactiveDomain()
   )
-
+  
   # Pass locker configuration to begin connection
   session$sendCustomMessage("rlocker-setup", config)
-
+  
   # Test the config and return the results
   return(list(status = test(config), agent = config$agent))
+}
+
+#' Stores an xAPI Statement
+#' 
+#' @param statement xAPI Statement
+#' @param warn Show warnings
+#' 
+#' @seealso \code{\link{createStatement}}
+#' 
+#' @return HTTP Status
+#' 
+#' @export
+store <- function(session, statement = NULL, warn = FALSE, ...) {
+  # Pass the statement to the js handler
+  session$sendCustomMessage("rlocker-store", statement)
+  
+  # HTTP Status Code
+  status_code <- ifelse(!is.null(session$input$storageStatus), session$input$storageStatus, 502)
+  
+  # Return HTTP_STATUS
+  return(status_code)
 }

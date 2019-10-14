@@ -1,11 +1,8 @@
-### RStudio ###
-.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-.Rbuildignore
-*.Rproj
+rsconnect/
 
 # Packages #
 ############
@@ -121,4 +118,3 @@ typings/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-rlocker.code-workspace

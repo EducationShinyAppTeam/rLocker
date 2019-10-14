@@ -1,13 +1,57 @@
-#'verbs
+#'verb
 #'
 #' xAPI Verb object definitions
-#' Note: Language strings have been unicode escaped for better compatibility.
+#' 
+#' @name verb
+#' @section Description:
+#'   The Verb defines the action between an Actor and an Activity.
+#' @section Details:
+#'   Verbs appear in Statements as Objects consisting of an IRI and a set of display names corresponding to multiple languages or dialects which provide human-readable meanings of the Verb. The table below lists all properties of the Verb Object.
+#' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#verbs}
+NULL
+
+#' Creates an xAPI Verb object
+#' 
+#' @param verb Verb params
+#' @param warn Show warnings
+#' 
+#' @seealso \code{verb}
+#' 
+#' @return xAPI Verb object
+#' 
+#' @examples
+#' createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
+#' 
+#' @export
+createVerb <- function(
+  verb = NULL,
+  warn = FALSE, ...) {
+
+  if(is.null(verb) & warn){
+    warning("Verb arguments not specified; using default xapi:verb.", call. = FALSE)
+  }
+
+  # Set defaults
+  # todo: add lookup from verbs list
+  # todo: add language support
+  # todo: warn - id should be a valid url
+  obj <- list(
+    id = ifelse(is.null(verb$id), paste(c("http://adlnet.gov/expapi/verbs/", verb$display), collapse = ""), verb$id),
+    display = list(
+      "en-US" = ifelse(is.null(verb$display), "experienced", verb$display)
+    )
+  )
+  
+  class(obj) <- "Verb"
+
+  return(obj)
+}
 
 #'@export
 getVerb <- function(name, asJSON = FALSE) {
-  exists = exists(name, verbs)
+  exists <- exists(name, verbs)
 
-  if(exists & asJSON) {
+  if (exists & asJSON) {
     return(formatJSON(verbs[name]))
   } else if(exists) {
     return(verbs[name])

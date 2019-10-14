@@ -63,7 +63,8 @@ registerQuestionEvents <- function(session, questions){
             object = list(
               id = paste0(getCurrentAddress(session), "#", question$id),
               name = question$title,
-              description = question$text
+              description = question$text,
+              interactionType = "choice"
             ),
             result = list(
               success = session$input[[question$id]] == question$answer,

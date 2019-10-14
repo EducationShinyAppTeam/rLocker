@@ -4,10 +4,10 @@
 \alias{createStatement}
 \title{Creates an xAPI Statement}
 \usage{
-createStatement(x = NULL, warn = FALSE, ...)
+createStatement(stmt = NULL, warn = FALSE, ...)
 }
 \arguments{
-\item{x}{Statement values}
+\item{stmt}{Statement values}
 
 \item{warn}{Show warnings}
 }

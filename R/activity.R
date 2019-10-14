@@ -1,14 +1,21 @@
 #'activity
 #'
+#' xAPI Activity object definitions
+#' 
+#' @name activity
+#' @section Details:
+#'  A Statement can represent an Activity as the Object of the Statement.
+#' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#activity-definition}
+NULL
 
 #'@export
 getActivityType <- function(name, asJSON = FALSE) {
-  exists = exists(name, verbs)
+  exists <- exists(name, activityTypes)
 
-  if(exists & asJSON) {
-    return(formatJSON(verbs[name]))
-  } else if(exists) {
-    return(verbs[name])
+  if (exists & asJSON) {
+    return(formatJSON(activityTypes[name]))
+  } else if (exists) {
+    return(activityTypes[name])
   } else {
     return(-1)
   }
@@ -16,10 +23,10 @@ getActivityType <- function(name, asJSON = FALSE) {
 
 #'@export
 getActivityTypes <- function() {
-  return(names(verbs))
+  return(names(activityTypes))
 }
 
-activityTypes = list(
+activityTypes <- list(
   "assessment" = "http://adlnet.gov/expapi/activities/assessment",
   "attempt" = "http://adlnet.gov/expapi/activities/attempt",
   "course" = "http://adlnet.gov/expapi/activities/course",

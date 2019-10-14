@@ -6,7 +6,12 @@ questions = list(
     title = "Question 1",
     text = "What type of histogram is this?",
     type = "radio",
-    choices = c("Log-normal (rlnorm)" = "rlnorm", "Uniform (unif)" = "unif", "Normal (rnorm)" = "rnorm", "Exponential (exp)" = "exp"),
+    choices = c(
+      "Log-normal (rlnorm)" = "rlnorm",
+      "Uniform (unif)" = "unif",
+      "Normal (rnorm)" = "rnorm",
+      "Exponential (exp)" = "exp"
+    ),
     answer = "rnorm"
   ),
   list(
@@ -14,7 +19,12 @@ questions = list(
     title = "Question 2",
     text = "What type of histogram is this?",
     type = "radio",
-    choices = c("Normal (rnorm)" = "rnorm", "Uniform (unif)" = "unif", "Log-normal (rlnorm)" = "rlnorm", "Exponential (exp)" = "exp"),
+    choices = c(
+      "Normal (rnorm)" = "rnorm",
+      "Uniform (unif)" = "unif",
+      "Log-normal (rlnorm)" = "rlnorm",
+      "Exponential (exp)" = "exp"
+    ),
     answer = "rlnorm"
   )
 )
