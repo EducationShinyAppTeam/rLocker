@@ -1,6 +1,6 @@
 {
   "name": "rlocker",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Learning Locker for R Shiny",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "build": "npm run compile-src"
   },
   "author": "ROBERT PATRICK CAREY III",
-  "license": "GPL-2.0+",
+  "license": "GPL-3.0+",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
