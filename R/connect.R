@@ -1,25 +1,58 @@
 #' connect
 #' 
-#' Tests Learning Locker API Configuration
-#' 
-#' @param config API Configuration
-#' @return HTTP Status Code
 #' @import htmltools httr
 
+#' Sets up scripts needed for Learning Locker API
+#' 
+#' @param session The current R session
+#' @param config Endpoint configuration
+#' 
+#' @return HTTP Status Code
+#' 
 #' @export
-test <- function(config) {
+connect <- function(session, config) {
+  
+  # Append xapiwrapper to DOM head
+  insertUI(
+    selector = "head",
+    where = "beforeEnd",
+    ui = htmltools::attachDependencies(htmltools::tags$head(), dep, append = TRUE),
+    immediate = TRUE,
+    session = getDefaultReactiveDomain()
+  )
+  
+  set_config(
+    add_headers(
+      Authorization = config$auth
+    )
+  )
+  
+  # Pass locker configuration to begin connection
+  session$sendCustomMessage("rlocker-setup", config)
+  
+  # Connection details
+  connection <- list(status = test(config), agent = config$agent)
+  
+  # Return connection
+  return(connection)
+}
+
+#' @export
+test <- function(cfg) {
+  
+  status <- NULL
   
   # Check to see if auth token is set or if username and password are set instead.
-  if (is.null(config$auth) & (is.null(config$user) | is.null(config$pass))) {
+  # is.null(config$auth) & (is.null(config$user) | is.null(config$pass))
+  if (FALSE) {
     warning("Locker credentials are not set; unable to proceed with test.")
   } else {
     # Try making a connection to the endpoint
     tryCatch({
       
-      response <- GET(
-        paste0(config$base_url, "/api/connection/statement"),
-        add_headers(Authorization = config$auth)
-      )
+      response <- with_config(config(), GET(
+        paste0(cfg$base_url, "api/connection/statement"),
+      ))
       
       status <- status_code(response)
       
@@ -41,27 +74,43 @@ test <- function(config) {
   return(status)
 }
 
-#' Sets up scripts needed for Learning Locker API
+#' Makes a simple API request to Learning Locker endpoint
+#' Uses HTTP Connection Interface
+#' @seealso \link{https://docs.learninglocker.net/http-connection/}
 #' 
 #' @param session The current R session
-#' @param config API Configuration
-#' @return HTTP Status Code
+#' @param request API request string
+#' @param asJSON (optional) Return content as json string
+#' 
+#' @return response content
+#' 
 #' @export
-connect <- function(session, config) {
-  # Append xapiwrapper to DOM head
-  insertUI(
-    selector = "head",
-    where = "beforeEnd",
-    ui = htmltools::attachDependencies(htmltools::tags$head(), dep, append = TRUE),
-    immediate = TRUE,
-    session = getDefaultReactiveDomain()
-  )
+api_request <- function(request, asJSON = FALSE){
   
-  # Pass locker configuration to begin connection
-  session$sendCustomMessage("rlocker-setup", config)
+  response <- with_config(config(), GET(request))
   
-  # Test the config and return the results
-  return(list(status = test(config), agent = config$agent))
+  status <- response$status
+  
+  content <- httr::content(response)
+  
+  #' @details https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+  if (status != 200) {
+    message(
+      paste(status, 
+        stringr::str_squish(
+          stringr::str_trim(gsub("<.*?>|\n", " ", content(response, as = "text")), side = "both")
+        )
+      )
+    )
+    
+    content <- NA
+  } else {
+    if(asJSON){
+      content <- formatJSON(content)
+    }
+  }
+  
+  return(content)
 }
 
 #' Stores an xAPI Statement

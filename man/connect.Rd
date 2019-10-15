@@ -9,7 +9,7 @@ connect(session, config)
 \arguments{
 \item{session}{The current R session}
 
-\item{config}{API Configuration}
+\item{config}{Endpoint configuration}
 }
 \value{
 HTTP Status Code

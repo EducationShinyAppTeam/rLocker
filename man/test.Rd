@@ -4,16 +4,10 @@
 \alias{test}
 \title{connect}
 \usage{
-test(config)
-}
-\arguments{
-\item{config}{API Configuration}
-}
-\value{
-HTTP Status Code
+test(config = config())
 }
 \description{
-Tests Learning Locker API Configuration
+connect
 }
 \details{
 https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
