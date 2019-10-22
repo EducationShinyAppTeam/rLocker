@@ -1,8 +1,8 @@
 Package: rlocker
 Type: Package
 Title: Learning Locker for Shiny
-Version: 0.1.4
-Date: 2019-05-28
+Version: 0.2.0
+Date: 2019-10-22
 Authors@R: c(person("Robert", "Carey", email = "rpc5102@psu.edu",
   role = c("aut", "cre")))
 Maintainer: Robert Carey <rpc5102@psu.edu>
@@ -10,7 +10,7 @@ Description: Adds Learning Locker xAPI support to Shiny Applications.
 Imports: shiny (>= 0.11), htmltools, uuid, jsonlite, stringr
 URL: https://github.com/rpc5102/rlocker
 BugReports: https://github.com/rpc5102/rlocker/issues
-License: GPL-2.0+
+License: GPL-3.0+
 Encoding: UTF-8
 NeedsCompilation: no
 LazyData: true

@@ -2,7 +2,7 @@
 % Please edit documentation in R/connect.R
 \name{connect}
 \alias{connect}
-\title{Sets up scripts needed for Learning Locker API}
+\title{connect}
 \usage{
 connect(session, config)
 }
@@ -15,5 +15,5 @@ connect(session, config)
 HTTP Status Code
 }
 \description{
-Sets up scripts needed for Learning Locker API
+connect
 }

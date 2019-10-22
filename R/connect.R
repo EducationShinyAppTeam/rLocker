@@ -78,7 +78,12 @@ test <- function(cfg) {
 #' Uses HTTP Connection Interface
 #' @seealso \link{https://docs.learninglocker.net/http-statements/}
 #' 
-#' ### THESE NEED TO BE UPDATED ###
+#' ### ### ### ### ### ### ### ### ### THESE NEED TO BE UPDATED ### ### ### ### ### ### ### ### ###
+#' Should this be renamed to retrieve as we're only making get requests? api_retrieve rlocker::retrieve
+#' api/connection should be added to the base request automatically, we're not supporting REST at this time
+#' base_url + "api/connection" + request_type + query
+#' create new functions for connection details set_locker_config() / get_locker_config() (there's a collision with set_config in httr)
+#' 
 #' @param session The current R session
 #' @param request API request string
 #' @param asJSON (optional) Return content as json string
@@ -86,13 +91,6 @@ test <- function(cfg) {
 #' @return response content
 #' 
 #' @export
-#' 
-#' Should this be renamed to retrieve as we're only making get requests? api_retrieve rlocker::retrieve
-#' api/connection should be added to the base request automatically, we're not supporting REST at this time
-#' 
-#' base_url + "api/connection" + request_type + query
-#' 
-#' create new functions for connection details set_locker_config() / get_locker_config() (there's a collision with set_config in httr)
 retrieve <- function(model, interface = "connection", query, asJSON = FALSE){
   
   # @todo if interface == connection, query belongs as html encoded + json encoded ?queryString
