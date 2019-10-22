@@ -15,15 +15,18 @@ Learning Locker xAPI support for Shiny Applications.
 
 ### Assumptions
 
-1.  This package assumes that you have [Learning
+1.  This package assumes that you have a [Learning
     Locker](https://www.ht2labs.com/learning-locker-community/overview/)
-    set up and reachable by your application.
+    instance set up and that it’s reachable by your application.
 2.  Your application is running in an environment that supports
     [Cross-Origin Resource Sharing
     (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS);
-    otherwise api requests will be blocked.
+    otherwise api requests will be blocked. Requests made from
+    `localhost` / `127.0.0.1` / RStudio’s `runApp()` are often blocked
+    for this reason.
 3.  You are given consent by the application user(s) to collect activity
-    data on them.
+    data on them. **Note**: unless specified, user identifiers are
+    anonymized by default.
 
 ### Installation
 
@@ -34,9 +37,14 @@ You can install the released version of rlocker from
 devtools::install_github("rpc5102/rlocker")
 ```
 
-### Example
+### Examples
 
 See the [examples](./inst/examples/) folder for a demo application.
+
+### Storage Mechanism
+
+Below are two approaches to creating and storing a simple xAPI statement
+in Learning Locker.
 
 #### Method 1: R handler
 
@@ -122,6 +130,114 @@ Shiny.addCustomMessageHandler('rlocker-store', function(values) {
 
 See [adlnet/xAPIWrapper](https://github.com/adlnet/xAPIWrapper/) for
 JavaScript implementations.
+
+### Data Retreival
+
+Stored statements can be retreived from Learning Locker by using the
+`api_request()` method. **Note**: This requires a connection to be
+established by the R-handler to work; JS implementations can interface
+with the api through [HTTP
+GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) /
+[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
+instead.
+
+``` r
+# Sample data: config$base_url = https://learning-locker.example.com/ 
+request <- paste0(config$base_url, "api", "/connection/statement?first=1")
+
+response <- api_request(request, asJSON = TRUE)
+
+print(response)
+```
+
+Response data can be returned as a JSON formatted string or as an R
+object (default). Below is sample output from the request above.
+
+``` json
+{
+  "edges": [
+    {
+      "cursor": "eyJfaWQiOiI1YzQ2MmRiYjI0ZjVmMDRhOTI0MjZlMWMifQ==",
+      "node": {
+        "person": {},
+        "completedQueues": [],
+        "processingQueues": [],
+        "deadForwardingQueue": [],
+        "pendingForwardingQueue": [],
+        "completedForwardingQueue": [],
+        "_id": "5c462dbb24f5f04a92426e1c",
+        "hasGeneratedId": false,
+        "organisation": "5c4383e369b9834b4e086caa",
+        "lrs_id": "5c46260e85ce554a24b7579f",
+        "client": "5c46260e85ce554a24b757a0",
+        "active": true,
+        "voided": false,
+        "timestamp": "2019-01-21T20:38:19.131Z",
+        "stored": "2019-01-21T20:38:19.131Z",
+        "hash": "0905ec8aa05e67d247d7c888baf80b1f65c439c9",
+        "agents": [
+          "886b382eb3a9570aeb3da9b34028a76ed761f1b9"
+        ],
+        "relatedAgents": [
+          "886b382eb3a9570aeb3da9b34028a76ed761f1b9",
+          "mailto:hello@learninglocker.net"
+        ],
+        "registrations": [],
+        "verbs": [
+          "http://adlnet.gov/expapi/verbs/launched"
+        ],
+        "activities": [
+          "http://127.0.0.1:4358/"
+        ],
+        "relatedActivities": [
+          "http://127.0.0.1:4358/"
+        ],
+        "statement": {
+          "actor": {
+            "objectType": "Agent",
+            "name": "b5958c7b-22ba-404f-af7d-e5c3ccc6ddea",
+            "mbox_sha1sum": "886b382eb3a9570aeb3da9b34028a76ed761f1b9"
+          },
+          "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/launched",
+            "display": {
+              "en-US": "launched"
+            }
+          },
+          "object": {
+            "objectType": "Activity",
+            "id": "http://127.0.0.1:4358/",
+            "definition": {
+              "name": {
+                "en-US": "rlocker demo"
+              }
+            }
+          },
+          "id": "baa14dff-fbb2-4722-94a2-ecb268193436",
+          "timestamp": "2019-01-21T20:38:19.131Z",
+          "stored": "2019-01-21T20:38:19.131Z",
+          "authority": {
+            "objectType": "Agent",
+            "name": "New Client",
+            "mbox": "mailto:hello@learninglocker.net"
+          },
+          "version": "1.0.0"
+        },
+        "failedForwardingLog": []
+      }
+    }
+  ],
+  "pageInfo": {
+    "hasNextPage": true,
+    "hasPreviousPage": false,
+    "startCursor": "eyJfaWQiOiI1YzQ2MmRiYjI0ZjVmMDRhOTI0MjZlMWMifQ==",
+    "endCursor": "eyJfaWQiOiI1YzQ2MmRiYjI0ZjVmMDRhOTI0MjZlMWMifQ=="
+  }
+}
+```
+
+See [HTTP Queries](https://docs.learninglocker.net/http-queries/) for
+more information on how to make calls to the records database.
 
 ### Configuration
 
