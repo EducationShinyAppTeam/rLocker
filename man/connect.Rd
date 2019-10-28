@@ -16,4 +16,6 @@ HTTP Status Code
 }
 \description{
 connect
+
+Sets up scripts needed for Learning Locker API
 }

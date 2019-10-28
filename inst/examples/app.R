@@ -35,7 +35,7 @@ shinyApp(
     # Initialize Learning Locker connection
     connection <- rlocker::connect(session, config)
   
-    response <- rlocker::api_request(paste0(config$base_url, "api/connection/statement?first=1"), asJSON = TRUE)
+    response <- rlocker::retrieve("api/connection/statement?first=1", asJSON = TRUE)
     
     print(response)
 

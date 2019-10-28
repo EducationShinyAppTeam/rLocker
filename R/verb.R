@@ -52,9 +52,14 @@ getVerb <- function(name, asJSON = FALSE) {
   exists <- exists(name, verbs)
 
   if (exists & asJSON) {
-    return(formatJSON(verbs[name]))
+    return(formatJSON(verbs[[name]]))
   } else if(exists) {
-    return(verbs[name])
+    return(
+      structure(
+        verbs[[name]],
+        class = "verb"
+      )
+    )
   } else {
     return(-1)
   }

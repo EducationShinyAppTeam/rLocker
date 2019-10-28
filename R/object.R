@@ -131,9 +131,9 @@ getInteractionType <- function(name, asJSON = FALSE) {
   exists <- exists(name, interactionTypes)
   
   if(exists & asJSON) {
-    return(formatJSON(interactionTypes[name]))
+    return(formatJSON(interactionTypes[[name]]))
   } else if(exists) {
-    return(interactionTypes[name])
+    return(interactionTypes[[name]])
   } else {
     return(-1)
   }
@@ -144,9 +144,14 @@ getInteractionComponent <- function(name, asJSON = FALSE){
   exists <- exists(name, components)
   
   if(exists & asJSON) {
-    return(formatJSON(components[name]))
+    return(formatJSON(components[[name]]))
   } else if(exists) {
-    return(components[name])
+    return(
+      structure(
+        components[[name]],
+        class = "component"
+      )
+    )
   } else {
     return(-1)
   }
@@ -164,7 +169,7 @@ getSupportedComponents <- function(interactionType) {
   if(is.na(exists)){
     return(NA)
   } else {
-    return(getInteractionType(interactionType)[[1]]$components)
+    return(getInteractionType(interactionType)$components)
   }
 }
 
