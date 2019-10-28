@@ -13,9 +13,14 @@ getModel <- function(name, asJSON = FALSE) {
   exists <- exists(name, models)
   
   if (exists & asJSON) {
-    return(formatJSON(models[name]))
+    return(formatJSON(models[[name]]))
   } else if(exists) {
-    return(models[name])
+    return(
+      structure(
+        models[[name]],
+        class = "model"
+      )
+    )
   } else {
     return(-1)
   }
