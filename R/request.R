@@ -55,9 +55,10 @@ retrieve <- function(interface = NULL, model = NULL, query = NULL, asJSON = FALS
       stop("Unable to process request; locker config not set.")
     }
 
-    model_id    <- model
-    model       <- getModel(model_id)
-    interface   <- getInterface(interface)
+    model_id      <- model
+    model         <- getModel(model_id)
+    interface_id  <- interface
+    interface     <- getInterface(interface_id)
 
     if (is.null(model) || class(model) != "model") {
       stop("Unable to process request; api model not specified or is invalid.")
@@ -67,15 +68,13 @@ retrieve <- function(interface = NULL, model = NULL, query = NULL, asJSON = FALS
       stop("Unable to process request; api interface not specified or is invalid.")
     }
 
-    request <- NA
-
-    if (interface == "rest") {
-      request <- httr::modify_url(
+    request <- if (interface_id == "rest") {
+      httr::modify_url(
         config$base_url,
         path = paste0(interface$route, model_id, ifelse(!is.null(query), paste0("/", query), ""))
       )
     } else {
-      request <- httr::modify_url(
+      httr::modify_url(
         config$base_url,
         path = paste0(interface$route, model_id),
         query = query
