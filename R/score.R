@@ -33,10 +33,10 @@ createScore <- function(
   }
 
   # Set defaults
-  scaled = ifelse(is.null(score$scaled), 0, score$scaled)
-  raw = ifelse(is.null(score$raw), NA, score$raw)
-  min = ifelse(is.null(score$min), NA, score$min)
-  max = ifelse(is.null(score$max), NA, score$max)
+  scaled  <- ifelse(is.null(score$scaled), 0, score$scaled)
+  raw     <- ifelse(is.null(score$raw), NA, score$raw)
+  min     <- ifelse(is.null(score$min), NA, score$min)
+  max     <- ifelse(is.null(score$max), NA, score$max)
 
   if (scaled < -1 | scaled > 1) {
     warning("A score's scale must be between -1 and 1 (inclusive); defaulting to 0.", call. = FALSE)

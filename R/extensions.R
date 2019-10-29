@@ -1,7 +1,7 @@
 #'extensions
 #'
 #' xAPI Extension object definitions
-#' 
+#'
 #' @name extensions
 #' @section Description:
 #'   Extensions are available as part of Activity Definitions, as part of a Statement's "context" property, or as part of a Statement's "result" property. In each case, extensions are intended to provide a natural way to extend those properties for some specialized use. The contents of these extensions might be something valuable to just one application, or it might be a convention used by an entire Community of Practice.
@@ -11,17 +11,17 @@
 NULL
 
 #' Creates an xAPI Extension object
-#' 
+#'
 #' @param ref Internationalized resource identifier (uri extension)
 #' @param value Any value matching corresponding reference definition constraints
-#' 
+#'
 #' @seealso \code{extension}
-#' 
+#'
 #' @return xAPI Extension object
-#' 
+#'
 #' @examples
 #' createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))
-#' 
+#'
 #' @export
 createExtension <- function(
   extension = NULL,
@@ -39,14 +39,14 @@ createExtension <- function(
 
   obj <- list()
   obj[ref] <- value
-  
+
   class(obj) <- "Extension"
 
   return(obj)
 }
 
 #'@export
-getExtensionDefinition <- function(){
+getExtensionDefinition <- function() {
   definition <- list(
     ref = NA_character_,
     value = NA_character_

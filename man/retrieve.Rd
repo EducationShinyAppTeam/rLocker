@@ -2,35 +2,35 @@
 % Please edit documentation in R/request.R
 \name{retrieve}
 \alias{retrieve}
-\title{Makes a simple HTTP GET request to Learning Locker API endpoint
-Uses HTTP Connection Interface}
+\title{Makes a simple HTTP GET request to Learning Locker API}
 \usage{
-retrieve(model = NULL, interface = "connection", query,
+retrieve(interface = NULL, model = NULL, query = NULL,
   asJSON = FALSE)
 }
 \arguments{
+\item{interface}{HTTP \code{\link{Interface}}}
+
+\item{model}{API \code{\link{Model}}}
+
+\item{query}{(optional) Filter}
+
 \item{asJSON}{(optional) Return content as json string}
-
-\item{session}{The current R session}
-
-\item{request}{API request string}
 }
 \value{
 response content
 }
 \description{
-Makes a simple HTTP GET request to Learning Locker API endpoint
-Uses HTTP Connection Interface
+Makes a simple HTTP GET request to Learning Locker API
 }
 \details{
-https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+\link{https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html}
+}
+\examples{
+retrieve(interface = "rest", model = "lrs")
+retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
+retrieve(interface = "connection", model = "statement", query = "?sort=\%7b\%22timestamp\%22\%3a-1\%2c\%22statement.id\%22\%3a1\%7d", asJSON = TRUE)
+
 }
 \seealso{
 \link{https://docs.learninglocker.net/http-statements/}
-
-### ### ### ### ### ### ### ### ### THESE NEED TO BE UPDATED ### ### ### ### ### ### ### ### ###
-Should this be renamed to retrieve as we're only making get requests? api_retrieve rlocker::retrieve
-api/connection should be added to the base request automatically, we're not supporting REST at this time
-base_url + "api/connection" + request_type + query
-create new functions for connection details set_locker_config() / get_locker_config() (there's a collision with set_config in httr)
 }

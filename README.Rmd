@@ -29,7 +29,7 @@ Learning Locker xAPI support for Shiny Applications.
 ### Assumptions
 
 1. This package assumes that you have a [Learning Locker](https://www.ht2labs.com/learning-locker-community/overview/) instance set up and that it's reachable by your application.
-2. Your application is running in an environment that supports [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS); otherwise api requests will be blocked. Requests made from `localhost` \/ `127.0.0.1` \/ RStudio's `runApp()` are often blocked for this reason.
+2. Your application is running in an environment that supports [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS); otherwise API requests will be blocked. Requests made from `localhost` \/ `127.0.0.1` \/ RStudio's `runApp()` are often blocked for this reason.
 3. You are given consent by the application user(s) to collect activity data on them. **Note**: unless specified, user identifiers are anonymized by default.
 
 ### Installation
@@ -67,7 +67,7 @@ shinyApp(
     # Register input event for interactive elements
     observeEvent(input$button, {
       statement <- rlocker::createStatement()
-      rlocker::store(statment)
+      rlocker::store(statement)
     })
   }
 )
@@ -128,19 +128,20 @@ See [adlnet/xAPIWrapper](https://github.com/adlnet/xAPIWrapper/) for JavaScript 
 
 ### Data Retreival
 
-Stored statements can be retreived from Learning Locker by using the `api_request()` method. **Note**: This requires a connection to be established by the R-handler to work; JS implementations can interface with the api through [HTTP GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) / [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) instead.
+Stored statements can be retreived from Learning Locker by using the `retrieve` method.
 
+**Note**: This requires a connection to be established by the R-handler to work; JS implementations can interface with the API through  [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) instead.
+
+###### app.R
 ```{r}
-# Sample data: config$base_url = https://learning-locker.example.com/ 
-request <- paste0(config$base_url, "api", "/connection/statement?first=1")
-
-response <- api_request(request, asJSON = TRUE)
+response <- rlocker::retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
 
 print(response)
 ```
 
 Response data can be returned as a JSON formatted string or as an R object (default). Below is sample output from the request above.
 
+###### OUTPUT JSON
 ```{json}
 {
   "edges": [

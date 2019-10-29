@@ -1,7 +1,7 @@
 #'activity
 #'
 #' xAPI Activity object definitions
-#' 
+#'
 #' @name activity
 #' @section Details:
 #'  A Statement can represent an Activity as the Object of the Statement.

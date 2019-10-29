@@ -1,6 +1,9 @@
-#' interface
-#' 
-#' Learning Locker API interfaces
+#' Interface
+#'
+#' @description Learning Locker API Interface
+#'
+#' @name Interface
+#'
 #' @seealso \link{https://docs.learninglocker.net/http-rest/}
 
 #'@export
@@ -8,13 +11,14 @@ getInterfaceList <- function() {
   return(names(interfaces))
 }
 
-#'@export
+#' @name Interface
+#' @export
 getInterface <- function(name, asJSON = FALSE) {
   exists <- exists(name, interfaces)
-  
+
   if (exists & asJSON) {
     return(formatJSON(interfaces[[name]]))
-  } else if(exists) {
+  } else if (exists) {
     return(
       structure(
         interfaces[[name]],
@@ -35,21 +39,21 @@ interfaces <- list(
   "connection" = list(
     "name" = "Connection HTTP Interface",
     "description" = "The Learning Locker Connection API is a HTTP interface that utilises cursors to provide paginated models inspired by GraphQL's connections. The API is available for all models in Learning Locker.",
-    "route" = "connection/"
+    "route" = "api/connection/"
   ),
   "aggregation" = list(
     "name" = "Aggregation HTTP Interface",
     "description" = "The Learning Locker Aggregation HTTP interface utilises the Mongo aggregation API and is only available for statements.",
-    "route" = "statements/aggregate"
+    "route" = "api/statements/aggregate"
   )
   # "statement_deletion" = list(
   #   "name" = "Statement Deletion HTTP Interface",
   #   "description" = "Statements may be deleted individually, using the record’s _id, or in bulk via a batch delete method.",
-  #   "route" = "v2/statement/"
+  #   "route" = "api/v2/statement/"
   # ),
   # "statement_batch_deletion" = list(
   #   "name" = "Statement Batch Deletion HTTP Interface",
   #   "description" = "Statements may be deleted individually, using the record’s _id, or in bulk via a batch delete method.",
-  #   "route" = "v2/batchdelete/"
+  #   "route" = "api/v2/batchdelete/"
   # )
 )

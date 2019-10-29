@@ -2,7 +2,7 @@ library(shiny)
 library(rlocker)
 
 # Import question set as global var to save on resources.
-source('./questions.R')
+source("./questions.R")
 
 shinyApp(
   ui = fluidPage(
@@ -24,20 +24,16 @@ shinyApp(
     )
   ),
   server = function(input, output, session) {
-    
+
     # Setup locker configuration
     config <- list(
       base_url = "https://learning-locker.stat.vmhost.psu.edu/",
       auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
       agent = rlocker::createAgent()
     )
-    
+
     # Initialize Learning Locker connection
     connection <- rlocker::connect(session, config)
-  
-    response <- rlocker::retrieve("api/connection/statement?first=1", asJSON = TRUE)
-    
-    print(response)
 
     # Import helper functions to setup demo app and user.
     source("./helpers.R", local = TRUE)
@@ -49,7 +45,7 @@ shinyApp(
 
     # Set up graphics for question items
     output$rnorm <- renderPlot({
-      hist(main = "", xlab = "", ylab = "", rnorm(n = 1000, m = 24.2, sd = 2.2))
+      hist(main = "", xlab = "", ylab = "", rnorm(n = 1000, mean = 24.2, sd = 2.2))
     })
 
     output$rlnorm <- renderPlot({

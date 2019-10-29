@@ -1,20 +1,24 @@
-#' model
-#' 
-#' xAPI interface models
+#' Model
+#'
+#' @description Learning Locker API Model
+#'
+#' @name Model
+#'
 #' @seealso \link{https://docs.learninglocker.net/http-rest/}
 
-#'@export
+#' @export
 getModelList <- function() {
   return(names(models))
 }
 
-#'@export
+#' @name Model
+#' @export
 getModel <- function(name, asJSON = FALSE) {
   exists <- exists(name, models)
-  
+
   if (exists & asJSON) {
     return(formatJSON(models[[name]]))
-  } else if(exists) {
+  } else if (exists) {
     return(
       structure(
         models[[name]],
@@ -78,6 +82,10 @@ models <- list(
   "role" = list(
     "name" = "Role",
     "description" = "Group of permissions for accessing organisation data via users."
+  ),
+  "statement" = list(
+    "name" = "Statement",
+    "description" = "xAPI Statement"
   ),
   "store" = list(
     "name" = "Store",

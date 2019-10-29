@@ -22,7 +22,7 @@ NULL
 #' @seealso \code{\link{createAgent}}
 #' 
 #' @export
-agent <- function(...){
+agent <- function(...) {
   return(createAgent(agent = list(...)))
 }
 
@@ -48,7 +48,7 @@ createAgent <- function(
   }
   
   if (!is.null(agent$email) & is.null(agent$mbox)) {
-    agent$mbox = mailto(agent$email)
+    agent$mbox <- mailto(agent$email)
   }
 
   obj <- list(

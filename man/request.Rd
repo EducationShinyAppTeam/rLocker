@@ -2,7 +2,7 @@
 % Please edit documentation in R/request.R
 \name{request}
 \alias{request}
-\title{request}
+\title{Storage and retrieval mechanisms for Learning Locker API}
 \description{
-request
+Storage and retrieval mechanisms for Learning Locker API
 }

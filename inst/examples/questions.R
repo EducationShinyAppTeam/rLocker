@@ -1,6 +1,6 @@
 # Question Bank
 
-questions = list(
+questions <- list(
   list(
     id = "question_1",
     title = "Question 1",

@@ -27,37 +27,53 @@ createVerb <- function(
   verb = NULL,
   warn = FALSE, ...) {
 
-  if(is.null(verb) & warn){
+  if (is.null(verb) & warn) {
     warning("Verb arguments not specified; using default xapi:verb.", call. = FALSE)
   }
-
+  
+  if (getVerb(verb$display) == -1 & warn) {
+    warning(paste0("Verb '", verb$display, "' not found in xAPI Vocabulary list."), call. = FALSE)
+  }
+  
+  config <- get_locker_config()
+  
+  lang <- ifelse(is.null(config), "en-US", config$language)
+  
   # Set defaults
   # todo: add lookup from verbs list
-  # todo: add language support
   # todo: warn - id should be a valid url
-  obj <- list(
-    id = ifelse(is.null(verb$id), paste(c("http://adlnet.gov/expapi/verbs/", verb$display), collapse = ""), verb$id),
-    display = list(
-      "en-US" = ifelse(is.null(verb$display), "experienced", verb$display)
-    )
+  obj <- structure(
+    list(
+      id = ifelse(
+        is.null(verb$id),
+        paste0("http://adlnet.gov/expapi/verbs/", verb$display),
+        verb$id
+      ),
+      display = setNames(lang, list(
+        ifelse(is.null(verb$display), "experienced", verb$display)
+      ))
+    ),
+    class = "Verb"
   )
-  
-  class(obj) <- "Verb"
 
   return(obj)
 }
 
-#'@export
+#' Get Verb from xAPI Vocabulary
+#'  
+#' @return Verb
+#' 
+#' @export
 getVerb <- function(name, asJSON = FALSE) {
   exists <- exists(name, verbs)
 
   if (exists & asJSON) {
     return(formatJSON(verbs[[name]]))
-  } else if(exists) {
+  } else if (exists) {
     return(
       structure(
         verbs[[name]],
-        class = "verb"
+        class = "Verb"
       )
     )
   } else {

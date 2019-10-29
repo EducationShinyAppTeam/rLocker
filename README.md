@@ -67,7 +67,7 @@ shinyApp(
     # Register input event for interactive elements
     observeEvent(input$button, {
       statement <- rlocker::createStatement()
-      rlocker::store(statment)
+      rlocker::store(statement)
     })
   }
 )
@@ -134,24 +134,26 @@ JavaScript implementations.
 ### Data Retreival
 
 Stored statements can be retreived from Learning Locker by using the
-`api_request()` method. **Note**: This requires a connection to be
-established by the R-handler to work; JS implementations can interface
-with the api through [HTTP
+`retrieve()` method.
+
+**Note**: This requires a connection to be established by the R-handler
+to work; JS implementations can interface with the api through [HTTP
 GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) /
 [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 instead.
 
-``` r
-# Sample data: config$base_url = https://learning-locker.example.com/ 
-request <- paste0(config$base_url, "api", "/connection/statement?first=1")
+###### app.R
 
-response <- api_request(request, asJSON = TRUE)
+``` r
+response <- rlocker::retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
 
 print(response)
 ```
 
 Response data can be returned as a JSON formatted string or as an R
 object (default). Below is sample output from the request above.
+
+###### OUTPUT JSON
 
 ``` json
 {

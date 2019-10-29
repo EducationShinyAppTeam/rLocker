@@ -2,11 +2,13 @@
 % Please edit documentation in R/request.R
 \name{store}
 \alias{store}
-\title{Stores an xAPI Statement}
+\title{Stores an xAPI Statement in configured locker}
 \usage{
 store(session, statement = NULL, warn = FALSE, ...)
 }
 \arguments{
+\item{session}{Shiny session}
+
 \item{statement}{xAPI Statement}
 
 \item{warn}{Show warnings}
@@ -15,8 +17,15 @@ store(session, statement = NULL, warn = FALSE, ...)
 HTTP Status
 }
 \description{
-Stores an xAPI Statement
+Stores an xAPI Statement in configured locker
+}
+\note{
+Requires interactive session
 }
 \seealso{
+\code{\link{connect}}
+
+\code{\link{retrieve}}
+
 \code{\link{createStatement}}
 }
