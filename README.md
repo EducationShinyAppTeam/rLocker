@@ -21,7 +21,7 @@ Learning Locker xAPI support for Shiny Applications.
 2.  Your application is running in an environment that supports
     [Cross-Origin Resource Sharing
     (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS);
-    otherwise api requests will be blocked. Requests made from
+    otherwise API requests will be blocked. Requests made from
     `localhost` / `127.0.0.1` / RStudio’s `runApp()` are often blocked
     for this reason.
 3.  You are given consent by the application user(s) to collect activity
@@ -134,18 +134,22 @@ JavaScript implementations.
 ### Data Retreival
 
 Stored statements can be retreived from Learning Locker by using the
-`retrieve()` method.
+`retrieve` method.
 
 **Note**: This requires a connection to be established by the R-handler
-to work; JS implementations can interface with the api through [HTTP
-GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) /
+to work; JS implementations can interface with the API through
 [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 instead.
 
 ###### app.R
 
 ``` r
-response <- rlocker::retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
+response <- rlocker::retrieve(
+  interface = "connection",
+  model = "statement",
+  query = "first=1",
+  asJSON = TRUE
+)
 
 print(response)
 ```

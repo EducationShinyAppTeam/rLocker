@@ -134,7 +134,12 @@ Stored statements can be retreived from Learning Locker by using the `retrieve` 
 
 ###### app.R
 ```{r}
-response <- rlocker::retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
+response <- rlocker::retrieve(
+  interface = "connection",
+  model = "statement",
+  query = "first=1",
+  asJSON = TRUE
+)
 
 print(response)
 ```
