@@ -14,6 +14,7 @@ NULL
 #' 
 #' @param verb Verb params
 #' @param warn Show warnings
+#' @param asJSON Returns object as JSON string
 #' 
 #' @seealso \code{verb}
 #' 
@@ -25,58 +26,84 @@ NULL
 #' @export
 createVerb <- function(
   verb = NULL,
-  warn = FALSE, ...) {
+  warn = FALSE,
+  asJSON = FALSE, ...) {
 
-  if (is.null(verb) & warn) {
+  if (is.null(verb)) {
     warning("Verb arguments not specified; using default xapi:verb.", call. = FALSE)
+    verb <- "experienced"
   }
   
-  if (getVerb(verb$display) == -1 & warn) {
-    warning(paste0("Verb '", verb$display, "' not found in xAPI Vocabulary list."), call. = FALSE)
-  }
+  verb_id <- verb
+  verb <- getVerb(verb_id, warn)  # returns -1 if not found
   
   config <- get_locker_config()
   
-  lang <- ifelse(is.null(config), "en-US", config$language)
+  lang    <- ifelse(is.null(config), "en-US", config$language)
   
-  # Set defaults
-  # todo: add lookup from verbs list
+  # Build verb
+  # todo: use getVerbDefinition to create this obj structure
   # todo: warn - id should be a valid url
   obj <- structure(
     list(
-      id = ifelse(
-        is.null(verb$id),
-        paste0("http://adlnet.gov/expapi/verbs/", verb$display),
-        verb$id
-      ),
-      display = setNames(lang, list(
-        ifelse(is.null(verb$display), "experienced", verb$display)
-      ))
+      id = "",
+      display = list()
     ),
     class = "Verb"
   )
+  
+  obj$id <- ifelse(
+    is.double(verb),
+    paste0("http://adlnet.gov/expapi/verbs/", verb_id),
+    verb$id
+  )
+  
+  obj$display[[lang]] <- ifelse(
+    is.double(verb),
+    "experienced",
+    verb_id
+  )
+  
+  if(asJSON){
+    obj <- formatJSON(obj)
+  }
 
   return(obj)
 }
 
 #' Get Verb from xAPI Vocabulary
 #'  
+#' @param verb Name of verb
+#' @param warn Show warnings
+#' @param asJSON Returns object as JSON string
+#' 
 #' @return Verb
 #' 
 #' @export
-getVerb <- function(name, asJSON = FALSE) {
-  exists <- exists(name, verbs)
-
+getVerb <- function(verb = "", warn = FALSE, asJSON = FALSE) {
+  
+  exists <- if(is.character(verb) & verb != ""){
+    exists(verb, verbs) 
+  } else {
+    if(warn){
+      warning("No Verb was provided.")
+    }
+    FALSE
+  }
+  
   if (exists & asJSON) {
-    return(formatJSON(verbs[[name]]))
+    return(formatJSON(verbs[[verb]]))
   } else if (exists) {
     return(
       structure(
-        verbs[[name]],
+        verbs[[verb]],
         class = "Verb"
       )
     )
   } else {
+    if(warn){
+      warning(paste0("Verb '", verb, "' not found in xAPI Vocabulary list."))
+    }
     return(-1)
   }
 }
