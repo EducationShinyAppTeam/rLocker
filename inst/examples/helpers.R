@@ -57,9 +57,7 @@ registerQuestionEvents <- function(session, questions) {
         statement <- rlocker::createStatement(
           list(
             agent = currentUser,
-            verb = list(
-              display = "answered"
-            ),
+            verb = "answered",
             object = list(
               id = paste0(getCurrentAddress(session), "#", question$id),
               name = question$title,

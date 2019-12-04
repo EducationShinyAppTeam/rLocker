@@ -35,10 +35,6 @@ shinyApp(
     # Initialize Learning Locker connection
     connection <- rlocker::connect(session, config)
 
-    response <- rlocker::retrieve(interface = "connection", model = "statement", query = "first=1", asJSON = TRUE)
-    
-    print(str(response))
-
     # Import helper functions to setup demo app and user.
     source("./helpers.R", local = TRUE)
 

@@ -4,7 +4,14 @@
 \alias{getVerb}
 \title{Get Verb from xAPI Vocabulary}
 \usage{
-getVerb(name, asJSON = FALSE)
+getVerb(verb = "", warn = FALSE, asJSON = FALSE)
+}
+\arguments{
+\item{verb}{Name of verb}
+
+\item{warn}{Show warnings}
+
+\item{asJSON}{Returns object as JSON string}
 }
 \value{
 Verb

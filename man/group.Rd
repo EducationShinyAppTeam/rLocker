@@ -8,7 +8,7 @@ group(...)
 }
 \arguments{
 \item{name}{Name of the Group.
-### FINISH ADDING PARAMS ###
+### todo: FINISH ADDING PARAMS ###
 ### FINISH ADDING PARAMS ###
 ### FINISH ADDING PARAMS ###
 ### FINISH ADDING PARAMS ###

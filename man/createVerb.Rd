@@ -4,12 +4,14 @@
 \alias{createVerb}
 \title{Creates an xAPI Verb object}
 \usage{
-createVerb(verb = NULL, warn = FALSE, ...)
+createVerb(verb = NULL, warn = FALSE, asJSON = FALSE, ...)
 }
 \arguments{
 \item{verb}{Verb params}
 
 \item{warn}{Show warnings}
+
+\item{asJSON}{Returns object as JSON string}
 }
 \value{
 xAPI Verb object
