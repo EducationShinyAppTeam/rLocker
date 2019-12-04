@@ -2,18 +2,20 @@
 % Please edit documentation in R/connect.R
 \name{connect}
 \alias{connect}
-\title{Sets up scripts needed for Learning Locker API}
+\title{connect}
 \usage{
 connect(session, config)
 }
 \arguments{
 \item{session}{The current R session}
 
-\item{config}{API Configuration}
+\item{config}{Endpoint configuration}
 }
 \value{
 HTTP Status Code
 }
 \description{
+connect
+
 Sets up scripts needed for Learning Locker API
 }

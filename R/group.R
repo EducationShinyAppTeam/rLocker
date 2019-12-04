@@ -11,47 +11,47 @@
 NULL
 
 #' Create an xAPI Group
-#' 
+#'
 #' @section Description:
 #'   Shorthand method to create Group
-#' 
+#'
 #' @param name Name of the Group.
-#' ### FINISH ADDING PARAMS ###
+#' ### todo: FINISH ADDING PARAMS ###
 #' ### FINISH ADDING PARAMS ###
 #' ### FINISH ADDING PARAMS ###
 #' ### FINISH ADDING PARAMS ###
 #' ### FINISH ADDING PARAMS ###
 #' @param members The members of this Group.
-#' 
+#'
 #' @seealso \code{\link{agent}}
 #' @seealso \code{\link{createGroup}}
-#' 
+#'
 #' @export
-group <- function(...){
+group <- function(...) {
   #return(
    # createGroup(
     #  group = list(members = ...)
     #)
   #)
-  params = list(...)
+  params <- list(...)
 
   return(params)
 }
 
 #' @export
-members <- function(...){
+members <- function(...) {
   return(createGroupMembers(members = list(...)))
 }
 
 #' Creates an xAPI Group object
-#' 
+#'
 #' @param group Group params
 #' @param warn Show warnings
-#' 
+#'
 #' @seealso \code{\link{group}}
-#' 
+#'
 #' @return xAPI Group object
-#' 
+#'
 #' @examples
 #' createGroup(
 #'   group = list(
@@ -63,35 +63,36 @@ members <- function(...){
 #'     )
 #'   )
 #' )
-#' 
+#'
 #' @export
 createGroup <- function(
   group = NULL,
   warn = FALSE, ...) {
 
   obj <- list()
-  
-  if(!is.null(group$name)){
+
+  if (!is.null(group$name)) {
     obj$name <- group$name
   }
-  
+
   if (!is.null(group$email) & is.null(group$mbox)) {
-    obj$mbox = mailto(group$email)
+    obj$mbox <- mailto(group$email)
   }
-  
+
   obj$member <- createGroupMembers(group$members)
-  
+
   class(obj) <- "Group"
+
   obj$objectType <- class(obj)
-  
+
   return(obj)
 }
 
 #' @export
 createGroupMembers <- function(members){
-  
+
   obj <- list()
-  
+
   for (member in members) {
     if(class(member) != "Agent"){
       agent <- createAgent(member)
@@ -100,6 +101,6 @@ createGroupMembers <- function(members){
     }
     obj <- c(obj, list(agent))
   }
-  
+
   return(obj)
 }

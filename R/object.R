@@ -1,7 +1,7 @@
 #'object
 #'
 #' xAPI Object object definitions
-#' 
+#'
 #' @name object
 #' @section Description:
 #'   The Object defines the thing that was acted on. The Object of a Statement can be an Activity, Agent/Group, SubStatement, or Statement Reference.
@@ -11,17 +11,17 @@
 NULL
 
 #' Creates an xAPI Object object
-#' 
+#'
 #' @param object Object params
 #' @param warn Show warnings
-#' 
+#'
 #' @seealso \code{object}
-#' 
+#'
 #' @return xAPI Object object
-#' 
+#'
 #' @examples
 #' createObject(object = list(name = "Question 1", description = "Example question description."))
-#' 
+#'
 #' @export
 createObject <- function(
   object = NULL,
@@ -90,7 +90,7 @@ createObject <- function(
 
   # Pushed to the bottom just to match default order
   obj$objectType <- type
-  
+
   class(obj) <- "Object"
 
   return(obj)
@@ -131,22 +131,27 @@ getInteractionType <- function(name, asJSON = FALSE) {
   exists <- exists(name, interactionTypes)
   
   if(exists & asJSON) {
-    return(formatJSON(interactionTypes[name]))
+    return(formatJSON(interactionTypes[[name]]))
   } else if(exists) {
-    return(interactionTypes[name])
+    return(interactionTypes[[name]])
   } else {
     return(-1)
   }
 }
 
 #'@export
-getInteractionComponent <- function(name, asJSON = FALSE){
+getInteractionComponent <- function(name, asJSON = FALSE) {
   exists <- exists(name, components)
-  
+
   if(exists & asJSON) {
-    return(formatJSON(components[name]))
+    return(formatJSON(components[[name]]))
   } else if(exists) {
-    return(components[name])
+    return(
+      structure(
+        components[[name]],
+        class = "component"
+      )
+    )
   } else {
     return(-1)
   }
@@ -164,7 +169,7 @@ getSupportedComponents <- function(interactionType) {
   if(is.na(exists)){
     return(NA)
   } else {
-    return(getInteractionType(interactionType)[[1]]$components)
+    return(getInteractionType(interactionType)$components)
   }
 }
 
@@ -173,9 +178,9 @@ checkSupportedComponents <- function(object) {
   supported <- getSupportedComponents(object$interactionType)
   available <- getInteractionComponents()
   exists <- match(object$interactionType, getInteractionTypes())
-  
+
   flag <- FALSE
-  
+
   if (!is.na(exists)) {
     for (i in names(object)) {
       if (!is.na(match(i, available) >= 1)) {
@@ -189,25 +194,25 @@ checkSupportedComponents <- function(object) {
     warning(paste0("Interaction type \"", object$interactionType, "\" is not a valid type."), call. = FALSE)
     flag <- TRUE
   }
-  
+
   return(!flag)
 }
 
 #'@export
 validateObject <- function(object) {
-  
+
   dfn <- names(getObjectDefinition())
   validKeys <- all(names(object) %in% dfn)
-  
+
   for (key in names(object)) {
     if (!(key %in% dfn)) {
       warning(paste0("Object property \"", key, "\" is not valid."), call. = FALSE)
     }
   }
-  
+
   validComponents <- checkSupportedComponents(object)
   passed <- validKeys & validComponents
-  
+
   return(passed)
 }
 
@@ -219,11 +224,10 @@ objectTypes <- c(
   "SubStatement"
 )
 
-# todo: format as r object instead of json
 components <- list(
   "choices" = list(
     "definition" = "An Array of interaction components to be chosen.",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "choice_a",
         "description": {
@@ -248,11 +252,11 @@ components <- list(
           "en-US": "Black"
         }
       }
-    ]'
+    ]')
   ),
   "sequencing" = list(
     "definition" = "An Array of interaction components to be ordered.",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "choice_1",
         "description": {
@@ -277,11 +281,11 @@ components <- list(
           "en-US": "4"
         }
       }
-    ]'
+    ]')
   ),
   "likert"= list(
     "definition" = "A list of the options on the likert scale.",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "likert_1",
         "description": {
@@ -312,11 +316,11 @@ components <- list(
           "en-US": "Strongly agree"
         }
       }
-    ]'
+    ]')
   ),
   "source"= list(
     "definition" = "An Array of origin interaction components (for matching).",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "source_1",
         "description": {
@@ -341,11 +345,11 @@ components <- list(
           "en-US": "Durian"
         }
       }
-    ]'
+    ]')
   ),
   "target"= list(
     "definition" = "An Array of destination interaction components (for matching).",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "target_1",
         "description": {
@@ -358,11 +362,11 @@ components <- list(
           "en-US": "Vegetable"
         }
       }
-    ]'
+    ]')
   ),
   "steps"= list(
     "definition" = "An Array of interaction components by logical steps.",
-    "sample" = '[
+    "sample" = jsonlite::fromJSON('[
       {
         "id": "step_1",
         "description": {
@@ -393,7 +397,7 @@ components <- list(
           "en-US": "Expert"
         }
       }
-    ]'
+    ]')
   )
 )
 

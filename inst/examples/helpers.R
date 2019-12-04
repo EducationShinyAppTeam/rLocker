@@ -4,7 +4,7 @@
 currentUser <- connection$agent
 
 # Render an individual question from a list
-renderQuestion <- function(question){
+renderQuestion <- function(question) {
   return(
     tagList(
       fluidRow(
@@ -22,13 +22,13 @@ renderQuestion <- function(question){
 }
 
 # Render full list of questions
-renderQuestionset <- function(questions){
-  listItems = tagList()
-  
-  for(i in questions){
+renderQuestionset <- function(questions) {
+  listItems <- tagList()
+
+  for(i in questions) {
     listItems <- tagList(listItems, tags$li(renderQuestion(i)))
   }
-  
+
   return(
     tagList(
       tags$ol(
@@ -39,10 +39,10 @@ renderQuestionset <- function(questions){
 }
 
 # Render xAPI statement for demonstration purposes 
-renderxAPIStatement <- function(session, question, statement){
+renderxAPIStatement <- function(session, question, statement) {
   session$output$statements <- renderText({
     paste0(
-      "<p>For <mark>&nbsp;", question$title, "&nbsp;</mark>, you chose: <mark>&nbsp;", session$input[[question$id]], "&nbsp;</mark>. The correct answer is: <mark>&nbsp;", question$answer,"&nbsp;</mark>.</p>
+      "<p>For <mark>&nbsp;", question$title, "&nbsp;</mark>, you chose: <mark>&nbsp;", session$input[[question$id]], "&nbsp;</mark>. The correct answer is: <mark>&nbsp;", question$answer, "&nbsp;</mark>.</p>
       <p>The following xAPI Statement has been generated:</p>
       <pre>", statement, "</pre>"
     )
@@ -50,16 +50,14 @@ renderxAPIStatement <- function(session, question, statement){
 }
 
 # Bind question input items to observers
-registerQuestionEvents <- function(session, questions){
+registerQuestionEvents <- function(session, questions) {
   observe({
-    sapply(questions, function (question) {
+    sapply(questions, function(question) {
       observeEvent(session$input[[question$id]], {
         statement <- rlocker::createStatement(
           list(
             agent = currentUser,
-            verb = list(
-              display = "answered"
-            ),
+            verb = "answered",
             object = list(
               id = paste0(getCurrentAddress(session), "#", question$id),
               name = question$title,
@@ -72,17 +70,17 @@ registerQuestionEvents <- function(session, questions){
             )
           )
         )
-        
+
         renderxAPIStatement(session, question, statement)
-        
+
         # Store statement in locker and return status
         status <- rlocker::store(session, statement)
-        
+
         # Render status code popup notification
         ifelse(
           status == 200,
-          showNotification('Statement stored.', type = 'message'),
-          showNotification('Failed to store statement.', type = 'error')
+          showNotification("Statement stored.", type = "message"),
+          showNotification("Failed to store statement.", type = "error")
         )
       })
     })
@@ -91,11 +89,11 @@ registerQuestionEvents <- function(session, questions){
 
 # Watch for submit button presses
 observeEvent(input$submit, {
-  session$sendCustomMessage(type = 'create-statement', rlocker::createStatement(list(actor = currentUser)))
+  session$sendCustomMessage(type = "create-statement", rlocker::createStatement(list(actor = currentUser)))
 })
 
 # Gets current page address from the current session
-getCurrentAddress <- function(session){
+getCurrentAddress <- function(session) {
   return(paste0(
     session$clientData$url_protocol, "//",
     session$clientData$url_hostname,

@@ -1,7 +1,7 @@
 #'actor
 #'
 #' xAPI Actor object definitions
-#' 
+#'
 #' @name actor
 #' @section Description:
 #'   The Actor defines who performed the action. The Actor of a Statement can be an Agent or a Group.
@@ -21,7 +21,7 @@ createActor <- function(
   } else {
     obj <- do.call(createGroup, list(group = group, warn = warn))
   }
-  
+
   class(obj) <- "Actor"
 
   return(obj)

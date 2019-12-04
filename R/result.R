@@ -38,13 +38,16 @@ createResult <- function(
   obj <- list(
     success = ifelse(is.null(result$success), NA, result$success),
     completion = ifelse(is.null(result$completion), NA, result$completion),
-    response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response),
-    duration = ifelse(is.null(result$duration), NA, result$duration)
+    response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
   )
 
   # ---- Optional Values ---- #
   if (!is.null(result$score)) {
     obj$score <- do.call(createScore, list(score = result$score, warn = warn))
+  }
+  
+  if (!is.null(result$duration)) {
+    obj$duration <- result$duration
   }
 
   # todo: allow multiple extensions

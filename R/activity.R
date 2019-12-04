@@ -1,7 +1,7 @@
 #'activity
 #'
 #' xAPI Activity object definitions
-#' 
+#'
 #' @name activity
 #' @section Details:
 #'  A Statement can represent an Activity as the Object of the Statement.
@@ -13,9 +13,9 @@ getActivityType <- function(name, asJSON = FALSE) {
   exists <- exists(name, activityTypes)
 
   if (exists & asJSON) {
-    return(formatJSON(activityTypes[name]))
+    return(formatJSON(activityTypes[[name]]))
   } else if (exists) {
-    return(activityTypes[name])
+    return(activityTypes[[name]])
   } else {
     return(-1)
   }

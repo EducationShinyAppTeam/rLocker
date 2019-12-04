@@ -2,18 +2,15 @@
 % Please edit documentation in R/connect.R
 \name{test}
 \alias{test}
-\title{connect}
+\title{Simple function to check if connection succeeds}
 \usage{
-test(config)
+test(config = get_locker_config())
 }
 \arguments{
-\item{config}{API Configuration}
-}
-\value{
-HTTP Status Code
+\item{config}{Endpoint configuration}
 }
 \description{
-Tests Learning Locker API Configuration
+Simple function to check if connection succeeds
 }
 \details{
 https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
