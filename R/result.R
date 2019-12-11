@@ -33,15 +33,24 @@ createResult <- function(
   if (is.null(result) & warn) {
     warning("Result arguments not specified; using default xapi:result", call. = FALSE)
   }
-
-  # Set defaults
-  obj <- list(
-    success = ifelse(is.null(result$success), NA, result$success),
-    completion = ifelse(is.null(result$completion), NA, result$completion),
-    response = ifelse(is.null(result$response), "DEFAULT_RESPONSE", result$response)
-  )
-
+  
+  obj <- list()
+  
   # ---- Optional Values ---- #
+  if (!is.null(result$success)) {
+    # todo: check if boolean value or can be coerced 
+    obj$success <- result$success
+  }
+  
+  if (!is.null(result$completion)) {
+    # todo: check if boolean value or can be coerced 
+    obj$completion <- result$completion
+  }
+  
+  if (!is.null(result$response)) {
+    obj$response <- result$response
+  }
+  
   if (!is.null(result$score)) {
     obj$score <- do.call(createScore, list(score = result$score, warn = warn))
   }
