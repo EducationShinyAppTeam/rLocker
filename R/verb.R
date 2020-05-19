@@ -243,7 +243,7 @@ verbs <- list(
     "display" = list(
       "de-DE" = "meisterte",
       "en-US" = "mastered",
-      "fr-FR" = "a maîtris\u00e9",
+      "fr-FR" = "a ma\u00eetris\u00e9",
       "es-ES" = "domin\u00f3"
     )
   ),
