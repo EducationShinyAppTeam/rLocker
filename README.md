@@ -13,6 +13,12 @@ GPLv3](https://img.shields.io/github/license/rpc5102/rlocker.svg?style=flat)](ht
 
 Learning Locker xAPI support for Shiny Applications.
 
+### About xAPI
+
+> xAPI \[Experience API\] is 100% free, open source, lightweight, and adaptable. It can be used to augment almost any performance assessment situation. It is being used in an expanding array of learning systems, from LMSs and simulator systems to museums and emergency medical services. – [adlnet.gov](https://adlnet.gov/projects/xapi/)
+
+See also: [What is the Experience API?](https://xapi.com/overview/)
+
 ### Assumptions
 
 1.  This package assumes that you have a [Learning
@@ -39,7 +45,7 @@ devtools::install_github("rpc5102/rlocker")
 
 ### Examples
 
-See the [examples](./inst/examples/) folder for a demo application.
+See the [examples](./inst/examples/) folder for demo code or visit psu-eberly.shinyapps.io/rlocker to see it in action.
 
 ### Storage Mechanism
 
