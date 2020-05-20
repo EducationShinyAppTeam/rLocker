@@ -45,7 +45,7 @@ devtools::install_github("rpc5102/rlocker")
 
 ### Examples
 
-See the [examples](./inst/examples/) folder for demo code or visit psu-eberly.shinyapps.io/rlocker to see it in action.
+See the [examples](./inst/examples/) folder for demo code or visit [psu-eberly.shinyapps.io/rlocker](https://psu-eberly.shinyapps.io/rlocker) to see it in action.
 
 ### Storage Mechanism
 
