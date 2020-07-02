@@ -1,0 +1,27 @@
+{
+  "name": "rlocker",
+  "version": "0.1.5",
+  "description": "Learning Locker for R Shiny",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rpc5102/rlocker.git",
+    "private": false
+  },
+  "main": "inst/www/rlocker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-src": "webpack --mode production",
+    "build": "npm run compile-src"
+  },
+  "author": "ROBERT PATRICK CAREY III",
+  "license": "GPL-3.0+",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "terser-webpack-plugin": "^3.0.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {}
+}

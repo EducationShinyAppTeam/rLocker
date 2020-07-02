@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rlocker <img src="https://github.com/rpc5102/rlocker/blob/master/rlocker.png?raw=true" align="right" height=140>
+# rLocker <img src="https://github.com/rpc5102/rlocker/blob/master/rlocker.png?raw=true" align="right" height=140>
 
 <!-- badges: start -->
 
@@ -15,7 +15,11 @@ Learning Locker xAPI support for Shiny Applications.
 
 ### About xAPI
 
-> xAPI \[Experience API\] is 100% free, open source, lightweight, and adaptable. It can be used to augment almost any performance assessment situation. It is being used in an expanding array of learning systems, from LMSs and simulator systems to museums and emergency medical services. – [adlnet.gov](https://adlnet.gov/projects/xapi/)
+> xAPI \[Experience API\] is 100% free, open source, lightweight, and
+> adaptable. It can be used to augment almost any performance assessment
+> situation. It is being used in an expanding array of learning systems,
+> from LMSs and simulator systems to museums and emergency medical
+> services. – [adlnet.gov](https://adlnet.gov/projects/xapi/)
 
 See also: [What is the Experience API?](https://xapi.com/overview/)
 
@@ -36,7 +40,7 @@ See also: [What is the Experience API?](https://xapi.com/overview/)
 
 ### Installation
 
-You can install the released version of rlocker from
+You can install the released version of rLocker from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -45,7 +49,9 @@ devtools::install_github("rpc5102/rlocker")
 
 ### Examples
 
-See the [examples](./inst/examples/) folder for demo code or visit [psu-eberly.shinyapps.io/rlocker](https://psu-eberly.shinyapps.io/rlocker) to see it in action.
+See the [examples](./inst/examples/) folder for demo code or visit
+[psu-eberly.shinyapps.io/rlocker](https://psu-eberly.shinyapps.io/rlocker)
+to see it in action.
 
 ### Storage Mechanism
 
