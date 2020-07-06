@@ -3,11 +3,7 @@
 \docType{package}
 \name{rlocker}
 \alias{rlocker}
-\alias{rlocker-package}
 \title{rlocker: Adds Learning Locker xAPI support for Shiny Applications.}
-\description{
-rlocker: Adds Learning Locker xAPI support for Shiny Applications.
-}
 \section{rlocker functions}{
 
 The rlocker functions ...

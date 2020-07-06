@@ -88,6 +88,21 @@ export class Locker {
   getSession() {
     return this.session;
   }
+  
+  /**
+   * Offset ISO 8601 Timestamp with Local Timezone
+   * @author Nahuel Greco
+   * @license MIT license
+   * @link https://stackoverflow.com/a/56709229
+   **/
+  dateToLocalISO(date) {
+    const off    = date.getTimezoneOffset()
+    const absoff = Math.abs(off)
+    return (new Date(date.getTime() - off*60*1000).toISOString().substr(0,23) +
+            (off > 0 ? '-' : '+') + 
+            (absoff / 60).toFixed(0).padStart(2,'0') + ':' + 
+            (absoff % 60).toString().padStart(2,'0'))
+  }
 
   store(statement) {
     let debug = this.debug;
@@ -130,6 +145,8 @@ export class Locker {
       this.getCurrentActivity()
     );
 
+    statement.timestamp = this.dateToLocalISO(new Date());
+    
     return statement;
   }
 

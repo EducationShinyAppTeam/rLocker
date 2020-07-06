@@ -4,8 +4,7 @@
 \alias{retrieve}
 \title{Makes a simple HTTP GET request to Learning Locker API}
 \usage{
-retrieve(interface = NULL, model = NULL, query = NULL,
-  asJSON = FALSE)
+retrieve(interface = NULL, model = NULL, query = NULL, asJSON = FALSE)
 }
 \arguments{
 \item{interface}{HTTP \code{\link{Interface}}}
