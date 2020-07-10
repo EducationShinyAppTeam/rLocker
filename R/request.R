@@ -21,7 +21,7 @@ NULL
 store <- function(session, statement = NULL, warn = FALSE, ...) {
   # Pass the statement to the js handler
   session$sendCustomMessage("rlocker-store", statement)
-  print(statement)
+  
   # HTTP Status Code
   status_code <- ifelse(!is.null(session$input$storageStatus), session$input$storageStatus, 502)
 

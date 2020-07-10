@@ -150,7 +150,6 @@ export class Locker {
     return statement;
   }
 
-  /* @todo: ignoring passed agent values for now */
   createStatement(values) {
     let statement = new ADL.XAPIStatement(
       this.getCurrentAgent(),
@@ -158,6 +157,7 @@ export class Locker {
       new ADL.XAPIStatement.Activity(values.object)
     );
 
+    statement.timestamp = this.dateToLocalISO(new Date());
     statement.result = values.result;
 
     return statement;
