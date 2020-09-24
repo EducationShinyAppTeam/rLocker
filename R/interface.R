@@ -6,12 +6,28 @@
 #'
 #' @seealso \link{https://docs.learninglocker.net/http-rest/}
 
+#' getInterfaceList
+#' 
+#' Returns a vector of the Learning Locker API Interface types.
+#' 
+#' @return vector
+#' 
 #'@export
 getInterfaceList <- function() {
   return(names(interfaces))
 }
 
+#' getInterface
+#' 
+#' Returns details about a specific Learning Locker API Interface.
+#' 
+#' @param name Interface name
+#' @param asJSON Return as json
+#' 
 #' @name Interface
+#' 
+#' @return Interface
+#' 
 #' @export
 getInterface <- function(name, asJSON = FALSE) {
   exists <- exists(name, interfaces)

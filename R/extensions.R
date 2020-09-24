@@ -17,10 +17,15 @@ NULL
 #'
 #' @seealso \code{extension}
 #'
-#' @return xAPI Extension object
+#' @return Extension
 #'
 #' @examples
-#' createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))
+#' createExtension(
+#'   extension = list(
+#'     ref = "https://w3id.org/xapi/cmi5/result/extensions/progress",
+#'     value = 100
+#'   )
+#' )
 #'
 #' @export
 createExtension <- function(
@@ -45,6 +50,12 @@ createExtension <- function(
   return(obj)
 }
 
+#' getExtensionDefinition
+#' 
+#' Returns an empty Extension object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getExtensionDefinition <- function() {
   definition <- list(

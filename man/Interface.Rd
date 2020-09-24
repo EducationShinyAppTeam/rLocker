@@ -10,9 +10,24 @@ getInterfaceList()
 
 getInterface(name, asJSON = FALSE)
 }
+\arguments{
+\item{name}{Interface name}
+
+\item{asJSON}{Return as json}
+}
+\value{
+vector
+
+Interface
+}
 \description{
 Learning Locker API Interface
+
+Returns details about a specific Learning Locker API Interface.
 }
 \seealso{
 \link{https://docs.learninglocker.net/http-rest/}
+getInterfaceList
+
+Returns a vector of the Learning Locker API Interface types.
 }

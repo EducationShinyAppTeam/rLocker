@@ -10,9 +10,24 @@ getModelList()
 
 getModel(name, asJSON = FALSE)
 }
+\arguments{
+\item{name}{Model name}
+
+\item{asJSON}{Return as json}
+}
+\value{
+vector
+
+Model
+}
 \description{
 Learning Locker API Model
+
+Returns details of a specific Learning Locker API Model.
 }
 \seealso{
 \link{https://docs.learninglocker.net/http-rest/}
+getModelList
+
+Returns a vector of Learning Locker API Models.
 }

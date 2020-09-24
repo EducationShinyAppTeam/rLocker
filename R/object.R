@@ -17,10 +17,15 @@ NULL
 #'
 #' @seealso \code{object}
 #'
-#' @return xAPI Object object
+#' @return Object
 #'
 #' @examples
-#' createObject(object = list(name = "Question 1", description = "Example question description."))
+#' createObject(
+#'   object = list(
+#'     name = "Question 1",
+#'     description = "Example question description."
+#'   )
+#' )
 #'
 #' @export
 createObject <- function(
@@ -96,6 +101,12 @@ createObject <- function(
   return(obj)
 }
 
+#' getObjectDefinition
+#' 
+#' Returns an empty Object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getObjectDefinition <- function() {
   definition <- list(
@@ -116,16 +127,34 @@ getObjectDefinition <- function() {
   return(definition)
 }
 
+#' getObjectTypes
+#' 
+#' Returns a list of the default Object types.
+#' 
+#' @return vector
+#' 
 #'@export
 getObjectTypes <- function() {
   return(objectTypes)
 }
 
+#' getInteractionTypes
+#' 
+#' Returns a list of Interaction types.
+#' 
+#' @return vector
+#' 
 #'@export
 getInteractionTypes <- function() {
   return(names(interactionTypes))
 }
 
+#' getInteractionType
+#' 
+#' Returns details about a specific Interaction type.
+#' 
+#' @return Interaction
+#' 
 #'@export
 getInteractionType <- function(name, asJSON = FALSE) {
   exists <- exists(name, interactionTypes)
@@ -139,6 +168,12 @@ getInteractionType <- function(name, asJSON = FALSE) {
   }
 }
 
+#' getInteractionComponent
+#' 
+#' Returns details about a specific Interaction Component.
+#' 
+#' @return Component
+#' 
 #'@export
 getInteractionComponent <- function(name, asJSON = FALSE) {
   exists <- exists(name, components)
@@ -157,11 +192,23 @@ getInteractionComponent <- function(name, asJSON = FALSE) {
   }
 }
 
+#' getInteractionComponents
+#' 
+#' Returns a list of the default Interaction Components.
+#' 
+#' @return vector
+#' 
 #'@export
 getInteractionComponents <- function(){
   return(names(components))
 }
 
+#' getSupportedComponents
+#' 
+#' Returns a list of Components supported by a given Interaction type.
+#' 
+#' @return 
+#' 
 #'@export
 getSupportedComponents <- function(interactionType) {
   exists <- match(interactionType, getInteractionTypes())
@@ -173,6 +220,11 @@ getSupportedComponents <- function(interactionType) {
   }
 }
 
+#' checkSupportedComponents
+#' 
+#' Check to see if provided Interaction Type supports the given Component.
+#' Not all types will support all components as per the xAPI Specification.
+#' 
 #'@export
 checkSupportedComponents <- function(object) {
   supported <- getSupportedComponents(object$interactionType)
@@ -198,6 +250,12 @@ checkSupportedComponents <- function(object) {
   return(!flag)
 }
 
+#' validateObject
+#' 
+#' Verifies the structure of an Object.
+#' 
+#' @return boolean
+#' 
 #'@export
 validateObject <- function(object) {
 

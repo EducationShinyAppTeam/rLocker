@@ -88,6 +88,12 @@ createGroup <- function(
   return(obj)
 }
 
+#' createGroupMembers
+#' 
+#' @param members Group members
+#' 
+#' @return list
+#' 
 #' @export
 createGroupMembers <- function(members){
 

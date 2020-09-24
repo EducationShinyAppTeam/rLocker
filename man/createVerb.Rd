@@ -14,13 +14,18 @@ createVerb(verb = NULL, warn = FALSE, asJSON = FALSE, ...)
 \item{asJSON}{Returns object as JSON string}
 }
 \value{
-xAPI Verb object
+Verb
 }
 \description{
 Creates an xAPI Verb object
 }
 \examples{
-createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
+createVerb(
+  verb = list(
+    display = "custom-verb",
+    id = "https://example.com/xapi/verbs/custom-verb"
+  )
+)
 
 }
 \seealso{

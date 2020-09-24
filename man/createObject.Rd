@@ -12,13 +12,18 @@ createObject(object = NULL, warn = FALSE, ...)
 \item{warn}{Show warnings}
 }
 \value{
-xAPI Object object
+Object
 }
 \description{
 Creates an xAPI Object object
 }
 \examples{
-createObject(object = list(name = "Question 1", description = "Example question description."))
+createObject(
+  object = list(
+    name = "Question 1",
+    description = "Example question description."
+  )
+)
 
 }
 \seealso{

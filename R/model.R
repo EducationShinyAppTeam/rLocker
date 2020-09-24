@@ -6,12 +6,28 @@
 #'
 #' @seealso \link{https://docs.learninglocker.net/http-rest/}
 
+#' getModelList
+#' 
+#' Returns a vector of Learning Locker API Models.
+#' 
+#' @return vector
+#' 
 #' @export
 getModelList <- function() {
   return(names(models))
 }
 
+#' getModel
+#' 
+#' Returns details of a specific Learning Locker API Model.
+#' 
+#' @param name Model name
+#' @param asJSON Return as json
+#' 
+#' @return Model
+#' 
 #' @name Model
+#' 
 #' @export
 getModel <- function(name, asJSON = FALSE) {
   exists <- exists(name, models)

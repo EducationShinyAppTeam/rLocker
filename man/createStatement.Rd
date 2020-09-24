@@ -17,6 +17,33 @@ xAPI Statement (json)
 \description{
 Creates an xAPI Statement
 }
+\examples{
+createStatement(
+  stmt = list(
+    agent = list(
+      name = "John Doe",
+      mbox = "mailto:john@example.com"
+    ),
+    verb = list(
+      display = "answered",
+      id = "http://adlnet.gov/expapi/verbs/answered"
+    ),
+    object = list(
+      name = "Question 1",
+      description = "Example question description."
+    ),
+    result = list(
+      success = TRUE,
+      response = "correctAnswer",
+      extensions = list(
+        ref = "https://w3id.org/xapi/cmi5/result/extensions/progress",
+        value = 100
+      )
+    )
+  )
+)
+
+}
 \seealso{
 \code{\link{createAgent}}
 

@@ -28,15 +28,20 @@ agent <- function(...) {
 
 #' Create an xAPI Agent
 #' 
-#' @param agent Agent defaults
+#' @param agent Agent params
 #' @param warn Show warnings
 #' 
 #' @seealso \code{agent}
 #' 
-#' @return xAPI Agent object
+#' @return Agent
 #' 
 #' @examples
-#' createAgent(agent = list(name = "John Doe", mbox = "mailto:john@example.com"))
+#' createAgent(
+#'   agent = list(
+#'     name = "John Doe",
+#'     mbox = "mailto:john@example.com"
+#'   )
+#' )
 #' 
 #' @export
 createAgent <- function(
@@ -62,6 +67,12 @@ createAgent <- function(
   return(obj)
 }
 
+#' getAgentDefinition
+#' 
+#' Returns an empty Agent object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getAgentDefinition <- function() {
   definition <- list(

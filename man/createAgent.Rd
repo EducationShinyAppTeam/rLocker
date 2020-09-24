@@ -7,18 +7,23 @@
 createAgent(agent = NULL, warn = FALSE, ...)
 }
 \arguments{
-\item{agent}{Agent defaults}
+\item{agent}{Agent params}
 
 \item{warn}{Show warnings}
 }
 \value{
-xAPI Agent object
+Agent
 }
 \description{
 Create an xAPI Agent
 }
 \examples{
-createAgent(agent = list(name = "John Doe", mbox = "mailto:john@example.com"))
+createAgent(
+  agent = list(
+    name = "John Doe",
+    mbox = "mailto:john@example.com"
+  )
+)
 
 }
 \seealso{

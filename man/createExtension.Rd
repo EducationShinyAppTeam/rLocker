@@ -12,13 +12,18 @@ createExtension(extension = NULL, warn = FALSE, ...)
 \item{value}{Any value matching corresponding reference definition constraints}
 }
 \value{
-xAPI Extension object
+Extension
 }
 \description{
 Creates an xAPI Extension object
 }
 \examples{
-createExtension(extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100))
+createExtension(
+  extension = list(
+    ref = "https://w3id.org/xapi/cmi5/result/extensions/progress",
+    value = 100
+  )
+)
 
 }
 \seealso{

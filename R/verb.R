@@ -18,10 +18,15 @@ NULL
 #' 
 #' @seealso \code{verb}
 #' 
-#' @return xAPI Verb object
+#' @return Verb
 #' 
 #' @examples
-#' createVerb(verb = list(display = "custom-verb", id = "https://example.com/xapi/verbs/custom-verb"))
+#' createVerb(
+#'   verb = list(
+#'     display = "custom-verb",
+#'     id = "https://example.com/xapi/verbs/custom-verb"
+#'   )
+#' )
 #' 
 #' @export
 createVerb <- function(
@@ -108,6 +113,12 @@ getVerb <- function(verb = "", warn = FALSE, asJSON = FALSE) {
   }
 }
 
+#' getVerbList
+#' 
+#' Returns a list of the default Verbs.
+#' 
+#' @return vector
+#' 
 #'@export
 getVerbList <- function() {
   return(names(verbs))

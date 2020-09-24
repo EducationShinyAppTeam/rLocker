@@ -19,11 +19,26 @@ NULL
 #' @seealso \code{\link{result}}
 #' @seealso \code{\link{createExtension}}
 #' 
-#' @return xAPI Result object
+#' @return Result
 #' 
 #' @examples
-#' createResult(result = list(success = TRUE, response = "correctAnswer"))
-#' createResult(result = list(success = TRUE, response = "correctAnswer", extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100)))
+#' createResult(
+#'   result = list(
+#'     success = TRUE,
+#'     response = "correctAnswer"
+#'   )
+#' )
+#' 
+#' createResult(
+#'   result = list(
+#'     success = TRUE,
+#'     response = "correctAnswer",
+#'     extensions = list(
+#'       ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", 
+#'       value = 100
+#'     )
+#'   )
+#' )
 #' 
 #' @export
 createResult <- function(
@@ -59,9 +74,15 @@ createResult <- function(
     obj$duration <- result$duration
   }
 
-  # todo: allow multiple extensions
   if (!is.null(result$extensions)) {
-    obj$extensions <- do.call(createExtension, list(extension = result$extensions, warn = warn))
+    # Check if ref:value pair was passed or a nested list with multiple extensions.
+    keys <- names(result$extensions)
+    if(length(keys) > 0 & any(keys == "ref")) {
+      obj$extensions <- do.call(createExtension, list(extension = result$extensions, warn = warn))
+    } else {
+      # May append .NUM to duplicate key entries; duplicates should be avoided.
+      obj$extensions <- sapply(result$extensions, createExtension, warn = warn)
+    }
   }
   
   class(obj) <- "Result"
@@ -69,6 +90,12 @@ createResult <- function(
   return(obj)
 }
 
+#' getResultDefinition
+#' 
+#' Returns an empty Result object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getResultDefinition <- function() {
   definition <- list(

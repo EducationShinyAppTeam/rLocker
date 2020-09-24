@@ -8,6 +8,12 @@
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#context}
 NULL
 
+#' createContext
+#' 
+#' @param context Context params
+#' 
+#' @return Context
+#' 
 #'@export
 createContext <- function(
   context = NULL,
@@ -74,6 +80,12 @@ createContext <- function(
   return(obj)
 }
 
+#' getContextDefinition
+#' 
+#' Returns an empty Context object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getContextDefinition <- function() {
   definition <- list(

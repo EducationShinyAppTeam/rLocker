@@ -65,6 +65,12 @@ createScore <- function(
   return(obj)
 }
 
+#' getScoreDefinition
+#' 
+#' Returns an empty Score object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getScoreDefinition <- function() {
   definition <- list(

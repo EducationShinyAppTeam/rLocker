@@ -8,6 +8,16 @@
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#activity-definition}
 NULL
 
+#' getActivityType
+#' 
+#' Lookup Activity type in default list to see if it is valid.
+#' Returns a `url` to definition if valid; if invalid returns `-1`.
+#' 
+#' @param name Activity name
+#' @param asJSON Return as json
+#' 
+#' @return url
+#' 
 #'@export
 getActivityType <- function(name, asJSON = FALSE) {
   exists <- exists(name, activityTypes)
@@ -21,6 +31,12 @@ getActivityType <- function(name, asJSON = FALSE) {
   }
 }
 
+#' getActivityTypes
+#' 
+#' Returns a list of the default Activity types.
+#' 
+#' @return list
+#' 
 #'@export
 getActivityTypes <- function() {
   return(names(activityTypes))

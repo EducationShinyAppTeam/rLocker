@@ -12,7 +12,7 @@ createResult(result = NULL, warn = FALSE, ...)
 \item{warn}{Show warnings}
 }
 \value{
-xAPI Result object
+Result
 }
 \description{
 Creates an xAPI Result object
@@ -23,8 +23,23 @@ This function accepts an optional result value \code{extension}.
 }
 
 \examples{
-createResult(result = list(success = TRUE, response = "correctAnswer"))
-createResult(result = list(success = TRUE, response = "correctAnswer", extension = list(ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", value = 100)))
+createResult(
+  result = list(
+    success = TRUE,
+    response = "correctAnswer"
+  )
+)
+
+createResult(
+  result = list(
+    success = TRUE,
+    response = "correctAnswer",
+    extensions = list(
+      ref = "https://w3id.org/xapi/cmi5/result/extensions/progress", 
+      value = 100
+    )
+  )
+)
 
 }
 \seealso{

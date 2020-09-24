@@ -8,6 +8,14 @@
 #' @seealso \link{https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#actor}
 NULL
 
+#' createActor
+#' 
+#' @param agent Agent params
+#' @param group Group params
+#' @param warn Show warnings
+#' 
+#' @return Actor
+#' 
 #'@export
 createActor <- function(
   agent = NULL,
@@ -27,6 +35,12 @@ createActor <- function(
   return(obj)
 }
 
+#' getActorDefinition
+#' 
+#' Returns an empty Actor object with possible arguments.
+#' 
+#' @return definition
+#' 
 #'@export
 getActorDefinition <- function() {
   definition <- list(
@@ -45,6 +59,12 @@ getActorDefinition <- function() {
   return(definition)
 }
 
+#' getActorTypes
+#' 
+#' Returns a list of possible Actor types.
+#' 
+#' @return list
+#' 
 #'@export
 getActorTypes <- function() {
   return(actorTypes)

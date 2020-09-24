@@ -2,10 +2,10 @@
 % Please edit documentation in R/util.R
 \name{.onAttach}
 \alias{.onAttach}
-\title{Utility Functions}
+\title{.onAttach}
 \usage{
 .onAttach(...)
 }
 \description{
-Load rlocker javascript dependencies
+Create link to javascript files for package using the shiny::onAttach hook.
 }
