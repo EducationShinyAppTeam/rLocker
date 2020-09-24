@@ -43,9 +43,6 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-### Webpack ###
-webpack.config.js
-
 # Runtime data
 pids
 *.pid

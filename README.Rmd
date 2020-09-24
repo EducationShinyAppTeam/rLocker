@@ -1,5 +1,5 @@
 ---
-title: "rlocker"
+title: "rLocker"
 output:
   md_document:
     variant: gfm
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rlocker <img src="https://github.com/rpc5102/rlocker/blob/master/rlocker.png?raw=true" align="right" height=140>
+# rLocker <img src="https://github.com/rpc5102/rlocker/blob/master/rlocker.png?raw=true" align="right" height=140>
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -26,6 +26,12 @@ knitr::opts_chunk$set(
 
 Learning Locker xAPI support for Shiny Applications.
 
+### About xAPI
+
+> xAPI \[Experience API\] is 100% free, open source, lightweight, and adaptable. It can be used to augment almost any performance assessment situation. It is being used in an expanding array of learning systems, from LMSs and simulator systems to museums and emergency medical services. – [adlnet.gov](https://adlnet.gov/projects/xapi/)
+
+See also: [What is the Experience API?](https://xapi.com/overview/)
+
 ### Assumptions
 
 1. This package assumes that you have a [Learning Locker](https://www.ht2labs.com/learning-locker-community/overview/) instance set up and that it's reachable by your application.
@@ -34,7 +40,7 @@ Learning Locker xAPI support for Shiny Applications.
 
 ### Installation
 
-You can install the released version of rlocker from [GitHub](https://github.com/) with:
+You can install the released version of rLocker from [GitHub](https://github.com/) with:
 
 ```{r}
 devtools::install_github("rpc5102/rlocker")
@@ -42,7 +48,7 @@ devtools::install_github("rpc5102/rlocker")
 
 ### Examples
 
-See the [examples](./inst/examples/) folder for a demo application.
+See the [examples](./inst/examples/) folder for demo code or visit [psu-eberly.shinyapps.io/rlocker](https://psu-eberly.shinyapps.io/rlocker) to see it in action.
 
 ### Storage Mechanism
 

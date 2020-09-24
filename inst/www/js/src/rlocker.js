@@ -1,7 +1,7 @@
 /**
  * rlocker - An xAPI Statement Generator & Storage Mechanism
  * @author Bob Carey (https://github.com/rpc5102).
- * @license GPL-2.0+
+ * @license GPL-3.0+
  **/
 
 import { UUID } from './uuid.js';
@@ -39,7 +39,7 @@ export class Locker {
       launched: null
     },
     this.agent = null,
-    this.activity = null
+    this.activity = null,
 
     this.init();
   }
@@ -50,30 +50,58 @@ export class Locker {
     this.setSession();
     this.setCurrentAgent("mailto:default@example.org");
     this.setCurrentActivity(window.location.href, document.title);
-
+    
     this.experienced_xAPI();
   }
 
   setSession() {
+    // Set session id
+    let sid = "0000-0000-0000-0000";
+    try {
+      sid = ADL.XAPIWrapper.lrs.agent.name;  
+    } catch(e) {
+      if(e instanceof ReferenceError) {
+        sid = UUID.generate();  
+      }
+    }
+    
+    // Try storing session id in sessionStorage
     if (typeof Storage !== "undefined") {
-      let sid = sessionStorage.getItem("sid");
-
-      if (!sid) {
-        /* generate universally unique identifier */
-        sid = UUID.generate();
+      
+      // Get stored session id
+      let ssid = sessionStorage.getItem("sid");
+      
+      // Check if stored id matches the one we have
+      if (sid != ssid) {
         sessionStorage.setItem("sid", sid);
         this.session.launched = true;
       } else {
         this.session.launched = false;
       }
-      this.session.id = sid;
     } else {
-      this.session.id = "0000-0000-0000-0000";
+      // If we can't store the info assume each session is new
+      this.session.launched = true;
     }
+    this.session.id = sid;
   }
 
   getSession() {
     return this.session;
+  }
+  
+  /**
+   * Offset ISO 8601 Timestamp with Local Timezone
+   * @author Nahuel Greco
+   * @license MIT license
+   * @link https://stackoverflow.com/a/56709229
+   **/
+  dateToLocalISO(date) {
+    const off    = date.getTimezoneOffset()
+    const absoff = Math.abs(off)
+    return (new Date(date.getTime() - off*60*1000).toISOString().substr(0,23) +
+            (off > 0 ? '-' : '+') + 
+            (absoff / 60).toFixed(0).padStart(2,'0') + ':' + 
+            (absoff % 60).toString().padStart(2,'0'))
   }
 
   store(statement) {
@@ -117,10 +145,11 @@ export class Locker {
       this.getCurrentActivity()
     );
 
+    statement.timestamp = this.dateToLocalISO(new Date());
+    
     return statement;
   }
 
-  /* @todo: ignoring passed agent values for now */
   createStatement(values) {
     let statement = new ADL.XAPIStatement(
       this.getCurrentAgent(),
@@ -128,12 +157,13 @@ export class Locker {
       new ADL.XAPIStatement.Activity(values.object)
     );
 
+    statement.timestamp = this.dateToLocalISO(new Date());
     statement.result = values.result;
 
     return statement;
   }
 
-  experienced_xAPI () {
+  experienced_xAPI() {
     let verb = this.session.launched ? "launched" : "experienced";
     this.store(this.createBasicStatement(verb));
 
@@ -149,7 +179,7 @@ export class Locker {
   }
 
   answered_xAPI(question, data, answered, success) {
-    let attempt = data["attempt"] ? data["attempt"] : 1;
+    let attempt = data.attempt ? data.attempt : 1;
     let location = this.activity.id + "#" + question;
     let title = this.activity.definition.name['en-US'] + " :: " + question;
     let agent = this.getCurrentAgent();
@@ -162,10 +192,10 @@ export class Locker {
 
     statement.object.definition.type =
       "http://adlnet.gov/expapi/activities/interaction";
-    statement.object.definition.interactionType = data["interactionType"];
+    statement.object.definition.interactionType = data.interactionType;
     statement.object.definition.correctResponsesPattern = [
-      JSON.stringify(data["validateOn"]),
-      data["answers"].toString()
+      JSON.stringify(data.validateOn),
+      data.answers.toString()
     ];
 
     statement.result = {
