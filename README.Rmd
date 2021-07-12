@@ -16,12 +16,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rLocker <img src="https://github.com/rpc5102/rLocker/blob/master/rLocker.png?raw=true" align="right" height=140>
+# rLocker <img src="https://github.com/EducationShinyAppTeam/rLocker/blob/master/rLocker.png?raw=true" align="right" height=140>
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/rLocker)](https://cran.r-project.org/package=rLocker)
-[![License: GPLv3](https://img.shields.io/github/license/rpc5102/rLocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
+[![License: GPLv3](https://img.shields.io/github/license/EducationShinyAppTeam/rLocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
 <!-- badges: end -->
 
 Learning Locker xAPI support for Shiny Applications.
@@ -43,7 +43,7 @@ See also: [What is the Experience API?](https://xapi.com/overview/)
 You can install the released version of rLocker from [GitHub](https://github.com/) with:
 
 ```{r}
-devtools::install_github("rpc5102/rLocker")
+devtools::install_github("EducationShinyAppTeam/rLocker")
 ```
 
 ### Examples

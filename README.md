@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rLocker <img src="https://github.com/rpc5102/rLocker/blob/master/rLocker.png?raw=true" align="right" height=140>
+# rLocker <img src="https://github.com/EducationShinyAppTeam/rLocker/blob/master/rLocker.png?raw=true" align="right" height=140>
 
 <!-- badges: start -->
 
@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rLocker)](https://cran.r-project.org/package=rLocker)
 [![License:
-GPLv3](https://img.shields.io/github/license/rpc5102/rLocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
+GPLv3](https://img.shields.io/github/license/EducationShinyAppTeam/rLocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
 <!-- badges: end -->
 
 Learning Locker xAPI support for Shiny Applications.

@@ -4,7 +4,7 @@
   "description": "Learning Locker for R Shiny",
   "repository": {
     "type": "git",
-    "url": "git@github.com:rpc5102/rLocker.git",
+    "url": "git@github.com:EducationShinyAppTeam/rLocker.git",
     "private": false
   },
   "main": "inst/www/rLocker.js",
