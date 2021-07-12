@@ -1,14 +1,14 @@
-import { Locker } from './rLocker.js';
+import { Locker } from './rlocker.js';
 
 /* @namespace: rLocker */
 var rLocker = rLocker || {};
 
 /* @config */
-Shiny.addCustomMessageHandler('rLocker-setup', function(config) {
+Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
   rLocker = new Locker(config);
 });
 
-Shiny.addCustomMessageHandler('rLocker-store', function(values) {
+Shiny.addCustomMessageHandler('rlocker-store', function(values) {
   let statement = rLocker.createStatement(values);
   rLocker.store(statement);
 });

@@ -110,22 +110,22 @@ shinyApp(
       force = TRUE
     )
     
-    session$sendCustomMessage(type = 'rLocker-setup', config)
+    session$sendCustomMessage(type = 'rlocker-setup', config)
     
     # Register input events for interactive elements
     observeEvent(input$button, {
-      session$sendCustomMessage(type = 'rLocker-store', rLocker::createStatement())
+      session$sendCustomMessage(type = 'rlocker-store', rLocker::createStatement())
     })
   }
 )
 ```
 ###### www/js/app.js
 ```{js}
-Shiny.addCustomMessageHandler('rLocker-setup', function(config) {
+Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
   /* connection logic */
 });
 
-Shiny.addCustomMessageHandler('rLocker-store', function(values) {
+Shiny.addCustomMessageHandler('rlocker-store', function(values) {
   /* storage logic */
 });
 ```

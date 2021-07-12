@@ -118,11 +118,11 @@ shinyApp(
       force = TRUE
     )
     
-    session$sendCustomMessage(type = 'rLocker-setup', config)
+    session$sendCustomMessage(type = 'rlocker-setup', config)
     
     # Register input events for interactive elements
     observeEvent(input$button, {
-      session$sendCustomMessage(type = 'rLocker-store', rLocker::createStatement())
+      session$sendCustomMessage(type = 'rlocker-store', rLocker::createStatement())
     })
   }
 )
@@ -131,11 +131,11 @@ shinyApp(
 ###### www/js/app.js
 
 ``` js
-Shiny.addCustomMessageHandler('rLocker-setup', function(config) {
+Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
   /* connection logic */
 });
 
-Shiny.addCustomMessageHandler('rLocker-store', function(values) {
+Shiny.addCustomMessageHandler('rlocker-store', function(values) {
   /* storage logic */
 });
 ```
@@ -145,7 +145,7 @@ JavaScript implementations.
 
 ### Data Retreival
 
-Stored statements can be retreived from Learning Locker by using the
+Stored statements can be retrieved from Learning Locker by using the
 `retrieve` method.
 
 **Note**: This requires a connection to be established by the R-handler
