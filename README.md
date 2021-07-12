@@ -44,7 +44,7 @@ You can install the released version of rLocker from
 [GitHub](https://github.com/) with:
 
 ``` r
-devtools::install_github("rpc5102/rLocker")
+devtools::install_github("EducationShinyAppTeam/rLocker")
 ```
 
 ### Examples
@@ -145,7 +145,7 @@ JavaScript implementations.
 
 ### Data Retreival
 
-Stored statements can be retrieved from Learning Locker by using the
+Stored statements can be retreived from Learning Locker by using the
 `retrieve` method.
 
 **Note**: This requires a connection to be established by the R-handler
@@ -260,7 +260,7 @@ more information on how to make calls to the records database.
 ### Configuration
 
 | option    | default                                                  |
-| --------- | -------------------------------------------------------- |
+|-----------|----------------------------------------------------------|
 | base\_url | <http://localhost:8000/xapi/>                            |
 | endpoint  | /data/xAPI/                                              |
 | auth      | Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA |
