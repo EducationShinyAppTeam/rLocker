@@ -27,7 +27,7 @@ connect <- function(session, config) {
   set_locker_config(config)
 
   # Pass locker configuration to begin connection
-  session$sendCustomMessage("rlocker-setup", config)
+  session$sendCustomMessage("rLocker-setup", config)
 
   # Connection details
   connection <- list(status = test(), agent = config$agent)

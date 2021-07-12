@@ -1,4 +1,4 @@
-#'util
+#' util
 #'
 #' Utility Functions
 #' 
@@ -10,8 +10,8 @@ NULL
 #' 
 #' Create link to javascript files for package using the shiny::onAttach hook.
 .onAttach <- function(...) {
-  shiny::addResourcePath("xapiwrapper", system.file("www/js/dist/", package = "rlocker"))
-  shiny::addResourcePath("rlocker", system.file("www/js/dist/", package = "rlocker"))
+  shiny::addResourcePath("xapiwrapper", system.file("www/js/dist/", package = "rLocker"))
+  shiny::addResourcePath("rLocker", system.file("www/js/dist/", package = "rLocker"))
 }
 
 #' xAPIWrapper
@@ -24,17 +24,17 @@ xAPIWrapper <- htmltools::htmlDependency(
   script = "xapiwrapper.min.js"
 )
 
-#' rlockerJS
+#' rLockerJS
 #' 
 #' htmlDependency js and css will be used in other functions with attachDependency
-rlockerJS <- htmltools::htmlDependency(
-  name = "rlocker",
-  version = packageVersion("rlocker"),
-  src = c("href" = "rlocker"),
-  script = "rlocker.js"
+rLockerJS <- htmltools::htmlDependency(
+  name = "rLocker",
+  version = packageVersion("rLocker"),
+  src = c("href" = "rLocker"),
+  script = "rLocker.js"
 )
 
-dep <- list(xAPIWrapper, rlockerJS)
+dep <- list(xAPIWrapper, rLockerJS)
 
 # ---- Utility Functions ---- #
 

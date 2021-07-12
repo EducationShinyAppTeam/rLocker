@@ -1,5 +1,5 @@
 /**
- * rlocker - An xAPI Statement Generator & Storage Mechanism
+ * rLocker - An xAPI Statement Generator & Storage Mechanism
  * @author Bob Carey (https://github.com/rpc5102).
  * @license GPL-3.0+
  **/
@@ -22,8 +22,8 @@ if (typeof ADL == "undefined") {
 
 /**
  * Creates a new Learning Locker instance.
- * @class rlocker/Locker
- * @see module:rlocker/Locker
+ * @class rLocker/Locker
+ * @see module:rLocker/Locker
  */
 export class Locker {
 

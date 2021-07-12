@@ -1,19 +1,19 @@
-import { Locker } from './rlocker.js';
+import { Locker } from './rLocker.js';
 
-/* @namespace: rlocker */
-var rlocker = rlocker || {};
+/* @namespace: rLocker */
+var rLocker = rLocker || {};
 
 /* @config */
-Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
-  rlocker = new Locker(config);
+Shiny.addCustomMessageHandler('rLocker-setup', function(config) {
+  rLocker = new Locker(config);
 });
 
-Shiny.addCustomMessageHandler('rlocker-store', function(values) {
-  let statement = rlocker.createStatement(values);
-  rlocker.store(statement);
+Shiny.addCustomMessageHandler('rLocker-store', function(values) {
+  let statement = rLocker.createStatement(values);
+  rLocker.store(statement);
 });
 
 Shiny.addCustomMessageHandler('create-statement', function(values) {
-  let statement = rlocker.createBasicStatement(values.verb.display['en-US']);
-  rlocker.store(statement);
+  let statement = rLocker.createBasicStatement(values.verb.display['en-US']);
+  rLocker.store(statement);
 });

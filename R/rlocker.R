@@ -1,9 +1,9 @@
-#' rlocker: Adds Learning Locker xAPI support for Shiny Applications.
+#' rLocker: Adds Learning Locker xAPI support for Shiny Applications.
 #'
 #'
-#' @section rlocker functions:
-#' The rlocker functions ...
+#' @section rLocker functions:
+#' The rLocker functions ...
 #'
 #' @docType package
-#' @name rlocker
+#' @name rLocker
 NULL

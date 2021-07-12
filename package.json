@@ -1,13 +1,13 @@
 {
-  "name": "rlocker",
+  "name": "rLocker",
   "version": "0.1.5",
   "description": "Learning Locker for R Shiny",
   "repository": {
     "type": "git",
-    "url": "git@github.com:rpc5102/rlocker.git",
+    "url": "git@github.com:rpc5102/rLocker.git",
     "private": false
   },
-  "main": "inst/www/rlocker.js",
+  "main": "inst/www/rLocker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile-src": "webpack --mode production",

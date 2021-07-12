@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   mode: "production",
   entry: {
-    rlocker: path.resolve(__dirname, "inst/www/js/src/app.js"),
+    rLocker: path.resolve(__dirname, "inst/www/js/src/app.js"),
   },
   optimization: {
     minimize: true,

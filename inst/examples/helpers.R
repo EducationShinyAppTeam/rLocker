@@ -54,7 +54,7 @@ registerQuestionEvents <- function(session, questions) {
   observe({
     sapply(questions, function(question) {
       observeEvent(session$input[[question$id]], {
-        statement <- rlocker::createStatement(
+        statement <- rLocker::createStatement(
           list(
             agent = currentUser,
             verb = "answered",
@@ -74,7 +74,7 @@ registerQuestionEvents <- function(session, questions) {
         renderxAPIStatement(session, question, statement)
 
         # Store statement in locker and return status
-        status <- rlocker::store(session, statement)
+        status <- rLocker::store(session, statement)
 
         # Render status code popup notification
         ifelse(
@@ -89,7 +89,7 @@ registerQuestionEvents <- function(session, questions) {
 
 # Watch for submit button presses
 observeEvent(input$submit, {
-  session$sendCustomMessage(type = "create-statement", rlocker::createStatement(list(actor = currentUser)))
+  session$sendCustomMessage(type = "create-statement", rLocker::createStatement(list(actor = currentUser)))
 })
 
 # Gets current page address from the current session

@@ -1,14 +1,14 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rLocker <img src="https://github.com/rpc5102/rlocker/blob/master/rlocker.png?raw=true" align="right" height=140>
+# rLocker <img src="https://github.com/rpc5102/rLocker/blob/master/rLocker.png?raw=true" align="right" height=140>
 
 <!-- badges: start -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/rlocker)](https://cran.r-project.org/package=rlocker)
+status](https://www.r-pkg.org/badges/version/rLocker)](https://cran.r-project.org/package=rLocker)
 [![License:
-GPLv3](https://img.shields.io/github/license/rpc5102/rlocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
+GPLv3](https://img.shields.io/github/license/rpc5102/rLocker.svg?style=flat)](https://opensource.org/licenses/GPL-3.0)
 <!-- badges: end -->
 
 Learning Locker xAPI support for Shiny Applications.
@@ -44,13 +44,13 @@ You can install the released version of rLocker from
 [GitHub](https://github.com/) with:
 
 ``` r
-devtools::install_github("rpc5102/rlocker")
+devtools::install_github("rpc5102/rLocker")
 ```
 
 ### Examples
 
 See the [examples](./inst/examples/) folder for demo code or visit
-[psu-eberly.shinyapps.io/rlocker](https://psu-eberly.shinyapps.io/rlocker)
+[psu-eberly.shinyapps.io/rLocker](https://psu-eberly.shinyapps.io/rLocker)
 to see it in action.
 
 ### Storage Mechanism
@@ -64,13 +64,13 @@ in Learning Locker.
 
 ``` r
 library(shiny)
-library(rlocker)
+library(rLocker)
 
 shinyApp(
   server = function(input, output, session) {
 
     # Initialize Learning Locker connection -- substitute with your own locker credentials
-    rlocker::connect(session, list(
+    rLocker::connect(session, list(
       base_url = "https://learning-locker.example.com/",
       endpoint = "/data/xAPI/",
       auth = "Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA"
@@ -78,8 +78,8 @@ shinyApp(
 
     # Register input event for interactive elements
     observeEvent(input$button, {
-      statement <- rlocker::createStatement()
-      rlocker::store(statement)
+      statement <- rLocker::createStatement()
+      rLocker::store(statement)
     })
   }
 )
@@ -91,7 +91,7 @@ shinyApp(
 
 ``` r
 library(shiny)
-library(rlocker)
+library(rLocker)
 
 shinyApp(
   ui = fluidPage(
@@ -99,7 +99,7 @@ shinyApp(
     tags$script(src = "js/app.js"),
     
     # Application title
-    titlePanel("rlocker demo"),
+    titlePanel("rLocker demo"),
     fluidRow(
       actionButton("button", "Press me!")
     )
@@ -118,11 +118,11 @@ shinyApp(
       force = TRUE
     )
     
-    session$sendCustomMessage(type = 'rlocker-setup', config)
+    session$sendCustomMessage(type = 'rLocker-setup', config)
     
     # Register input events for interactive elements
     observeEvent(input$button, {
-      session$sendCustomMessage(type = 'rlocker-store', rlocker::createStatement())
+      session$sendCustomMessage(type = 'rLocker-store', rLocker::createStatement())
     })
   }
 )
@@ -131,11 +131,11 @@ shinyApp(
 ###### www/js/app.js
 
 ``` js
-Shiny.addCustomMessageHandler('rlocker-setup', function(config) {
+Shiny.addCustomMessageHandler('rLocker-setup', function(config) {
   /* connection logic */
 });
 
-Shiny.addCustomMessageHandler('rlocker-store', function(values) {
+Shiny.addCustomMessageHandler('rLocker-store', function(values) {
   /* storage logic */
 });
 ```
@@ -156,7 +156,7 @@ instead.
 ###### app.R
 
 ``` r
-response <- rlocker::retrieve(
+response <- rLocker::retrieve(
   interface = "connection",
   model = "statement",
   query = "first=1",
@@ -227,7 +227,7 @@ object (default). Below is sample output from the request above.
             "id": "http://127.0.0.1:4358/",
             "definition": {
               "name": {
-                "en-US": "rlocker demo"
+                "en-US": "rLocker demo"
               }
             }
           },

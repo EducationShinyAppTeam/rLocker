@@ -1,5 +1,5 @@
 library(shiny)
-library(rlocker)
+library(rLocker)
 
 # Import question set as global var to save on resources.
 source("./questions.R")
@@ -8,7 +8,7 @@ shinyApp(
   ui = fluidPage(
 
     # Application title
-    titlePanel("rlocker demo"),
+    titlePanel("rLocker demo"),
     hr(),
 
     # Begin Quiz Questions
@@ -29,11 +29,11 @@ shinyApp(
     config <- list(
       base_url = "https://learning-locker.stat.vmhost.psu.edu/",
       auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
-      agent = rlocker::createAgent()
+      agent = rLocker::createAgent()
     )
 
     # Initialize Learning Locker connection
-    connection <- rlocker::connect(session, config)
+    connection <- rLocker::connect(session, config)
 
     # Import helper functions to setup demo app and user.
     source("./helpers.R", local = TRUE)
