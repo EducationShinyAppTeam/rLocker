@@ -31,7 +31,7 @@ rLockerJS <- htmltools::htmlDependency(
   name = "rLocker",
   version = packageVersion("rLocker"),
   src = c("href" = "rLocker"),
-  script = "rLocker.js"
+  script = "rlocker.js"
 )
 
 dep <- list(xAPIWrapper, rLockerJS)
