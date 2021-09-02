@@ -1,4 +1,4 @@
-import { Locker } from './rlocker.js';
+import { Locker } from './rLocker.js';
 
 /* @namespace: rLocker */
 var rLocker = rLocker || {};
